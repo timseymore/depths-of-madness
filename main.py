@@ -421,9 +421,11 @@ class Player(pygame.sprite.Sprite):
 
     def check_platforms(self, last, new):
         """
-        Checks for player collisions with platforms.
-        :param last: Player position before movement
-        :param new: Player position after movement
+        Player Coord Coord -> Player
+        Checks for player collisions with platforms and handles the collision
+         - last: Player position before movement
+         - new: Player position after movement
+         Player.check_platforms(10, 20) >>> Checks for and handles platform collision at coord (20, 30)
         """
         platform_hits = pygame.sprite.spritecollide(self, self.platforms, False)
         for platform in platform_hits:
@@ -436,8 +438,8 @@ class Player(pygame.sprite.Sprite):
                 new.left = platform.rect.right
                 self.resting = False
                 self.falling = True
-            # Standing on Platform ==BUG== not moving w/ plat at correct speed
-            if last.bottom <= platform.rect.top < new.bottom:
+            # TODO Standing on Platform ==BUG== not moving w/ plat at correct speed
+            if last.bottom >= platform.rect.top < new.bottom:
                 new.bottom = platform.rect.top
                 self.change_speed(platform.change_x, platform.change_y)
                 self.resting = True
