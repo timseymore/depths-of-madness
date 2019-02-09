@@ -1,13 +1,11 @@
-
-=========================================================================
-             THE DEPTHS OF MADNESS
-=====================================
+ THE DEPTHS OF MADNESS
+=======================
 
 
-=====VERSION HISTORY=====
+--- VERSION HISTORY ---
 
 
-=== VERSION 1.00.0 ===
+ VERSION 1.00.0 
 
     - This game is "Early Access",
       most features are still under development.
@@ -57,9 +55,6 @@
 
      - Saving feature for re-playability
 
-
-
-
 ==== USER INPUT FOR BUGS AND SUGGESTIONS ===
 
 Use this area to communicate with the developer about issues and suggestions
@@ -69,10 +64,6 @@ for future updates.
 
  NEW BUGS / ISSUES
 ==================
-
-
-
-
 
 
 USER SUGGESTIONS
@@ -87,6 +78,3 @@ Tunnels (mario style) - Maggie
 multi-player / online mode - Josh
 player tags - Josh
 running -Josh
-
-
-
