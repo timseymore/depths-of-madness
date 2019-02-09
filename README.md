@@ -1,7 +1,7 @@
-==============================================
-             THE DEPTHS OF MADNESS
-==============================================
 
+=========================================================================
+             THE DEPTHS OF MADNESS
+=====================================
 
 
 =====VERSION HISTORY=====
@@ -12,19 +12,18 @@
     - This game is "Early Access",
       most features are still under development.
 
-    - Bugs and issues are "expected" and should be
+    - Bugs and issues are still present and should be
       documented in the Version history.
 
 --- KNOWN BUGS / ISSUES ---
 
-    - Not staying on platform during movement, causing some serious
-      issues with y axis moving platforms (ex: lvl 2)
+    - Not staying still on platform during movement
 
     - Player able to change direction while falling  / jumping
 
     - small chance of missing fast repeated space bar taps
 
-    - able to "climb the walls"; possibly related to platform bug
+    - able to "climb the walls"
 
     - Unknown circumstances: player getting stuck while trying to move / fast and far jumps
         - first play through, on level 2
@@ -56,10 +55,6 @@
 
      -Improved Graphics
 
-     - Sound Effects / Background Music
-
-     - Full screen mode
-
      - Saving feature for re-playability
 
 
@@ -69,6 +64,7 @@
 
 Use this area to communicate with the developer about issues and suggestions
 for future updates.
+
 ----------------------------------------------------------------------------
 
  NEW BUGS / ISSUES
@@ -81,6 +77,7 @@ for future updates.
 
 USER SUGGESTIONS
 ================
+
 Fading Text at beginning of level - Maggie
 sasquatch enemy holding knife - Maggie
 big hairy spider - Maggie
