@@ -20,32 +20,6 @@ class Player(pygame.sprite.Sprite):
              p.rect.y    - Integer[0, HEIGHT]
              ...
      """
-    # PLAYER STATES
-    gender = "male"
-    score = 0
-    coins = 0
-    lives = 0
-
-    win = False
-    dead = False
-    clear = False
-
-    jumping = False
-    falling = False
-    resting = False
-
-    dy = 0
-    change_x = 0
-    change_y = 0
-
-    # Object lists
-    walls = None
-    doors = None
-    platforms = None
-    enemies = None
-    coins_list = None
-    extra_lives = None
-
     def __init__(self, x, y):
         """
         Integer[0, WIDTH] Integer[0, HEIGHT] -> Player
@@ -59,10 +33,29 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.origin_x = x
         self.origin_y = y
+        self.gender = None
+        self.score = 0
+        self.lives = 0
+        self.coins = 0
+        self.win = False
+        self.dead = False
+        self.clear = False
+        self.jumping = False
+        self.resting = False
+        self.falling = False
+        self.dy = 0
+        self.change_x = 0
+        self.change_y = 0
+        self.walls = []
+        self.doors = []
+        self.platforms = []
+        self.enemies = []
+        self.coins_list = []
+        self.extra_lives = []
 
-    def get_gender(self):
+    # Getters
+    def get_gender(self) -> str:
         """
-        Player -> String
         return player gender outside of class definition
           - Prints error message to console if no gender is defined.
         Player.get_gender()  - returns gender as String
@@ -72,33 +65,29 @@ class Player(pygame.sprite.Sprite):
         else:
             print("AttributeError: Player gender not defined.")
 
-    def get_score(self):
+    def get_score(self) -> int:
         """
-         Player -> Integer
          return the Player score outside of class definition
          Player.get_score()  - returns score as Integer
         """
         return self.score
 
-    def get_coins(self):
+    def get_coins(self) -> int:
         """
-        Player -> Integer
         return number of coins player is holding outside of class definition
         Player.get_coins()  - returns coins as Integer
         """
         return self.coins
 
-    def get_lives(self):
+    def get_lives(self) -> int:
         """
-        Player -> Integer
         return number of lives player has left outside of class definition
         Player.get_lives()  - returns lives as Integer
         """
         return self.lives
 
-    def get_state(self):
+    def get_state(self) -> str:
         """
-        Player -> String
         return player state outside of class definition
           - "resting"
           - "jumping"
@@ -205,6 +194,7 @@ class Player(pygame.sprite.Sprite):
         self.origin_x = x
         self.origin_y = y
 
+    # TODO refactor name to be more representative of what it does
     def check_lives(self):
         """
         Checks number of lives and
@@ -337,6 +327,21 @@ class Player(pygame.sprite.Sprite):
         self.platforms = platforms
         self.win = False
 
+    def update(self, dt, gravity):
+        """
+        Update the player position and state.
+        :param dt: Delta time
+        :param gravity: Gravity constant
+        """
+        # update player position
+        last = self.rect.copy()
+        self.control_player(dt, gravity)
+        new = self.rect
+        self.switch_img(last, new)
+        # handle collisions
+        self.map_collisions(last, new)
+        self.object_collisions(last, new)
+
     def control_player(self, dt, gravity):
         """ Player Controls """
         # Check for quick key presses
@@ -372,6 +377,17 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += x
         self.rect.y += y
 
+    def map_collisions(self, last, new):
+        """
+        Check and handle all map collisions
+        :param last: Player position before movement
+        :param new: Player position after movement
+        """
+        self.check_walls(last, new)
+        self.check_platforms(last, new)
+        self.check_doors()
+
+    # TODO ===BUG=== climbing and getting stuck on walls while jumping and touching sides
     def check_walls(self, last, new):
         """
         Check walls for collisions.
@@ -385,18 +401,19 @@ class Player(pygame.sprite.Sprite):
             elif new.left < cell.rect.right <= last.left:
                 new.left = cell.rect.right
             # Standing on top of block
-            elif last.bottom <= cell.rect.top < new.bottom:
+            if last.bottom <= cell.rect.top < new.bottom:
                 self.resting = True
                 self.jumping = False
                 self.falling = False
                 new.bottom = cell.rect.top
                 self.dy = 0
             # Hitting bottom from underneath
-            elif new.top < cell.rect.bottom <= last.top:
+            if new.top < cell.rect.bottom <= last.top:
                 new.top = cell.rect.bottom
                 self.dy = 0
                 self.falling = True
 
+    # TODO  ==BUG== player not moving along with platform at correct speed
     def check_platforms(self, last, new):
         """
         Player Coord Coord -> Player
@@ -416,7 +433,7 @@ class Player(pygame.sprite.Sprite):
                 new.left = platform.rect.right
                 self.resting = False
                 self.falling = True
-            # TODO Standing on Platform ==BUG== not moving w/ plat at correct speed
+
             if last.bottom >= platform.rect.top < new.bottom:
                 new.bottom = platform.rect.top
                 self.change_speed(platform.change_x, platform.change_y)
@@ -439,16 +456,6 @@ class Player(pygame.sprite.Sprite):
             self.score += 100
             self.score += self.lives * 10
             print(door.get_text())
-
-    def map_collisions(self, last, new):
-        """
-        Check and handle all map collisions
-        :param last: Player position before movement
-        :param new: Player position after movement
-        """
-        self.check_walls(last, new)
-        self.check_platforms(last, new)
-        self.check_doors()
 
     # TODO Separate object detection from enemy detection
     def object_collisions(self, last, new):
@@ -483,15 +490,4 @@ class Player(pygame.sprite.Sprite):
             effect = pygame.mixer.Sound(coin.sound)
             effect.play()
 
-    def update(self, dt, gravity):
-        """
-        Update the player position and state.
-        :param dt: Delta time
-        :param gravity: Gravity constant
-        """
-        last = self.rect.copy()
-        self.control_player(dt, gravity)
-        new = self.rect
-        self.switch_img(last, new)
-        self.map_collisions(last, new)
-        self.object_collisions(last, new)
+

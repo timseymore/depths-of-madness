@@ -2,96 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34fd4c68-9594-4124-b6b9-ba3b256a3853" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Tim.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OldVersion/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OldVersion/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OldVersion/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/coin_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/demon_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/demon_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/female_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/female_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/game_over.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/insect_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/insect_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/life.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/life_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/male_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/male_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/mouse_cursor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/platform.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/power_up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/spikes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/stone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/stone_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/win_game.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/zombie_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/zombie_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/enviroment/block.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/enviroment/door.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/enviroment/doorLeft.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/enviroment/platform.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/enviroment/wall.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/powerups/coin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/powerups/extraLife.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/powerups/powerUp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/jump.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/level_background1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/level_background2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/level_background3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/lose_life.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/menu_background.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/over_background.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/power_up.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sounds/win_background.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/coinicon.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/colors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/eventBox.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/gameOver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/lifeicon.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/mousePointer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/titleScreen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/tools/winGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TheDepthsOfMadness.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TheDepthsOfMadness.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Tim.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Tim.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/coin.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/coin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/coin_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/coin_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/demon_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/demon_left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/demon_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/demon_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/female_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/female_left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/female_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/female_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/game_over.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/game_over.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/insect_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/insect_left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/insect_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/insect_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/life.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/life.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/life_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/life_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/male_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/male_left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/male_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/male_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/menu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/mouse_cursor.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/mouse_cursor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/platform.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/platform.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/power_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/power_up.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/spikes.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/spikes.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/stone.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/stone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/stone_background.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/stone_background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/win_game.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/win_game.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/zombie_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/zombie_left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphics/zombie_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Graphics/zombie_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Scripts/colors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/jump.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/jump.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/level_background1.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/level_background1.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/level_background2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/level_background2.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/level_background3.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/level_background3.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/lose_life.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/lose_life.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/menu_background.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/menu_background.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/over_background.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/over_background.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/power_up.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/power_up.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sounds/win_background.wav" beforeDir="false" afterPath="$PROJECT_DIR$/OldVersion/Sounds/win_background.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/coin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/coin_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/demon_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/demon_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/female_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/female_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/game_over.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/insect_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/insect_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/life.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/life_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/male_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/male_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/mouse_cursor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/platform.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/power_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/spikes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/stone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/stone_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/win_game.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/zombie_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Graphics/zombie_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Scripts/colors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/jump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/level_background1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/level_background2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/level_background3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/lose_life.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/menu_background.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/over_background.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/power_up.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/Sounds/win_background.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldVersion/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/players/male.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/male.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/players/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/player.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+            <state relative-caret-position="646">
+              <caret line="34" column="11" lean-forward="true" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
               <folding>
                 <element signature="e#90#103#0" expanded="true" />
               </folding>
@@ -117,10 +69,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/tools/coinicon.py">
+        <entry file="file://$PROJECT_DIR$/src/models/players/player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="2052">
+              <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/players/male.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="65" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="76">
+                <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -154,14 +133,11 @@
         <option value="$PROJECT_DIR$/src/players/male.py" />
         <option value="$PROJECT_DIR$/src/enemies/demon.py" />
         <option value="$PROJECT_DIR$/src/ui/main.py" />
-        <option value="$PROJECT_DIR$/src/models/players/player.py" />
         <option value="$PROJECT_DIR$/src/models/enviroment/wall.py" />
-        <option value="$PROJECT_DIR$/src/models/players/male.py" />
         <option value="$PROJECT_DIR$/src/models/players/female.py" />
         <option value="$PROJECT_DIR$/src/models/enemies/demon.py" />
         <option value="$PROJECT_DIR$/src/ui/tools/colors.py" />
         <option value="$PROJECT_DIR$/src/models/enviroment/block.py" />
-        <option value="$PROJECT_DIR$/src/models/enviroment/platform.py" />
         <option value="$PROJECT_DIR$/src/models/enviroment/door.py" />
         <option value="$PROJECT_DIR$/src/models/enviroment/doorLeft.py" />
         <option value="$PROJECT_DIR$/src/ui/tools/eventBox.py" />
@@ -172,13 +148,17 @@
         <option value="$PROJECT_DIR$/src/models/powerups/powerUp.py" />
         <option value="$PROJECT_DIR$/src/models/powerups/coin.py" />
         <option value="$PROJECT_DIR$/src/models/powerups/extraLife.py" />
+        <option value="$PROJECT_DIR$/src/models/enviroment/platform.py" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main.py" />
+        <option value="$PROJECT_DIR$/src/models/players/male.py" />
+        <option value="$PROJECT_DIR$/src/models/players/player.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="9" />
-    <option name="y" value="2" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="18" />
+    <option name="y" value="-8" />
     <option name="width" value="1918" />
     <option name="height" value="1038" />
   </component>
@@ -190,6 +170,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="TheDepthsOfMadness" type="cbb8eebc:String" user="TheDepthsOfMadness" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,25 +203,8 @@
               <item name="TheDepthsOfMadness" type="b2602c69:ProjectViewProjectNode" />
               <item name="TheDepthsOfMadness" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TheDepthsOfMadness" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TheDepthsOfMadness" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="TheDepthsOfMadness" type="cbb8eebc:String" user="TheDepthsOfMadness" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="players" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -243,14 +217,14 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\workspace\Repos\TheDepthsOfMadness\OldVersion" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\workspace\Repos\TheDepthsOfMadness\src" />
+      <recent name="F:\workspace\Repos\TheDepthsOfMadness\src\ui" />
       <recent name="F:\workspace\Repos\TheDepthsOfMadness\src\ui\tools" />
       <recent name="F:\workspace\Repos\TheDepthsOfMadness\src\models" />
-      <recent name="F:\workspace\Repos\TheDepthsOfMadness\src\ui" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\workspace\Repos\TheDepthsOfMadness\OldVersion" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -402,15 +376,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="9" y="2" width="1918" height="1038" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.18510638" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.18335089" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.24973656" />
       <window_info id="Favorites" order="2" sideWeight="0.5016234" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3359116" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21018419" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -484,9 +458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="538">
           <caret line="1692" lean-forward="true" selection-start-line="1692" selection-end-line="1692" />
-          <folding>
-            <element signature="e#90#103#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -528,13 +499,6 @@
     <entry file="file://$PROJECT_DIR$/src/graphics/menu.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/players/male.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/enemies/demon.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -562,33 +526,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/enviroment/platform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/enviroment/block.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/enviroment/wall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/tools/colors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -600,16 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/players/player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7581">
-          <caret line="399" column="41" lean-forward="true" selection-start-line="399" selection-start-column="41" selection-end-line="399" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -697,14 +624,71 @@
     <entry file="file://$PROJECT_DIR$/src/ui/tools/coinicon.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/enviroment/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/enviroment/wall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/enviroment/platform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="76">
+            <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/players/male.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/players/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+        <state relative-caret-position="646">
+          <caret line="34" column="11" lean-forward="true" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
           <folding>
             <element signature="e#90#103#0" expanded="true" />
           </folding>

@@ -45,7 +45,6 @@ GRAVITY = 47
 
 def main(screen):
     """
-    (Integer, Integer) -> Image
     Start game with main(display_screen)
     """
     clock = pygame.time.Clock()
@@ -506,7 +505,11 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
     spike_8 = add_enemy(Spike, 225, 300 - block, 0, walls, players, enemies, sprites)
     spike_9 = add_enemy(Spike, 250, 300 - block, 0, walls, players, enemies, sprites)
     spike_10 = add_enemy(Spike, 275, 300 - block, 0, walls, players, enemies, sprites)
+
     # TODO Add mario style tunnel leading to lower level
+    # Tunnel to lower level
+
+    # Continue mid level spikes
     spike_12 = add_enemy(Spike, 400, 300 - block, 0, walls, players, enemies, sprites)
     spike_13 = add_enemy(Spike, 425, 300 - block, 0, walls, players, enemies, sprites)
     spike_14 = add_enemy(Spike, 450, 300 - block, 0, walls, players, enemies, sprites)
@@ -556,7 +559,7 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
         disp.blit(spike_8.image, (spike_8.rect.x, spike_8.rect.y))
         disp.blit(spike_9.image, (spike_9.rect.x, spike_9.rect.y))
         disp.blit(spike_10.image, (spike_10.rect.x, spike_10.rect.y))
-
+        # TODO Display Tunnel
         disp.blit(spike_12.image, (spike_12.rect.x, spike_12.rect.y))
         disp.blit(spike_13.image, (spike_13.rect.x, spike_13.rect.y))
         disp.blit(spike_14.image, (spike_14.rect.x, spike_14.rect.y))
