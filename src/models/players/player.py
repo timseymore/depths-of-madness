@@ -1,24 +1,25 @@
 import pygame
 import sys
 
-from src.ui.tools.colors import Color
-from src.ui.tools.lifeicon import LifeIcon
-from src.ui.tools.coinicon import CoinIcon
+from ui.tools.colors import Color
+from ui.tools.lifeicon import LifeIcon
+from ui.tools.coinicon import CoinIcon
 
 
 class Player(pygame.sprite.Sprite):
     """
-     Player is a Player(Integer[0, WIDTH], Integer[0, HEIGHT])
-     interp. p = Player(x, y) creates a playable character p where:
-              - x is the x coordinate
-              - y is the y coordinate
-     p = Player(20, 10)  - create a Player p at x position 20 and y position 10
+     Player is  Player(Integer[0, WIDTH], Integer[0, HEIGHT])
+     interp. a playable character p where:
+              - x is the starting x position
+              - y is the starting y position
+     p = Player(20, 10)  - creates a Player p at x position 20 and y position 10
 
-     def fn-for-player(p):
-         ...
-             p.rect.x    - Integer[0, WIDTH]
-             p.rect.y    - Integer[0, HEIGHT]
-             ...
+    Template:
+
+     def fn_for_player(p):
+        ... p.rect.x  # Integer[0, WIDTH]
+        ... p.rect.y  # Integer[0, HEIGHT]
+        ... p.(...)   # PlayerState
      """
     def __init__(self, x, y):
         """
@@ -58,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         """
         return player gender outside of class definition
           - Prints error message to console if no gender is defined.
-        Player.get_gender()  - returns gender as String
+        Player.get_gender()  - return gender as String
         """
         if self.gender == "male" or self.gender == "female":
             return self.gender

@@ -1,7 +1,7 @@
 import pygame
 
-from src.ui.tools.colors import Color
-from src.models.enviroment.door import Door
+from ui.tools.colors import Color
+from models.enviroment.door import Door
 
 
 class DoorLeft(Door):

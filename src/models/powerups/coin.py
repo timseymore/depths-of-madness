@@ -1,6 +1,6 @@
 import pygame
 
-from src.models.powerups.powerUp import PowerUp
+from models.powerups.powerUp import PowerUp
 
 
 class Coin(PowerUp):

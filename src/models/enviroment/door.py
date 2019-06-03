@@ -1,6 +1,6 @@
 import pygame
 
-from src.ui.tools.colors import Color
+from ui.tools.colors import Color
 
 
 class Door(pygame.sprite.Sprite):

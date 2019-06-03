@@ -1,4 +1,4 @@
-from src.models.enemies.enemy import *
+from models.enemies.enemy import *
 
 
 class Zombie(Enemy):

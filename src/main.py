@@ -9,27 +9,27 @@ The Depths Of Madness
 import pygame
 import sys
 
-from src.ui.tools.colors import Color
-from src.ui.tools.gameOver import GameOver
-from src.ui.tools.winGame import WinGame
-from src.ui.tools.titleScreen import TitleScreen
-from src.ui.tools.mousePointer import MousePointer
-from src.models.players.male import Male
-from src.models.players.female import Female
-from src.models.enemies.demon import Demon
-from src.models.enemies.insect import Insect
-from src.models.enemies.zombie import Zombie
-from src.models.enemies.spike import Spike
-from src.models.enviroment.block import Block
-from src.models.enviroment.platform import Platform
-from src.models.enviroment.door import Door
-from src.models.enviroment.doorLeft import DoorLeft
-from src.models.powerups.extraLife import ExtraLife
-from src.models.powerups.coin import Coin
+from ui.tools.colors import Color
+from ui.tools.gameOver import GameOver
+from ui.tools.winGame import WinGame
+from ui.tools.titleScreen import TitleScreen
+from ui.tools.mousePointer import MousePointer
+from models.players.male import Male
+from models.players.female import Female
+from models.enemies.demon import Demon
+from models.enemies.insect import Insect
+from models.enemies.zombie import Zombie
+from models.enemies.spike import Spike
+from models.enviroment.block import Block
+from models.enviroment.platform import Platform
+from models.enviroment.door import Door
+from models.enviroment.doorLeft import DoorLeft
+from models.powerups.extraLife import ExtraLife
+from models.powerups.coin import Coin
 
 
-# ===============
-# ---CONSTANTS---
+# =================
+# --- CONSTANTS ---
 
 VERSION = "ver. 1.00.1"
 WIDTH = 800
@@ -40,8 +40,8 @@ FPS = 60
 GRAVITY = 47
 
 
-# ====================
-# -----Functions------
+# ======================
+# ----- Functions ------
 
 def main(screen):
     """
@@ -55,34 +55,32 @@ def main(screen):
     # ---Main Game Loop---
     running = True
     while running:
-        # clock ticks inside each inner loop
-        # ---Control Flow---
-        # main menu
+        # NOTE: clock ticks inside each inner function
+
         main_menu(menu, screen, clock, FPS, WIDTH, HEIGHT, BLOCK)
-        # Create player object
+        # player presses 'enter'
         player = character_selection(screen, clock, FPS, WIDTH, HEIGHT, BLOCK)
-        # Start game levels
         level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
         level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
         level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
-    # Exit Game
+    # player presses 'esc'
     pygame.mixer.quit()
     pygame.quit()
     sys.exit()
 
 
-# ---Menu Screens---
+# --- Menu Screens ---
 
 def main_menu(img, disp, time, fps, width, height, block):
     """
     Title screen for the game.
-    :param img: event box img
-    :param disp: display screen
-    :param time: game clock
-    :param fps: frames per second
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
+     - img: event box img
+     - disp: display screen
+     - time: game clock
+     - fps: frames per second
+     - width: screen width
+     - height: screen height
+     - block: block size
     """
     menu_border = pygame.Surface([400, 150])
     menu_border.fill(Color.Eigengrau)
@@ -120,12 +118,12 @@ def main_menu(img, disp, time, fps, width, height, block):
 def controls_menu(disp, time, fps, width, height, block):
     """
     Runs the menu showing controls for the game.
-    :param disp: display screen
-    :param time: game clock
-    :param fps: frames per second
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
+     - disp: display screen
+     - time: game clock
+     - fps: frames per second
+     - width: screen width
+     - height: screen height
+     - block: block size
     """
     menu_border = pygame.Surface([700, 500])
     menu_border.fill(Color.Eigengrau)
@@ -208,7 +206,7 @@ def character_selection(disp, time, fps, width, height, block):
         pygame.display.flip()
 
 
-# ---Game Levels---
+# --- Game Levels ---
 
 
 def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
@@ -782,8 +780,8 @@ def add_power_up(obj, x, y, power_list, sprites):
     sprites.add(power)
 
 
-# ======================
-# -------Run game-------
+# ========================
+# ------- Run game -------
 
 if __name__ == "__main__":
     pygame.init()

@@ -1,6 +1,6 @@
 import pygame
 
-from src.models.players.player import Player
+from models.players.player import Player
 
 
 class Female(Player):

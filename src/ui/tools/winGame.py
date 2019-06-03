@@ -1,6 +1,6 @@
 import pygame
 
-from src.ui.tools.eventBox import EventBox
+from ui.tools.eventBox import EventBox
 
 
 class WinGame(EventBox):

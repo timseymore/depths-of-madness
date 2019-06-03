@@ -1,6 +1,6 @@
 import pygame
 
-from src.models.enviroment.wall import Wall
+from models.enviroment.wall import Wall
 
 
 class Block(Wall):
