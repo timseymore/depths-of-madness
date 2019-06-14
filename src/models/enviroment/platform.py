@@ -13,6 +13,7 @@ class Platform(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
 
+        # TODO should be using game constants instead of hard values
         self.min_x = 25
         self.max_x = 775
         self.min_y = 25
@@ -34,12 +35,22 @@ class Platform(pygame.sprite.Sprite):
 
     def update(self, dt, gravity):
         """ Update the platform position. """
-        # Move left/right
+        self.handle_left_right()
+        self.handle_up_down()
+
+    def handle_left_right(self):
+        self.move_left_right()
+        self.check_left_right()
+
+    def move_left_right(self):
+        # self.move(self.min_x, self.max_x, self.rect.x, self.change_x)
         if self.min_x <= self.rect.x <= self.max_x:
             self.rect.x += self.change_x
         else:
             self.change_x *= -1
+            # self.rect.x += self.change_x  # causes change in speed right vs. left movement
 
+    def check_left_right(self):
         # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
@@ -52,13 +63,19 @@ class Platform(pygame.sprite.Sprite):
                 self.rect.left = block.rect.right
                 self.change_x *= -1
 
-        # Move up/down
-        if self.min_y < self.rect.y < self.max_y:
+    def handle_up_down(self):
+        self.move_up_down()
+        self.check_up_down()
+
+    def move_up_down(self):
+        # self.move(self.min_y, self.max_y, self.rect.y, self.change_y)
+        if self.min_y <= self.rect.y <= self.max_y:
             self.rect.y += self.change_y
         else:
             self.change_y *= -1
             self.rect.y += self.change_y
 
+    def check_up_down(self):
         # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
@@ -70,3 +87,6 @@ class Platform(pygame.sprite.Sprite):
                 # Otherwise if we are moving up, do the opposite.
                 self.rect.top = block.rect.bottom
                 self.change_y *= -1
+
+    def move(self, low, high, rect, change):
+        ...
