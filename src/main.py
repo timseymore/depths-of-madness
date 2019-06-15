@@ -45,7 +45,7 @@ GRAVITY = 47
 
 def main(screen):
     """
-    Start game with main(display_screen)
+    Start game with main(SCREEN)
     """
     clock = pygame.time.Clock()
     menu = TitleScreen(200, 100)
@@ -55,15 +55,14 @@ def main(screen):
     # ---Main Game Loop---
     running = True
     while running:
-        # NOTE: clock ticks inside each inner function
-
-        main_menu(menu, screen, clock, FPS, WIDTH, HEIGHT, BLOCK)
-        # player presses 'enter'
+        # NOTE: game clock ticks inside each inner function
+        # player presses 'enter' to continue to next available screen or level
+        main_menu(menu, screen, clock, WIDTH, HEIGHT, BLOCK)
         player = character_selection(screen, clock, FPS, WIDTH, HEIGHT, BLOCK)
         level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
         level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
         level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
-    # player presses 'esc'
+    # player presses 'esc' to exit game
     pygame.mixer.quit()
     pygame.quit()
     sys.exit()
@@ -71,9 +70,9 @@ def main(screen):
 
 # --- Menu Screens ---
 
-def main_menu(img, disp, time, fps, width, height, block):
+def main_menu(img, disp, time, width, height, block):
     """
-    Title screen for the game.
+    Title screen for the game with main menu options
      - img: event box img
      - disp: display screen
      - time: game clock
@@ -82,28 +81,37 @@ def main_menu(img, disp, time, fps, width, height, block):
      - height: screen height
      - block: block size
     """
+    # set up menu screen gui
     menu_border = pygame.Surface([400, 150])
     menu_border.fill(Color.Eigengrau)
     menu_box = pygame.Surface([390, 140])
     menu_box.fill(Color.Blood)
+    # set up text surfaces
     font = pygame.font.SysFont("Comic Sans MS", 30)
     text_surface = font.render("Enter: Start Game", False, Color.RedBrown)
     text_surface_1 = font.render("Tab: Controls", False, Color.RedBrown)
     text_surface_2 = font.render("Esc: Quit", False, Color.RedBrown)
+    # set up background music
     background = r'sounds\menu_background.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
     menu = True
     while menu:
-        time.tick(fps)
+        time.tick(FPS)
+        # check for and handle player input
         for event in pygame.event.get():
+            # 'esc' or closing the window exits the game
             if_quit(event, True)
             if event.type == pygame.KEYDOWN:
+                # 'enter' exits menu and continues game
                 if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
+                    pygame.mixer.music.stop()
                     menu = False
+                # 'tab' toggles between main menu and control menu
                 if event.key == pygame.K_TAB:
-                    controls_menu(disp, time, fps, width, height, block)
+                    controls_menu(disp, time, width, height, block)
+        # draw menu to screen
         fill_background(disp, width, height, block)
         disp.blit(img.image, (200, 20))
         disp.blit(menu_border, (200, 430))
@@ -112,10 +120,9 @@ def main_menu(img, disp, time, fps, width, height, block):
         disp.blit(text_surface_1, (250, 480))
         disp.blit(text_surface_2, (250, 530))
         pygame.display.flip()
-    pygame.mixer.music.stop()
 
 
-def controls_menu(disp, time, fps, width, height, block):
+def controls_menu(disp, time, width, height, block):
     """
     Runs the menu showing controls for the game.
      - disp: display screen
@@ -125,10 +132,12 @@ def controls_menu(disp, time, fps, width, height, block):
      - height: screen height
      - block: block size
     """
+    # set up menu gui
     menu_border = pygame.Surface([700, 500])
     menu_border.fill(Color.Eigengrau)
     menu_box = pygame.Surface([650, 450])
     menu_box.fill(Color.Blood)
+    # set up text surfaces
     font = pygame.font.SysFont("Times Roman", 35)
     text_surface = font.render("Player Controls: ", False, Color.RedBrown, Color.Black)
     text_surface_1 = font.render("Arrow keys or 'a'/'d': Move Left/ Right", False, Color.RedBrown)
@@ -141,12 +150,16 @@ def controls_menu(disp, time, fps, width, height, block):
 
     menu = True
     while menu:
-        time.tick(fps)
+        time.tick(FPS)
+        # check for and handle player input
         for event in pygame.event.get():
+            # 'esc' or closing the window exits the game
             if_quit(event, True)
             if event.type == pygame.KEYDOWN:
+                # 'tab' toggles between control menu and main menu
                 if event.key == pygame.K_TAB:
                     menu = False
+        # draw control menu to  screen
         fill_background(disp, width, height, block)
         disp.blit(menu_border, (50, 50))
         disp.blit(menu_box, (75, 75))
@@ -615,8 +628,8 @@ def stone_background(disp):
 # --- Event Processing ---
 def if_quit(event, esc):
     """ Exit game if user inputs a quit command.
-     :param event: input event
-     :param esc: Boolean Value:  True if 'esc'  will exit """
+      - event: input event
+      - esc: Boolean Value:  True if 'esc'  will exit """
     if event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()
