@@ -38,30 +38,28 @@ SCREEN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.DOU
 BLOCK = 25
 FPS = 60
 GRAVITY = 47
+CLOCK = pygame.time.Clock()
+MENU_SCREEN = TitleScreen(200, 100)
+END_SCREEN = GameOver(200, 100)
+WIN_SCREEN = WinGame(200, 100)
 
 
 # ======================
 # ----- Functions ------
 
-def main(screen):
+def main():
     """
-    Start game with main(SCREEN)
+    Start game with main()
     """
-    clock = pygame.time.Clock()
-    menu = TitleScreen(200, 100)
-    end = GameOver(200, 100)
-    win = WinGame(200, 100)
-
-    # ---Main Game Loop---
     running = True
     while running:
         # NOTE: game clock ticks inside each inner function
-        # player presses 'enter' to continue to next available screen or level
-        main_menu(menu, screen, clock, WIDTH, HEIGHT, BLOCK)
-        player = character_selection(screen, clock, FPS, WIDTH, HEIGHT, BLOCK)
-        level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
-        level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
-        level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, screen, clock, FPS, end, win)
+        #       player presses 'enter' to continue to next available screen or level
+        main_menu()
+        player = character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
+        level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
     # player presses 'esc' to exit game
     pygame.mixer.quit()
     pygame.quit()
@@ -70,16 +68,11 @@ def main(screen):
 
 # --- Menu Screens ---
 
-def main_menu(img, disp, time, width, height, block):
+def main_menu():
     """
     Title screen for the game with main menu options
-     - img: event box img
-     - disp: display screen
-     - time: game clock
-     - fps: frames per second
-     - width: screen width
-     - height: screen height
-     - block: block size
+
+    returns: None
     """
     # set up menu screen gui
     menu_border = pygame.Surface([400, 150])
@@ -98,7 +91,7 @@ def main_menu(img, disp, time, width, height, block):
 
     menu = True
     while menu:
-        time.tick(FPS)
+        CLOCK.tick(FPS)
         # check for and handle player input
         for event in pygame.event.get():
             # 'esc' or closing the window exits the game
@@ -110,15 +103,15 @@ def main_menu(img, disp, time, width, height, block):
                     menu = False
                 # 'tab' toggles between main menu and control menu
                 if event.key == pygame.K_TAB:
-                    controls_menu(disp, time, width, height, block)
+                    controls_menu(SCREEN, CLOCK, WIDTH, HEIGHT, BLOCK)
         # draw menu to screen
-        fill_background(disp, width, height, block)
-        disp.blit(img.image, (200, 20))
-        disp.blit(menu_border, (200, 430))
-        disp.blit(menu_box, (205, 435))
-        disp.blit(text_surface, (250, 430))
-        disp.blit(text_surface_1, (250, 480))
-        disp.blit(text_surface_2, (250, 530))
+        fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+        SCREEN.blit(MENU_SCREEN.image, (200, 20))
+        SCREEN.blit(menu_border, (200, 430))
+        SCREEN.blit(menu_box, (205, 435))
+        SCREEN.blit(text_surface, (250, 430))
+        SCREEN.blit(text_surface_1, (250, 480))
+        SCREEN.blit(text_surface_2, (250, 530))
         pygame.display.flip()
 
 
@@ -177,12 +170,14 @@ def controls_menu(disp, time, width, height, block):
 def character_selection(disp, time, fps, width, height, block):
     """
     Runs the character selection screen.
-    :param disp: display screen
-    :param time: game clock
-    :param fps: frames per second
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
+     - disp: display screen
+     - time: game clock
+     - fps: frames per second
+     - width: screen width
+     - height: screen height
+     - block: block size
+
+    returns: Player instance
     """
     img_1 = pygame.image.load("graphics/male_right.png")
     img_2 = pygame.image.load("graphics/female_left.png")
@@ -225,16 +220,16 @@ def character_selection(disp, time, fps, width, height, block):
 def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
     """
     Create playable Level 1
-    :param player: player object
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
-    :param gravity: constant for gravity
-    :param disp: display screen
-    :param clock: game clock
-    :param fps: frames per second
-    :param end: end text
-    :param win: level clear text
+     - player: player object
+     - width: screen width
+     - height: screen height
+     - block: block size
+     - gravity: constant for gravity
+     - disp: display screen
+     - clock: game clock
+     - fps: frames per second
+     - end: end text
+     - win: level clear text
     """
     # Delta time
     dt = clock.tick(fps)
@@ -331,16 +326,16 @@ def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
 def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     """
     Create playable Level 2
-    :param player: player object
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
-    :param gravity: constant for gravity
-    :param disp: display screen
-    :param clock: game clock
-    :param fps: frames per second
-    :param end: end text
-    :param win: level clear text
+     - player: player object
+     - width: screen width
+     - height: screen height
+     - block: block size
+     - gravity: constant for gravity
+     - disp: display screen
+     - clock: game clock
+     - fps: frames per second
+     - end: end text
+     - win: level clear text
     """
     # Delta time
     dt = clock.tick(fps)
@@ -456,16 +451,16 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
 def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
     """
     Create playable Level 3
-    :param player: player object
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
-    :param gravity: constant for gravity
-    :param disp: display screen
-    :param clock: game clock
-    :param fps: frames per second
-    :param end: end text
-    :param win: level clear text
+     - player: player object
+     - width: screen width
+     - height: screen height
+     - block: block size
+     - gravity: constant for gravity
+     - disp: display screen
+     - clock: game clock
+     - fps: frames per second
+     - end: end text
+     - win: level clear text
     """
     # Delta time
     dt = clock.tick(fps)
@@ -646,11 +641,11 @@ def if_quit(event, esc):
 def add_border(width, height, block, walls, sprites):
     """
     Draws main border around screen
-    :param width: screen width
-    :param height: screen height
-    :param block: block size
-    :param walls: wall list
-    :param sprites: sprites list
+     - width: screen width
+     - height: screen height
+     - block: block size
+     - walls: wall list
+     - sprites: sprites list
     """
     # Floor
     for x in range(0, width, block):
@@ -683,12 +678,12 @@ def add_border(width, height, block, walls, sprites):
 def add_ledge(start_x, end_x, y, block, walls, sprites):
     """
     Draw a horizontal ledge
-    :param start_x: starting position x
-    :param end_x: ending position x
-    :param y: y position
-    :param block: block size
-    :param walls: wall list
-    :param sprites: sprites list
+     - start_x: starting position x
+     - end_x: ending position x
+     - y: y position
+     - block: block size
+     - walls: wall list
+     - sprites: sprites list
     """
     for x in range(start_x, end_x, block):
         wall = Block(x, y, block, block)
@@ -699,12 +694,12 @@ def add_ledge(start_x, end_x, y, block, walls, sprites):
 def add_column(x, start_y, end_y, block, walls, sprites):
     """
     Draw a vertical column
-    :param x: x position
-    :param start_y: top position y
-    :param end_y: bottom position y
-    :param block: block size
-    :param walls: wall list
-    :param sprites: sprites list
+     - x: x position
+     - start_y: top position y
+     - end_y: bottom position y
+     - block: block size
+     - walls: wall list
+     - sprites: sprites list
     """
     for y in range(start_y, end_y, block):
         wall = Block(x, y, block, block)
@@ -715,13 +710,13 @@ def add_column(x, start_y, end_y, block, walls, sprites):
 def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
     """
     Draw a movable horizontal platform
-    :param x: x position
-    :param y: y position
-    :param x_speed: speed in x direction
-    :param y_speed: speed in y direction
-    :param platforms: platform list
-    :param walls: wall list
-    :param sprites: sprites list
+     - x: x position
+     - y: y position
+     - x_speed: speed in x direction
+     - y_speed: speed in y direction
+     - platforms: platform list
+     - walls: wall list
+     - sprites: sprites list
     """
     platform = Platform(x, y)
     platform.change_x = x_speed
@@ -735,12 +730,12 @@ def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
 def add_door(x, y, block, doors, sprites, left=False):
     """
     Draw the door object on right side of screen by default, left by input
-    :param x: x position
-    :param y: y position
-    :param block: block size
-    :param doors: door list
-    :param sprites: sprites list
-    :param left: Default False, enter True to place on left side
+     - x: x position
+     - y: y position
+     - block: block size
+     - doors: door list
+     - sprites: sprites list
+     - left: Default False, enter True to place on left side
     """
     if left:
         door = DoorLeft(x, y, block, block + 50)
@@ -757,15 +752,16 @@ def add_door(x, y, block, doors, sprites, left=False):
 def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
     """
     Adds a specific enemy type to the level
-    :param obj: Enemy class
-    :param x: start x
-    :param y: start y
-    :param speed: change x speed
-    :param walls: wall list
-    :param players: player list
-    :param enemies: enemy list
-    :param sprites: all sprite list
-    Returns: New enemy object
+     - obj: Enemy class
+     - x: start x
+     - y: start y
+     - speed: change x speed
+     - walls: wall list
+     - players: player list
+     - enemies: enemy list
+     - sprites: all sprite list
+
+    returns: Enemy instance
     """
     start_x = x
     start_y = y
@@ -782,11 +778,11 @@ def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
 def add_power_up(obj, x, y, power_list, sprites):
     """
     Add a power up to the level
-    :param obj: power up object to add
-    :param x: x position
-    :param y: y position
-    :param power_list: power up list
-    :param sprites: sprites list
+     - obj: power up object to add
+     - x: x position
+     - y: y position
+     - power_list: power up list
+     - sprites: sprites list
     """
     power = obj(x, y)
     power_list.add(power)
@@ -800,4 +796,4 @@ if __name__ == "__main__":
     pygame.init()
     pygame.mixer.init()
     pygame.display.set_caption('The Depths Of Madness      -- {}--'.format(VERSION))
-    main(SCREEN)
+    main()
