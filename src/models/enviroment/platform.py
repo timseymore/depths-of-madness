@@ -43,12 +43,7 @@ class Platform(pygame.sprite.Sprite):
         self.check_left_right()
 
     def move_left_right(self):
-        # self.move(self.min_x, self.max_x, self.rect.x, self.change_x)
-        if self.min_x <= self.rect.x <= self.max_x:
-            self.rect.x += self.change_x
-        else:
-            self.change_x *= -1
-            # self.rect.x += self.change_x  # causes change in speed right vs. left movement
+        self.rect.x = self.move(self.min_x, self.max_x, self.rect.x, self.change_x)
 
     def check_left_right(self):
         # Did this update cause us to hit a wall?
@@ -63,17 +58,13 @@ class Platform(pygame.sprite.Sprite):
                 self.rect.left = block.rect.right
                 self.change_x *= -1
 
+    # TODO find and fix bug in vertically moving platform
     def handle_up_down(self):
         self.move_up_down()
         self.check_up_down()
 
     def move_up_down(self):
-        # self.move(self.min_y, self.max_y, self.rect.y, self.change_y)
-        if self.min_y <= self.rect.y <= self.max_y:
-            self.rect.y += self.change_y
-        else:
-            self.change_y *= -1
-            self.rect.y += self.change_y
+        self.rect.y = self.move(self.min_y, self.max_y, self.rect.y, self.change_y, True)
 
     def check_up_down(self):
         # Did this update cause us to hit a wall?
@@ -88,5 +79,26 @@ class Platform(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
                 self.change_y *= -1
 
-    def move(self, low, high, rect, change):
-        ...
+    @staticmethod
+    def move(lower_bound, upper_bound, pos, velocity, vertical=False):
+        """
+        move platform within given bounds
+         - lower_bound: lower limit of movement
+         - upper_bound: upper limit of movement
+         - pos: current position
+         - velocity: rate of change in position
+         - vertical: True if moving vertically, False by default
+        returns: new position
+        """
+        # if pos is within bounds
+        if lower_bound <= pos <= upper_bound:
+            # change position based on velocity
+            pos += velocity
+        else:
+            # change direction
+            velocity *= -1
+            # check vertical parameter for true
+            if vertical:
+                # change position based on velocity
+                pos += velocity
+        return pos
