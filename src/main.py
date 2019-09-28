@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 The Depths Of Madness
- ver. 1.00.1
+ ver. 1.00
 
  - Tim Seymore  2018
 """
@@ -57,9 +57,10 @@ def main():
         #       player presses 'enter' to continue to next available screen or level
         main_menu()
         player = character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
-        level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        # TODO: working one level at a time to work out bugs
+        #level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
         level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
-        level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        #level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
     # player presses 'esc' to exit game
     pygame.mixer.quit()
     pygame.quit()
@@ -382,7 +383,7 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
 
     # Create the platform objects
     platform = add_platform(300, 80, 0, -3, platforms, walls, sprites,)
-    platform.change_bounds(block, width - block, block, height - 10*block)
+    platform.change_bounds(block, width - block, block*10, 0)
 
     # ---ADD OBJECTS---
 

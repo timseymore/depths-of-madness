@@ -5,7 +5,7 @@
 --- VERSION HISTORY ---
 
 
- VERSION 1.00.1 
+ VERSION 1.00 
 
     - This game is "Early Access",
       most features are still under development.
