@@ -1,3 +1,8 @@
-
+# ignore all xml files
 *.xml
+
+# ignore all pyc files
 *.pyc
+
+# ignore iml folder
+iml/
