@@ -10,7 +10,7 @@ class Platform(pygame.sprite.Sprite):
              - y: y position of platform
         """
         super().__init__()
-        self.image = pygame.image.load("graphics/platform.png")
+        self.image = pygame.image.load("src/graphics/platform.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.walls = None
         self.x_speed = 0

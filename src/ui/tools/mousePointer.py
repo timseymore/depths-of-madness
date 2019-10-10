@@ -4,7 +4,7 @@ import pygame
 class MousePointer(object):
     """ The Mouse Pointer Object """
     def __init__(self):
-        self.image = pygame.image.load("graphics/mouse_cursor.png")
+        self.image = pygame.image.load("src/graphics/mouse_cursor.png")
         self.rect = self.image.get_size()
         pygame.mouse.set_visible(False)
 

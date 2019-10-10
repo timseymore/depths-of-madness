@@ -23,15 +23,15 @@ class Enemy(pygame.sprite.Sprite):
         self.origin_x = x
         self.origin_y = y
 
-        self.image = pygame.image.load("graphics/demon_right.png")
+        self.image = pygame.image.load("src/graphics/demon_right.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
 
     def switch_img(self):
         """ Switches img based on direction of movement """
         if self.change_x < 0:
-            self.image = pygame.image.load("graphics/demon_left.png")
+            self.image = pygame.image.load("src/graphics/demon_left.png")
         elif self.change_x > 0:
-            self.image = pygame.image.load("graphics/demon_right.png")
+            self.image = pygame.image.load("src/graphics/demon_right.png")
 
     def update(self, dt, gravity):
         """ Update the enemy position. """

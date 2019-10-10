@@ -9,7 +9,7 @@ class LifeIcon(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.image = pygame.image.load("graphics/life_icon.png")
+        self.image = pygame.image.load("src/graphics/life_icon.png")
         self.text = "An icon representing the player's lives."
 
     def get_text(self):

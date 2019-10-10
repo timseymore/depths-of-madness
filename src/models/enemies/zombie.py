@@ -1,4 +1,4 @@
-from models.enemies.enemy import *
+from src.models.enemies.enemy import *
 
 
 class Zombie(Enemy):
@@ -12,12 +12,12 @@ class Zombie(Enemy):
         super().__init__(x, y)
 
         # Set Zombie image
-        self.image = pygame.image.load("graphics/zombie_right.png")
+        self.image = pygame.image.load("src/graphics/zombie_right.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
 
     def switch_img(self):
         """ Switches img based on direction of movement """
         if self.change_x < 0:
-            self.image = pygame.image.load("graphics/zombie_left.png")
+            self.image = pygame.image.load("src/graphics/zombie_left.png")
         elif self.change_x > 0:
-            self.image = pygame.image.load("graphics/zombie_right.png")
+            self.image = pygame.image.load("src/graphics/zombie_right.png")

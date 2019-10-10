@@ -1,4 +1,4 @@
-from models.enemies.enemy import *
+from src.models.enemies.enemy import *
 
 
 class Spike(Enemy):
@@ -12,5 +12,5 @@ class Spike(Enemy):
         super().__init__(x, y)
 
         # Set Spike image
-        self.image = pygame.image.load("graphics/spikes.png")
+        self.image = pygame.image.load("src/graphics/spikes.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())

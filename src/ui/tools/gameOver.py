@@ -1,6 +1,6 @@
 import pygame
 
-from ui.tools.eventBox import EventBox
+from src.ui.tools.eventBox import EventBox
 
 
 class GameOver(EventBox):
@@ -9,5 +9,5 @@ class GameOver(EventBox):
         """ Constructor Method """
         super().__init__(x, y)
 
-        self.image = pygame.image.load('graphics/game_over.png')
+        self.image = pygame.image.load('src/graphics/game_over.png')
         self.music = r'sounds\over_background.wav'

@@ -1,6 +1,6 @@
 import pygame
 
-from ui.tools.eventBox import EventBox
+from src.ui.tools.eventBox import EventBox
 
 
 class WinGame(EventBox):
@@ -9,5 +9,5 @@ class WinGame(EventBox):
         """ Constructor Method """
         super().__init__(x, y)
 
-        self.image = pygame.image.load('graphics/win_game.png')
+        self.image = pygame.image.load('src/graphics/win_game.png')
         self.music = r'sounds\win_background.wav'
