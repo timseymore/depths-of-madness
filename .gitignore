@@ -8,7 +8,7 @@
 iml/
 
 # ignore idea folder
-idea/
+.idea/
 
 # ignore pycache
 __pycache__/
