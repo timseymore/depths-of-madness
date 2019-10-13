@@ -437,7 +437,7 @@ class Player(pygame.sprite.Sprite):
 
             if last.bottom >= platform.rect.top < new.bottom:
                 new.bottom = platform.rect.top
-                self.change_speed(platform.change_x, platform.change_y)
+                self.change_speed(platform.x_speed, platform.y_speed)
                 self.resting = True
                 self.jumping = False
                 self.falling = False

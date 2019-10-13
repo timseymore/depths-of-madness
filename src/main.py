@@ -381,9 +381,10 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     # Column on floor left
     add_column(470, height - 180, height, block, walls, sprites)
 
+    # TODO
     # Create the platform objects
-    platform = add_platform(300, 80, 0, -3, platforms, walls, sprites,)
-    platform.change_bounds(block, width - block, block*10, 0)
+    platform = add_platform(300, 80, 0, 3, platforms, walls, sprites,)
+    platform.change_bounds(block, width - block, block, height - (block * 10))
 
     # ---ADD OBJECTS---
 
@@ -708,9 +709,11 @@ def add_column(x, start_y, end_y, block, walls, sprites):
         sprites.add(wall)
 
 
+# TODO
 def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
     """
-    Draw a movable horizontal platform
+    Draw a movable horizontal platform and add to all lists
+    Returns: New platform instance
      - x: x position
      - y: y position
      - x_speed: speed in x direction
@@ -719,9 +722,7 @@ def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
      - walls: wall list
      - sprites: sprites list
     """
-    platform = Platform(x, y)
-    platform.change_x = x_speed
-    platform.change_y = y_speed
+    platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
     platforms.add(platform)
     platform.walls = walls
     sprites.add(platform)

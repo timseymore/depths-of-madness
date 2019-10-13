@@ -4,22 +4,27 @@ import pygame
 class Platform(pygame.sprite.Sprite):
     """Platform that floats or moves in the game."""
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, x_speed, y_speed, min_x, max_x, min_y, max_y):
         """ Constructor Method
              - x: x position of platform
              - y: y position of platform
+             - x_speed: speed at which platform moves left/right
+             - y_speed: speed at which platform moves up/down
+             - min_x: lower x bound
+             - max_x: upper x bound
+             - min_y: lower y bound
+             - max_y: upper y bound
         """
         super().__init__()
         self.image = pygame.image.load("src/graphics/platform.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.walls = None
-        self.x_speed = 0
-        self.y_speed = 0
-        # TODO should be using game constants instead of hard values
-        self.min_x = 25
-        self.max_x = 775
-        self.min_y = 0
-        self.max_y = 575
+        self.x_speed = x_speed
+        self.y_speed = y_speed
+        self.min_x = min_x
+        self.max_x = max_x
+        self.min_y = min_y
+        self.max_y = max_y
 
     def change_bounds(self, min_x, max_x, min_y, max_y):
         """ Change the upper and lower bounds on x and y
@@ -38,8 +43,8 @@ class Platform(pygame.sprite.Sprite):
              - x: new left/right speed
              - y: new up/down speed
         """
-        self.x_speed += x
-        self.y_speed += y
+        self.x_speed = x
+        self.y_speed = y
 
     def update(self, dt, gravity):
         """ Update the platform position. """
@@ -107,6 +112,7 @@ class Platform(pygame.sprite.Sprite):
          - vertical: True if moving vertically, False by default
         returns: new position
         """
+        print("pos: " + str(pos))
         if lower_bound <= pos <= upper_bound:
             print("platform in bounds")
             pos += velocity
@@ -117,5 +123,4 @@ class Platform(pygame.sprite.Sprite):
             if vertical:
                 print("vertical platform")
                 pos += velocity
-
         return pos
