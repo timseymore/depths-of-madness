@@ -9,5 +9,5 @@ class Block(Wall):
         """ Constructor Method """
         super().__init__(x, y, width, height)
 
-        self.image = pygame.image.load("src/graphics/stone.png")
+        self.image = pygame.image.load(r"graphics/stone.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())

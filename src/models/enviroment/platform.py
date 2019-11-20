@@ -16,7 +16,7 @@ class Platform(pygame.sprite.Sprite):
              - max_y: upper y bound
         """
         super().__init__()
-        self.image = pygame.image.load("src/graphics/platform.png")
+        self.image = pygame.image.load(r"graphics/platform.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.walls = None
         self.x_speed = x_speed
@@ -71,7 +71,6 @@ class Platform(pygame.sprite.Sprite):
                 self.rect.left = block.rect.right
                 self.x_speed *= -1
 
-    # TODO: find and fix bug in vertically moving platform ; remove all print statements when fully tested
     def handle_up_down(self):
         """ Handle the up and down movement of the platform """
         self.move_up_down()
@@ -79,7 +78,11 @@ class Platform(pygame.sprite.Sprite):
 
     def move_up_down(self):
         """ Move the platform up and down ignoring any objects """
-        self.rect.y = self.move(self.min_y, self.max_y, self.rect.y, self.y_speed, True)
+        if self.min_y <= self.rect.y <= self.max_y:
+            self.rect.y += self.y_speed
+        else:
+            self.y_speed *= -1
+            self.rect.y += self.y_speed
 
     def check_up_down(self):
         """ Change platform direction and position if collision is detected
@@ -112,15 +115,10 @@ class Platform(pygame.sprite.Sprite):
          - vertical: True if moving vertically, False by default
         returns: new position
         """
-        print("pos: " + str(pos))
         if lower_bound <= pos <= upper_bound:
-            print("platform in bounds")
             pos += velocity
         else:
-            print("platform out of bounds")
             velocity *= -1
-
             if vertical:
-                print("vertical platform")
                 pos += velocity
         return pos

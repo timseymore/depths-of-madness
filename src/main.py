@@ -24,8 +24,8 @@ from src.models.enviroment.block import Block
 from src.models.enviroment.platform import Platform
 from src.models.enviroment.door import Door
 from src.models.enviroment.doorLeft import DoorLeft
-from src.models.powerups.extraLife import ExtraLife
-from src.models.powerups.coin import Coin
+from src.models.powerUps.extraLife import ExtraLife
+from src.models.powerUps.coin import Coin
 
 
 # =================
@@ -57,10 +57,9 @@ def main():
         #       player presses 'enter' to continue to next available screen or level
         main_menu()
         player = character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
-        # TODO: working one level at a time to work out bugs
-        # level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
         level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
-        # level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+        level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
     # player presses 'esc' to exit game
     pygame.mixer.quit()
     pygame.quit()
@@ -86,7 +85,7 @@ def main_menu():
     text_surface_1 = font.render("Tab: Controls", False, Color.RedBrown)
     text_surface_2 = font.render("Esc: Quit", False, Color.RedBrown)
     # set up background music
-    background = r'src\sounds\menu_background.wav'
+    background = r'sounds\menu_background.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
@@ -180,8 +179,8 @@ def character_selection(disp, time, fps, width, height, block):
 
     returns: Player instance
     """
-    img_1 = pygame.image.load("src/graphics/male_right.png")
-    img_2 = pygame.image.load("src/graphics/female_left.png")
+    img_1 = pygame.image.load(r"graphics/male_right.png")
+    img_2 = pygame.image.load(r"graphics/female_left.png")
     menu_border = pygame.Surface([600, 400])
     menu_border.fill(Color.Eigengrau)
     menu_box = pygame.Surface([550, 350])
@@ -191,7 +190,7 @@ def character_selection(disp, time, fps, width, height, block):
     text_surface = font.render("Choose your character", False, Color.RedBrown)
     text_surface_1 = font_1.render("1. Male", False, Color.RedBrown)
     text_surface_2 = font_1.render("2. Female", False, Color.RedBrown)
-    background = r'src\sounds\level_background2.wav'
+    background = r'sounds\level_background2.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
@@ -286,7 +285,7 @@ def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
     player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
 
     # Set background music
-    background = r'src\sounds\level_background1.wav'
+    background = r'sounds\level_background1.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
@@ -381,7 +380,6 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     # Column on floor left
     add_column(470, height - 180, height, block, walls, sprites)
 
-    # TODO
     # Create the platform objects
     platform = add_platform(300, 80, 0, 3, platforms, walls, sprites,)
     platform.change_bounds(block, width - block, block, height - (block * 10))
@@ -409,7 +407,7 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
 
     # Set background music
-    background = r'src\sounds\level_background2.wav'
+    background = r'sounds\level_background2.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
@@ -539,7 +537,7 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
     # Update player lists
     player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
     # Music
-    background = r'src\sounds\level_background3.wav'
+    background = r'sounds\level_background3.wav'
     pygame.mixer.music.load(background)
     pygame.mixer.music.play(-1)
 
@@ -612,13 +610,13 @@ def fill_background(disp, width, height, block):
     """ Fill background with stone blocks; high CPU usage."""
     for x in range(0, width, block):
         for y in range(0, height, block):
-            img = pygame.image.load("src/graphics/stone.png")
+            img = pygame.image.load(r"graphics/stone.png")
             disp.blit(img, (x, y))
 
 
 def stone_background(disp):
     """ Display dark stone background image"""
-    img = pygame.image.load("src/graphics/stone_background.png")
+    img = pygame.image.load(r"graphics/stone_background.png")
     disp.blit(img, (0, 0))
 
 

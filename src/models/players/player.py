@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         p = Player(10, 20)  - create a Player p at x position 10 and y position 20
         """
         super().__init__()
-        self.image = pygame.image.load("src/graphics/male_right.png")
+        self.image = pygame.image.load(r"graphics/male_right.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.origin_x = x
         self.origin_y = y
@@ -181,9 +181,9 @@ class Player(pygame.sprite.Sprite):
     def switch_img(self, last, new):
         """ Switches player image based on direction of movement. """
         if last.right < new.right:
-            self.image = pygame.image.load("src/graphics/male_right.png")
+            self.image = pygame.image.load(r"graphics/male_right.png")
         elif last.left > new.left:
-            self.image = pygame.image.load("src/graphics/male_left.png")
+            self.image = pygame.image.load(r"graphics/male_left.png")
 
     def reset(self):
         """ Reset player to original location in level. """
@@ -202,7 +202,7 @@ class Player(pygame.sprite.Sprite):
         determines if player is dead.
         Resets player if 1 or more lives are present.
         """
-        effect = pygame.mixer.Sound(r'src/sounds/lose_life.wav')
+        effect = pygame.mixer.Sound(r'sounds/lose_life.wav')
         if self.lives == 0:
             self.dead = True
         else:
@@ -220,7 +220,7 @@ class Player(pygame.sprite.Sprite):
         """
         font = pygame.font.SysFont("Comic Sans MS", 30)
         text_surface = font.render("Press 'Enter' to continue", False, Color.RedBrown)
-        background = r'src\sounds\over_background.wav'
+        background = r'sounds\over_background.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
 
@@ -259,7 +259,7 @@ class Player(pygame.sprite.Sprite):
         font1 = pygame.font.SysFont("Times Roman", 50)
         text_surface = font.render("Press 'Enter' to play next level.", False, Color.DarkSlateBlue)
         text_surface1 = font1.render("Level Clear", False, Color.DarkSlateBlue)
-        background = r'src\sounds\win_background.wav'
+        background = r'sounds\win_background.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
         while self.clear:
@@ -290,7 +290,7 @@ class Player(pygame.sprite.Sprite):
         font1 = pygame.font.SysFont("Times Roman", 45)
         text_surface = font.render("Press 'Enter' to continue.", False, Color.DarkSlateBlue)
         text_surface1 = font1.render("Congratulations You Beat The Game!", False, Color.DarkSlateBlue)
-        background = r'src\sounds\win_background.wav'
+        background = r'sounds\win_background.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
 
@@ -358,7 +358,7 @@ class Player(pygame.sprite.Sprite):
         # Check key holding
         key = pygame.key.get_pressed()
         # Jump by Space bar
-        effect = pygame.mixer.Sound(r'src\sounds\jump.wav')
+        effect = pygame.mixer.Sound(r'sounds\jump.wav')
         if self.resting and key[pygame.K_SPACE]:
             effect.play()
             self.resting = False
@@ -490,5 +490,3 @@ class Player(pygame.sprite.Sprite):
             self.score += 20
             effect = pygame.mixer.Sound(coin.sound)
             effect.play()
-
-

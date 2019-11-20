@@ -9,5 +9,5 @@ class WinGame(EventBox):
         """ Constructor Method """
         super().__init__(x, y)
 
-        self.image = pygame.image.load('src/graphics/win_game.png')
+        self.image = pygame.image.load(r'graphics/win_game.png')
         self.music = r'sounds\win_background.wav'
