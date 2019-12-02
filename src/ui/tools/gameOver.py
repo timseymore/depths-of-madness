@@ -9,5 +9,5 @@ class GameOver(EventBox):
         """ Constructor Method """
         super().__init__(x, y)
 
-        self.image = pygame.image.load(r'graphics/game_over.png')
-        self.music = r'sounds\over_background.wav'
+        self.image = pygame.image.load(r'src/graphics/game_over.png')
+        self.music = r'src/sounds/over_background.wav'

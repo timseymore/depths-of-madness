@@ -5,10 +5,10 @@ class PowerUp(pygame.sprite.Sprite):
     """ Game object with positive effect on character """
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load(r"graphics/power_up.png")
+        self.image = pygame.image.load(r"src/graphics/power_up.png")
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.text = "A powerful upgrade."
-        self.sound = r'sounds\power_up.wav'
+        self.sound = r'src/sounds/power_up.wav'
 
     def get_x(self):
         """ Returns current x position."""

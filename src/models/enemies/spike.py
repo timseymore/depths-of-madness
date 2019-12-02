@@ -12,5 +12,5 @@ class Spike(Enemy):
         super().__init__(x, y)
 
         # Set Spike image
-        self.image = pygame.image.load(r"graphics/spikes.png")
+        self.image = pygame.image.load(r'src/graphics/spikes.png')
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())

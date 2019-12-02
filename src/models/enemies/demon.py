@@ -1,4 +1,4 @@
-from models.enemies.enemy import Enemy
+from src.models.enemies.enemy import Enemy
 
 
 class Demon(Enemy):

@@ -9,5 +9,5 @@ class TitleScreen(EventBox):
         """ Constructor Method """
         super().__init__(x, y)
 
-        self.image = pygame.image.load(r'graphics/menu.png')
-        self.music = r'sounds\menu_background.wav'
+        self.image = pygame.image.load(r'src/graphics/menu.png')
+        self.music = r'src/sounds/menu_background.wav'

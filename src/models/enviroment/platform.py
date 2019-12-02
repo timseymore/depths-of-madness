@@ -16,7 +16,7 @@ class Platform(pygame.sprite.Sprite):
              - max_y: upper y bound
         """
         super().__init__()
-        self.image = pygame.image.load(r"graphics/platform.png")
+        self.image = pygame.image.load(r'src/graphics/platform.png')
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.walls = None
         self.x_speed = x_speed
