@@ -180,7 +180,7 @@ def controls_menu(disp, time, width, height, block):
         pygame.display.flip()
 
 
-def character_selection(disp, time, fps, width, height, block):
+def character_selection(disp, time, fps, width, height, block) -> Player:
     """
     Runs the character selection screen.
      - disp: display screen
@@ -230,7 +230,7 @@ def character_selection(disp, time, fps, width, height, block):
 # --- Game Levels ---
 
 
-def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
+def level_1(player: Player, width, height, block, gravity, disp, clock, fps, end, win):
     """
     Create playable Level 1
      - player: player object
@@ -279,7 +279,9 @@ def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
     add_platform(420, 80, .2 * dt, 0, platforms, walls, sprites)
 
     # Power Ups
+    # noinspection PyTypeChecker
     add_power_up(ExtraLife, 625, 275, extra_lives, sprites)
+    # noinspection PyTypeChecker
     add_power_up(Coin, 40, height - 60, coins, sprites)
 
     # Door
@@ -289,9 +291,13 @@ def level_1(player, width, height, block, gravity, disp, clock, fps, end, win):
     player.add_player_start(players, sprites)
 
     # ---Enemies---
+    # noinspection PyTypeChecker
     spider = add_enemy(Insect, width//2, (height - block) - 35, -4, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     bug = add_enemy(Insect, 60, (height - block) - 35, 4, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike = add_enemy(Spike, width - 225, height - 50, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_1 = add_enemy(Spike, 225, height - 50, 0, walls, players, enemies, sprites)
 
     # Update player lists
@@ -400,7 +406,9 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     # ---ADD OBJECTS---
 
     # Add the Power Up objects
+    # noinspection PyTypeChecker
     add_power_up(ExtraLife, 40, 400, extra_lives, sprites)
+    # noinspection PyTypeChecker
     add_power_up(Coin, 660, 265, coins, sprites)
 
     # Add the door
@@ -410,10 +418,15 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
     player.add_player_next(players, sprites)
 
     # Create the enemy objects.
+    # noinspection PyTypeChecker
     zombie = add_enemy(Zombie, 60, (height - 5*block) - 37, 1, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     demon = add_enemy(Demon, 150, (height - 5*block) - 46, -2, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike = add_enemy(Spike, width - 255, height - 50, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_1 = add_enemy(Spike, width - 280, height - 50, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_2 = add_enemy(Spike, width - 305, height - 50, 0, walls, players, enemies, sprites)
 
     # Update player lists
@@ -502,49 +515,81 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
     # ---ADD OBJECTS---
 
     # Add the Power Up objects
+    # noinspection PyTypeChecker
     add_power_up(Coin, 725, height - 60, coins, sprites)
+    # noinspection PyTypeChecker
     add_power_up(ExtraLife, 325, 200, extra_lives, sprites)
 
     # Add player
     player.add_player_next(players, sprites)
 
     # Create the enemy objects.
+    # noinspection PyTypeChecker
     zombie = add_enemy(Zombie, 60, (height - block) - 37, 1, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     demon = add_enemy(Demon, 150, (height - block) - 46, -2, walls, players, enemies, sprites)
 
     # Add spikes to mid level
+    # noinspection PyTypeChecker
     spike = add_enemy(Spike, 25, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_1 = add_enemy(Spike, 50, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_2 = add_enemy(Spike, 75, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_3 = add_enemy(Spike, 100, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_4 = add_enemy(Spike, 125, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_5 = add_enemy(Spike, 150, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_6 = add_enemy(Spike, 175, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_7 = add_enemy(Spike, 200, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_8 = add_enemy(Spike, 225, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_9 = add_enemy(Spike, 250, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_10 = add_enemy(Spike, 275, 300 - block, 0, walls, players, enemies, sprites)
 
     # TODO Add mario style tunnel leading to lower level
     # Tunnel to lower level
 
     # Continue mid level spikes
+    # noinspection PyTypeChecker
     spike_12 = add_enemy(Spike, 400, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_13 = add_enemy(Spike, 425, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_14 = add_enemy(Spike, 450, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_15 = add_enemy(Spike, 475, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_16 = add_enemy(Spike, 500, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_17 = add_enemy(Spike, 525, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_18 = add_enemy(Spike, 550, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_19 = add_enemy(Spike, 525, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_20 = add_enemy(Spike, 550, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_21 = add_enemy(Spike, 575, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_22 = add_enemy(Spike, 600, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_23 = add_enemy(Spike, 625, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_24 = add_enemy(Spike, 650, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_25 = add_enemy(Spike, 675, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_26 = add_enemy(Spike, 700, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_27 = add_enemy(Spike, 725, 300 - block, 0, walls, players, enemies, sprites)
+    # noinspection PyTypeChecker
     spike_28 = add_enemy(Spike, 750, 300 - block, 0, walls, players, enemies, sprites)
 
     # Update player lists
@@ -762,9 +807,10 @@ def add_door(x, y, block, doors, sprites, left=False):
 
 # --- Player and Enemies ---
 
-def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
-    """
-    Adds a specific enemy type to the level
+def add_enemy(obj: Enemy, x: int, y: int, speed: int, walls: SpriteGroup,
+              players: SpriteGroup, enemies: SpriteGroup, sprites: SpriteGroup) -> Enemy:
+    """  Adds a specific enemy type to the level
+
      - obj: Enemy class
      - x: start x
      - y: start y
@@ -776,9 +822,9 @@ def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
 
     returns: Enemy instance
     """
-    start_x = x
-    start_y = y
-    enemy = obj(start_x, start_y)
+
+    # noinspection PyCallingNonCallable
+    enemy = obj(x, y)
     enemy.change_x = speed
     enemy.walls = walls
     enemy.player = players
