@@ -1,37 +1,41 @@
 # -*- coding: utf-8 -*-
-"""
-The Depths Of Madness
- ver. 1.00
+""" The Depths Of Madness
+                ver. 1.00
+
+ A 2-D platform game using pygame
 
  - Tim Seymore  2018
 """
 
-import pygame
+
 import sys
 
-from src.ui.tools.colors import Color
-from src.ui.tools.gameOver import GameOver
-from src.ui.tools.winGame import WinGame
-from src.ui.tools.titleScreen import TitleScreen
-from src.ui.tools.mousePointer import MousePointer
-from src.models.players.male import Male
-from src.models.players.female import Female
+import pygame
+from src.models.enemies.enemy import Enemy
 from src.models.enemies.demon import Demon
 from src.models.enemies.insect import Insect
-from src.models.enemies.zombie import Zombie
 from src.models.enemies.spike import Spike
+from src.models.enemies.zombie import Zombie
 from src.models.enviroment.block import Block
-from src.models.enviroment.platform import Platform
 from src.models.enviroment.door import Door
 from src.models.enviroment.doorLeft import DoorLeft
-from src.models.powerUps.extraLife import ExtraLife
+from src.models.enviroment.platform import Platform
+from src.models.players.player import Player
+from src.models.players.female import Female
+from src.models.players.male import Male
+from src.models.powerUps.powerUp import PowerUp
 from src.models.powerUps.coin import Coin
-
+from src.models.powerUps.extraLife import ExtraLife
+from src.ui.tools.colors import Color
+from src.ui.tools.gameOver import GameOver
+from src.ui.tools.mousePointer import MousePointer
+from src.ui.tools.titleScreen import TitleScreen
+from src.ui.tools.winGame import WinGame
 
 # =================
 # --- CONSTANTS ---
 
-VERSION = "ver. 1.00.1"
+VERSION = "ver. 1.00.0"
 WIDTH = 800
 HEIGHT = 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE)
@@ -45,12 +49,21 @@ WIN_SCREEN = WinGame(200, 100)
 
 
 # ======================
+# ------ Classes -------
+
+class SpriteGroup(pygame.sprite.Group):
+    pass
+
+
+# ======================
 # ----- Functions ------
 
 def main():
-    """
+    """ Main game function
+
     Start game with main()
     """
+
     running = True
     while running:
         # NOTE: game clock ticks inside each inner function
@@ -69,11 +82,11 @@ def main():
 # --- Menu Screens ---
 
 def main_menu():
-    """
-    Title screen for the game with main menu options
+    """ Title screen for the game with main menu options
 
     returns: None
     """
+
     # set up menu screen gui
     menu_border = pygame.Surface([400, 150])
     menu_border.fill(Color.Eigengrau)
@@ -775,15 +788,16 @@ def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
 
 
 # --- Other Objects ---
-def add_power_up(obj, x, y, power_list, sprites):
-    """
-    Add a power up to the level
+def add_power_up(obj: PowerUp, x: int, y: int, power_list: SpriteGroup, sprites: SpriteGroup):
+    """ Adds a power up object to the sprites list
+
      - obj: power up object to add
      - x: x position
      - y: y position
      - power_list: power up list
      - sprites: sprites list
     """
+    # noinspection PyCallingNonCallable
     power = obj(x, y)
     power_list.add(power)
     sprites.add(power)
