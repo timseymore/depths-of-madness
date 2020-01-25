@@ -9,8 +9,8 @@
 
 
 import sys
-
 import pygame
+
 from src.models.enemies.enemy import Enemy
 from src.models.enemies.demon import Demon
 from src.models.enemies.insect import Insect
@@ -31,6 +31,7 @@ from src.ui.tools.gameOver import GameOver
 from src.ui.tools.mousePointer import MousePointer
 from src.ui.tools.titleScreen import TitleScreen
 from src.ui.tools.winGame import WinGame
+
 
 # =================
 # --- CONSTANTS ---
@@ -82,10 +83,7 @@ def main():
 # --- Menu Screens ---
 
 def main_menu():
-    """ Title screen for the game with main menu options
-
-    returns: None
-    """
+    """ Title screen for the game with main menu options """
 
     # set up menu screen gui
     menu_border = pygame.Surface([400, 150])
@@ -129,8 +127,8 @@ def main_menu():
 
 
 def controls_menu(disp, time, width, height, block):
-    """
-    Runs the menu showing controls for the game.
+    """ Runs the menu showing controls for the game.
+
      - disp: display screen
      - time: game clock
      - fps: frames per second
@@ -138,6 +136,7 @@ def controls_menu(disp, time, width, height, block):
      - height: screen height
      - block: block size
     """
+
     # set up menu gui
     menu_border = pygame.Surface([700, 500])
     menu_border.fill(Color.Eigengrau)
@@ -146,11 +145,11 @@ def controls_menu(disp, time, width, height, block):
     # set up text surfaces
     font = pygame.font.SysFont("Times Roman", 35)
     text_surface = font.render("Player Controls: ", False, Color.RedBrown, Color.Black)
-    text_surface_1 = font.render("Arrow keys or 'a'/'d': Move Left/ Right", False, Color.RedBrown)
+    text_surface_1 = font.render("Arrow Keys or 'a'/'d': Move Left/ Right", False, Color.RedBrown)
     text_surface_2 = font.render("Space Bar: Jump", False, Color.RedBrown)
-    text_surface_3 = font.render("Mouse Pointer: Aim", False, Color.Blood)
-    text_surface_4 = font.render("Left Mouse Button: Ability 1", False, Color.Blood)
-    text_surface_5 = font.render("Right Mouse Button: Ability 2", False, Color.Blood)
+    text_surface_3 = font.render("Mouse Pointer: Aim", False, Color.RedBrown)
+    text_surface_4 = font.render("Left Mouse Button: Ability 1", False, Color.RedBrown)
+    text_surface_5 = font.render("Right Mouse Button: Ability 2", False, Color.RedBrown)
     text_surface_6 = font.render("Tab: Toggle Menu", False, Color.RedBrown)
     text_surface_7 = font.render("Esc: Quit Game", False, Color.RedBrown)
 

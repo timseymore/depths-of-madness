@@ -13,7 +13,7 @@ class LifeIcon(object):
         self.image = pygame.image.load(r'src/graphics/life_icon.png')
         self.text = "An icon representing the player's lives."
 
-    def get_text(self):
+    def get_text(self) -> str:
         """ Returns description text """
 
         return self.text

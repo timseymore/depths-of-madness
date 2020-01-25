@@ -10,13 +10,13 @@ class MousePointer(object):
         pygame.mouse.set_visible(False)
 
     @staticmethod
-    def get_pos():
+    def get_pos() -> tuple:
         """ Returns: Tuple (x, y) position of mouse """
 
         return pygame.mouse.get_pos()
 
     @staticmethod
-    def get_pressed():
+    def get_pressed() -> ():
         """
         Returns the state of the mouse buttons
         (button1, button2, button3) Boolean values
@@ -25,7 +25,7 @@ class MousePointer(object):
         return pygame.mouse.get_pressed
 
     @staticmethod
-    def get_focused():
+    def get_focused() -> bool:
         """ Returns Boolean; True if mouse is active """
 
         return pygame.mouse.get_focused()
