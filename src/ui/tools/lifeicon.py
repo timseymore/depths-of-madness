@@ -8,6 +8,7 @@ class LifeIcon(object):
 
     def __init__(self, x: int, y: int):
         """ Constructor """
+        
         self.x = x
         self.y = y
         self.image = pygame.image.load(r'src/graphics/life_icon.png')

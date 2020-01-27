@@ -857,7 +857,7 @@ def add_power_up(obj: PowerUp, x: int, y: int, power_list: SpriteGroup, sprites:
      - power_list: power up list
      - sprites: sprites list
     """
-    
+
     # noinspection PyCallingNonCallable
     power = obj(x, y)
     power_list.add(power)
