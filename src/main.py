@@ -180,8 +180,8 @@ def controls_menu(disp, time, width, height, block):
 
 
 def character_selection(disp, time, fps, width, height, block) -> Player:
-    """
-    Runs the character selection screen.
+    """ Runs the character selection screen.
+
      - disp: display screen
      - time: game clock
      - fps: frames per second
@@ -191,6 +191,7 @@ def character_selection(disp, time, fps, width, height, block) -> Player:
 
     returns: Player instance
     """
+
     img_1 = pygame.image.load(r"src/graphics/male_right.png")
     img_2 = pygame.image.load(r"src/graphics/female_left.png")
     menu_border = pygame.Surface([600, 400])
@@ -230,8 +231,8 @@ def character_selection(disp, time, fps, width, height, block) -> Player:
 
 
 def level_1(player: Player, width, height, block, gravity, disp, clock, fps, end, win):
-    """
-    Create playable Level 1
+    """ Create playable Level 1
+
      - player: player object
      - width: screen width
      - height: screen height
@@ -243,6 +244,7 @@ def level_1(player: Player, width, height, block, gravity, disp, clock, fps, end
      - end: end text
      - win: level clear text
     """
+
     # Delta time
     dt = clock.tick(fps)
 
@@ -342,8 +344,8 @@ def level_1(player: Player, width, height, block, gravity, disp, clock, fps, end
 
 
 def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
-    """
-    Create playable Level 2
+    """ Create playable Level 2
+
      - player: player object
      - width: screen width
      - height: screen height
@@ -355,6 +357,7 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
      - end: end text
      - win: level clear text
     """
+
     # Delta time
     dt = clock.tick(fps)
 
@@ -474,8 +477,8 @@ def level_2(player, width, height, block, gravity, disp, clock, fps, end, win):
 
 
 def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
-    """
-    Create playable Level 3
+    """ Create playable Level 3
+
      - player: player object
      - width: screen width
      - height: screen height
@@ -487,6 +490,7 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
      - end: end text
      - win: level clear text
     """
+
     # Delta time
     dt = clock.tick(fps)
 
@@ -665,23 +669,28 @@ def level_3(player, width, height, block, gravity, disp, clock, fps, end, win):
 
 def fill_background(disp, width, height, block):
     """ Fill background with stone blocks; high CPU usage."""
+
     for x in range(0, width, block):
         for y in range(0, height, block):
-            img = pygame.image.load(r"src/graphics/stone.png")
+            img = pygame.image.load(r'src/graphics/stone.png')
             disp.blit(img, (x, y))
 
 
 def stone_background(disp):
     """ Display dark stone background image"""
-    img = pygame.image.load(r"src/graphics/stone_background.png")
+
+    img = pygame.image.load(r'src/graphics/stone_background.png')
     disp.blit(img, (0, 0))
 
 
 # --- Event Processing ---
 def if_quit(event, esc):
     """ Exit game if user inputs a quit command.
+
       - event: input event
-      - esc: Boolean Value:  True if 'esc'  will exit """
+      - esc: Boolean Value:  True if 'esc'  will exit
+    """
+
     if event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()
@@ -696,14 +705,15 @@ def if_quit(event, esc):
 
 # --- Build Map ---
 def add_border(width, height, block, walls, sprites):
-    """
-    Draws main border around screen
+    """ Draws main border around screen
+
      - width: screen width
      - height: screen height
      - block: block size
      - walls: wall list
      - sprites: sprites list
     """
+
     # Floor
     for x in range(0, width, block):
         wall = Block(x, height - block, block, block)
@@ -733,8 +743,8 @@ def add_border(width, height, block, walls, sprites):
 
 
 def add_ledge(start_x, end_x, y, block, walls, sprites):
-    """
-    Draw a horizontal ledge
+    """ Draw a horizontal ledge
+
      - start_x: starting position x
      - end_x: ending position x
      - y: y position
@@ -742,6 +752,7 @@ def add_ledge(start_x, end_x, y, block, walls, sprites):
      - walls: wall list
      - sprites: sprites list
     """
+
     for x in range(start_x, end_x, block):
         wall = Block(x, y, block, block)
         walls.add(wall)
@@ -749,8 +760,8 @@ def add_ledge(start_x, end_x, y, block, walls, sprites):
 
 
 def add_column(x, start_y, end_y, block, walls, sprites):
-    """
-    Draw a vertical column
+    """ Draw a vertical column
+
      - x: x position
      - start_y: top position y
      - end_y: bottom position y
@@ -758,6 +769,7 @@ def add_column(x, start_y, end_y, block, walls, sprites):
      - walls: wall list
      - sprites: sprites list
     """
+
     for y in range(start_y, end_y, block):
         wall = Block(x, y, block, block)
         walls.add(wall)
@@ -766,9 +778,9 @@ def add_column(x, start_y, end_y, block, walls, sprites):
 
 # TODO
 def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
-    """
-    Draw a movable horizontal platform and add to all lists
-    Returns: New platform instance
+    """ Draw a movable horizontal platform and add to all lists
+
+
      - x: x position
      - y: y position
      - x_speed: speed in x direction
@@ -776,7 +788,9 @@ def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
      - platforms: platform list
      - walls: wall list
      - sprites: sprites list
+     Returns: New platform instance
     """
+
     platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
     platforms.add(platform)
     platform.walls = walls
@@ -785,8 +799,8 @@ def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
 
 
 def add_door(x, y, block, doors, sprites, left=False):
-    """
-    Draw the door object on right side of screen by default, left by input
+    """ Draw the door object on right side of screen by default, left by input
+
      - x: x position
      - y: y position
      - block: block size
@@ -794,6 +808,7 @@ def add_door(x, y, block, doors, sprites, left=False):
      - sprites: sprites list
      - left: Default False, enter True to place on left side
     """
+
     if left:
         door = DoorLeft(x, y, block, block + 50)
         doors.add(door)
@@ -808,7 +823,7 @@ def add_door(x, y, block, doors, sprites, left=False):
 
 def add_enemy(obj: Enemy, x: int, y: int, speed: int, walls: SpriteGroup,
               players: SpriteGroup, enemies: SpriteGroup, sprites: SpriteGroup) -> Enemy:
-    """  Adds a specific enemy type to the level
+    """ Adds a specific enemy type to the level
 
      - obj: Enemy class
      - x: start x
@@ -842,6 +857,7 @@ def add_power_up(obj: PowerUp, x: int, y: int, power_list: SpriteGroup, sprites:
      - power_list: power up list
      - sprites: sprites list
     """
+    
     # noinspection PyCallingNonCallable
     power = obj(x, y)
     power_list.add(power)
