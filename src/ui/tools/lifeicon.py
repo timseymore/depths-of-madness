@@ -2,9 +2,7 @@ import pygame
 
 
 class LifeIcon(object):
-    """
-    An icon representing the 'player life' object
-    """
+    """ An icon representing the 'player life' object """
 
     def __init__(self, x: int, y: int):
         """ Constructor """
