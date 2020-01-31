@@ -26,6 +26,7 @@ from src.models.players.male import Male
 from src.models.powerUps.powerUp import PowerUp
 from src.models.powerUps.coin import Coin
 from src.models.powerUps.extraLife import ExtraLife
+from src.models.groups.spritegroup import SpriteGroup
 from src.ui.tools.colors import Color
 from src.ui.tools.gameOver import GameOver
 from src.ui.tools.mousePointer import MousePointer
@@ -51,9 +52,6 @@ WIN_SCREEN = WinGame(200, 100)
 
 # ======================
 # ------ Classes -------
-
-class SpriteGroup(pygame.sprite.Group):
-    pass
 
 
 # ======================
