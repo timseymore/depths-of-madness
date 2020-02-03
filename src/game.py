@@ -69,9 +69,9 @@ class Game:
             # Show menu -> player selection -> start game
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
-            player = self.character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
+            player = self.character_selection()
             # TODO: Cycle through levels randomly until reaching end level
-            self.level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+            self.level_1(player)
             self.level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
             self.level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
         # player presses 'esc' to exit game
@@ -112,7 +112,7 @@ class Game:
                     if event.key == pygame.K_TAB:
                         self.controls_menu()
             # draw menu to screen
-            self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+            self.fill_background()
             SCREEN.blit(MENU_SCREEN.image, (200, 20))
             SCREEN.blit(menu_border, (200, 430))
             SCREEN.blit(menu_box, (205, 435))
@@ -162,7 +162,7 @@ class Game:
                         menu = False
 
             # draw control menu to  screen
-            self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+            self.fill_background()
             SCREEN.blit(menu_border, (50, 50))
             SCREEN.blit(menu_box, (75, 75))
             SCREEN.blit(text_surface, (100, 100))
@@ -175,7 +175,7 @@ class Game:
             SCREEN.blit(text_surface_7, (100, 450))
             pygame.display.flip()
 
-    def character_selection(self, disp, time, fps, width, height, block) -> Player:
+    def character_selection(self) -> Player:
         """ Runs the character selection screen.
 
          - disp: display screen
@@ -204,41 +204,29 @@ class Game:
         pygame.mixer.music.play(-1)
 
         while True:
-            time.tick(fps)
+            CLOCK.tick(FPS)
             for event in pygame.event.get():
                 self.check_for_quit(event, True)
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1 or event.key == pygame.K_KP1:
-                        return Male(block + 10, 40)
+                        return Male(BLOCK + 10, 40)
                     elif event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                        return Female(block + 10, 40)
-            self.fill_background(disp, width, height, block)
-            disp.blit(menu_border, (100, 130))
-            disp.blit(menu_box, (125, 155))
-            disp.blit(img_1, (200, 220))
-            disp.blit(img_2, (300, 220))
-            disp.blit(text_surface, (75, 25))
-            disp.blit(text_surface_1, (190, 255))
-            disp.blit(text_surface_2, (290, 255))
+                        return Female(BLOCK + 10, 40)
+            self.fill_background()
+            SCREEN.blit(menu_border, (100, 130))
+            SCREEN.blit(menu_box, (125, 155))
+            SCREEN.blit(img_1, (200, 220))
+            SCREEN.blit(img_2, (300, 220))
+            SCREEN.blit(text_surface, (75, 25))
+            SCREEN.blit(text_surface_1, (190, 255))
+            SCREEN.blit(text_surface_2, (290, 255))
             pygame.display.flip()
 
-    def level_1(self, player: Player, width, height, block, gravity, disp, clock, fps, end, win):
-        """ Create playable Level 1
-
-         - player: player object
-         - width: screen width
-         - height: screen height
-         - block: block size
-         - gravity: constant for gravity
-         - disp: display screen
-         - clock: game clock
-         - fps: frames per second
-         - end: end text
-         - win: level clear text
-        """
+    def level_1(self, player: Player):
+        """ Create playable Level 1 """
 
         # Delta time
-        dt = clock.tick(fps)
+        dt = CLOCK.tick(FPS)
 
         # Create Sprites Lists
         sprites = pygame.sprite.Group()
@@ -251,22 +239,22 @@ class Game:
         enemies = pygame.sprite.Group()
 
         # ---BUILD THE MAP--
-        self.add_border(width, height, block, walls, sprites)
+        self.add_border(WIDTH, HEIGHT, BLOCK, walls, sprites)
 
         # Top right side ledge
-        self.add_ledge(690, 790, 80, block, walls, sprites)
+        self.add_ledge(690, 790, 80, BLOCK, walls, sprites)
 
         # Left side ledge
-        self.add_ledge(block, 200 + block, 300, block, walls, sprites)
+        self.add_ledge(BLOCK, 200 + BLOCK, 300, BLOCK, walls, sprites)
 
         # Stationary platform, right side
-        self.add_ledge(500 - block, 690, 225, block, walls, sprites)
-        self.add_ledge(550 + block, width - block, 300, block, walls, sprites)
-        self.add_column(550 + block, 225, 300, block, walls, sprites)
+        self.add_ledge(500 - BLOCK, 690, 225, BLOCK, walls, sprites)
+        self.add_ledge(550 + BLOCK, WIDTH - BLOCK, 300, BLOCK, walls, sprites)
+        self.add_column(550 + BLOCK, 225, 300, BLOCK, walls, sprites)
 
         # Columns on floor
-        self.add_column(200, (height - block) - 60,  height - block, block, walls, sprites)
-        self.add_column(width - 200, (height - block) - 60, height - block, block, walls, sprites)
+        self.add_column(200, (HEIGHT - BLOCK) - 60,  HEIGHT - BLOCK, BLOCK, walls, sprites)
+        self.add_column(WIDTH - 200, (HEIGHT - BLOCK) - 60, HEIGHT - BLOCK, BLOCK, walls, sprites)
 
         # Floating platform
         self.add_platform(420, 80, .2 * dt, 0, platforms, walls, sprites)
@@ -275,23 +263,23 @@ class Game:
         # noinspection PyTypeChecker
         self.add_power_up(ExtraLife, 625, 275, extra_lives, sprites)
         # noinspection PyTypeChecker
-        self.add_power_up(Coin, 40, height - 60, coins, sprites)
+        self.add_power_up(Coin, 40, HEIGHT - 60, coins, sprites)
 
         # Door
-        self.add_door(width - (block * 2), height - (block + 75), block, doors, sprites, random.randint(0, 1))
+        self.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, doors, sprites, random.randint(0, 1))
 
         # ---Player---
         player.add_player_start(players, sprites)
 
         # ---Enemies---
         # noinspection PyTypeChecker
-        spider = self.add_enemy(Insect, width//2, (height - block) - 35, -4, walls, players, enemies, sprites)
+        spider = self.add_enemy(Insect, WIDTH//2, (HEIGHT - BLOCK) - 35, -4, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        bug = self.add_enemy(Insect, 60, (height - block) - 35, 4, walls, players, enemies, sprites)
+        bug = self.add_enemy(Insect, 60, (HEIGHT - BLOCK) - 35, 4, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike = self.add_enemy(Spike, width - 225, height - 50, 0, walls, players, enemies, sprites)
+        spike = self.add_enemy(Spike, WIDTH - 225, HEIGHT - 50, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_1 = self.add_enemy(Spike, 225, height - 50, 0, walls, players, enemies, sprites)
+        spike_1 = self.add_enemy(Spike, 225, HEIGHT - 50, 0, walls, players, enemies, sprites)
 
         # Update player lists
         player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
@@ -302,7 +290,7 @@ class Game:
         pygame.mixer.music.play(-1)
 
         while not player.dead and not player.clear:
-            clock.tick(fps)
+            CLOCK.tick(FPS)
 
             # ---Event Processing
 
@@ -310,29 +298,29 @@ class Game:
             print(player.get_state())
 
             # ---Drawing Code
-            self.stone_background(disp)
+            self.stone_background()
 
             # Sprites
-            sprites.update(round(dt / 1000, 2), gravity)
-            disp.blit(spike.image, (spike.rect.x, spike.rect.y))
-            disp.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
-            disp.blit(spider.image, (spider.rect.x, spider.rect.y))
-            disp.blit(bug.image, (bug.rect.x, bug.rect.y))
-            disp.blit(player.image, (player.rect.x, player.rect.y))
-            sprites.draw(disp)
+            sprites.update(round(dt / 1000, 2), GRAVITY)
+            SCREEN.blit(spike.image, (spike.rect.x, spike.rect.y))
+            SCREEN.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
+            SCREEN.blit(spider.image, (spider.rect.x, spider.rect.y))
+            SCREEN.blit(bug.image, (bug.rect.x, bug.rect.y))
+            SCREEN.blit(player.image, (player.rect.x, player.rect.y))
+            sprites.draw(SCREEN)
 
             # HUD
-            player.show_hud(disp)
+            player.show_hud(SCREEN)
 
             # Mouse Pointer
             pointer = MousePointer()
-            disp.blit(pointer.image, pointer.get_pos())
+            SCREEN.blit(pointer.image, pointer.get_pos())
 
             pygame.display.flip()
 
         pygame.mixer.music.stop()
-        player.if_clear(win, disp, clock, fps)
-        player.if_dead(end, disp, clock, fps)
+        player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
+        player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     def level_2(self, player, width, height, block, gravity, disp, clock, fps, end, win):
         """ Create playable Level 2
@@ -440,7 +428,7 @@ class Game:
             print(player.get_state())
 
             # ---Drawing Code
-            self.stone_background(disp)
+            self.stone_background()
 
             # Sprites
             sprites.update(round(dt / 1000, 2), gravity)
@@ -599,7 +587,7 @@ class Game:
 
             # ---Drawing Code---
             # Background
-            self.stone_background(disp)
+            self.stone_background()
 
             # Objects
             sprites.update(round(dt / 1000, 2), gravity)
@@ -655,20 +643,20 @@ class Game:
         player.if_dead(end, disp, clock, fps)
 
     @staticmethod
-    def fill_background(disp, width, height, block):
+    def fill_background():
         """ Fill background with stone blocks; high CPU usage."""
 
-        for x in range(0, width, block):
-            for y in range(0, height, block):
+        for x in range(0, WIDTH, BLOCK):
+            for y in range(0, HEIGHT, BLOCK):
                 img = pygame.image.load(r'src/graphics/stone.png')
-                disp.blit(img, (x, y))
+                SCREEN.blit(img, (x, y))
 
     @staticmethod
-    def stone_background(disp):
+    def stone_background():
         """ Display dark stone background image"""
 
         img = pygame.image.load(r'src/graphics/stone_background.png')
-        disp.blit(img, (0, 0))
+        SCREEN.blit(img, (0, 0))
 
     @staticmethod
     def check_for_quit(event, esc):
