@@ -69,7 +69,7 @@ class Game:
             # Show menu -> player selection -> start game
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
-            player = self.character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
+            player = self.character_selection()
             # TODO: Cycle through levels randomly until reaching end level
             self.level_1(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
             self.level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
@@ -112,7 +112,7 @@ class Game:
                     if event.key == pygame.K_TAB:
                         self.controls_menu()
             # draw menu to screen
-            self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+            self.fill_background()
             SCREEN.blit(MENU_SCREEN.image, (200, 20))
             SCREEN.blit(menu_border, (200, 430))
             SCREEN.blit(menu_box, (205, 435))
@@ -162,7 +162,7 @@ class Game:
                         menu = False
 
             # draw control menu to  screen
-            self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+            self.fill_background()
             SCREEN.blit(menu_border, (50, 50))
             SCREEN.blit(menu_box, (75, 75))
             SCREEN.blit(text_surface, (100, 100))
@@ -175,7 +175,7 @@ class Game:
             SCREEN.blit(text_surface_7, (100, 450))
             pygame.display.flip()
 
-    def character_selection(self, disp, time, fps, width, height, block) -> Player:
+    def character_selection(self) -> Player:
         """ Runs the character selection screen.
 
          - disp: display screen
@@ -204,22 +204,22 @@ class Game:
         pygame.mixer.music.play(-1)
 
         while True:
-            time.tick(fps)
+            CLOCK.tick(FPS)
             for event in pygame.event.get():
                 self.check_for_quit(event, True)
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1 or event.key == pygame.K_KP1:
-                        return Male(block + 10, 40)
+                        return Male(BLOCK + 10, 40)
                     elif event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                        return Female(block + 10, 40)
-            self.fill_background(disp, width, height, block)
-            disp.blit(menu_border, (100, 130))
-            disp.blit(menu_box, (125, 155))
-            disp.blit(img_1, (200, 220))
-            disp.blit(img_2, (300, 220))
-            disp.blit(text_surface, (75, 25))
-            disp.blit(text_surface_1, (190, 255))
-            disp.blit(text_surface_2, (290, 255))
+                        return Female(BLOCK + 10, 40)
+            self.fill_background()
+            SCREEN.blit(menu_border, (100, 130))
+            SCREEN.blit(menu_box, (125, 155))
+            SCREEN.blit(img_1, (200, 220))
+            SCREEN.blit(img_2, (300, 220))
+            SCREEN.blit(text_surface, (75, 25))
+            SCREEN.blit(text_surface_1, (190, 255))
+            SCREEN.blit(text_surface_2, (290, 255))
             pygame.display.flip()
 
     def level_1(self, player: Player, width, height, block, gravity, disp, clock, fps, end, win):
@@ -310,7 +310,7 @@ class Game:
             print(player.get_state())
 
             # ---Drawing Code
-            self.stone_background(disp)
+            self.stone_background()
 
             # Sprites
             sprites.update(round(dt / 1000, 2), gravity)
@@ -440,7 +440,7 @@ class Game:
             print(player.get_state())
 
             # ---Drawing Code
-            self.stone_background(disp)
+            self.stone_background()
 
             # Sprites
             sprites.update(round(dt / 1000, 2), gravity)
@@ -599,7 +599,7 @@ class Game:
 
             # ---Drawing Code---
             # Background
-            self.stone_background(disp)
+            self.stone_background()
 
             # Objects
             sprites.update(round(dt / 1000, 2), gravity)
@@ -655,20 +655,20 @@ class Game:
         player.if_dead(end, disp, clock, fps)
 
     @staticmethod
-    def fill_background(disp, width, height, block):
+    def fill_background():
         """ Fill background with stone blocks; high CPU usage."""
 
-        for x in range(0, width, block):
-            for y in range(0, height, block):
+        for x in range(0, WIDTH, BLOCK):
+            for y in range(0, HEIGHT, BLOCK):
                 img = pygame.image.load(r'src/graphics/stone.png')
-                disp.blit(img, (x, y))
+                SCREEN.blit(img, (x, y))
 
     @staticmethod
-    def stone_background(disp):
+    def stone_background():
         """ Display dark stone background image"""
 
         img = pygame.image.load(r'src/graphics/stone_background.png')
-        disp.blit(img, (0, 0))
+        SCREEN.blit(img, (0, 0))
 
     @staticmethod
     def check_for_quit(event, esc):
