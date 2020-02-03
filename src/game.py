@@ -66,8 +66,8 @@ class Game:
 
         running = True
         while running:
+            # Show menu -> player selection -> start game
             # NOTE: game clock ticks inside each inner function
-            #       player presses 'enter' to continue to next available screen or level
             self.main_menu()
             player = self.character_selection(SCREEN, CLOCK, FPS, WIDTH, HEIGHT, BLOCK)
             # TODO: Cycle through levels randomly until reaching end level
@@ -102,7 +102,7 @@ class Game:
             # check for and handle player input
             for event in pygame.event.get():
                 # 'esc' or closing the window exits the game
-                self.if_quit(event, True)
+                self.check_for_quit(event, True)
                 if event.type == pygame.KEYDOWN:
                     # 'enter' exits menu and continues game
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
@@ -110,7 +110,7 @@ class Game:
                         menu = False
                     # 'tab' toggles between main menu and control menu
                     if event.key == pygame.K_TAB:
-                        self.controls_menu(SCREEN, CLOCK, WIDTH, HEIGHT, BLOCK)
+                        self.controls_menu()
             # draw menu to screen
             self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
             SCREEN.blit(MENU_SCREEN.image, (200, 20))
@@ -121,7 +121,7 @@ class Game:
             SCREEN.blit(text_surface_2, (250, 530))
             pygame.display.flip()
 
-    def controls_menu(self, disp, time, width, height, block):
+    def controls_menu(self):
         """ Runs the menu showing controls for the game.
 
          - disp: display screen
@@ -150,27 +150,29 @@ class Game:
 
         menu = True
         while menu:
-            time.tick(FPS)
+            CLOCK.tick(FPS)
+
             # check for and handle player input
             for event in pygame.event.get():
                 # 'esc' or closing the window exits the game
-                self.if_quit(event, True)
+                self.check_for_quit(event, True)
                 if event.type == pygame.KEYDOWN:
                     # 'tab' toggles between control menu and main menu
                     if event.key == pygame.K_TAB:
                         menu = False
+
             # draw control menu to  screen
-            self.fill_background(disp, width, height, block)
-            disp.blit(menu_border, (50, 50))
-            disp.blit(menu_box, (75, 75))
-            disp.blit(text_surface, (100, 100))
-            disp.blit(text_surface_1, (100, 150))
-            disp.blit(text_surface_2, (100, 200))
-            disp.blit(text_surface_3, (100, 250))
-            disp.blit(text_surface_4, (100, 300))
-            disp.blit(text_surface_5, (100, 350))
-            disp.blit(text_surface_6, (100, 400))
-            disp.blit(text_surface_7, (100, 450))
+            self.fill_background(SCREEN, WIDTH, HEIGHT, BLOCK)
+            SCREEN.blit(menu_border, (50, 50))
+            SCREEN.blit(menu_box, (75, 75))
+            SCREEN.blit(text_surface, (100, 100))
+            SCREEN.blit(text_surface_1, (100, 150))
+            SCREEN.blit(text_surface_2, (100, 200))
+            SCREEN.blit(text_surface_3, (100, 250))
+            SCREEN.blit(text_surface_4, (100, 300))
+            SCREEN.blit(text_surface_5, (100, 350))
+            SCREEN.blit(text_surface_6, (100, 400))
+            SCREEN.blit(text_surface_7, (100, 450))
             pygame.display.flip()
 
     def character_selection(self, disp, time, fps, width, height, block) -> Player:
@@ -204,7 +206,7 @@ class Game:
         while True:
             time.tick(fps)
             for event in pygame.event.get():
-                self.if_quit(event, True)
+                self.check_for_quit(event, True)
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1 or event.key == pygame.K_KP1:
                         return Male(block + 10, 40)
@@ -669,7 +671,7 @@ class Game:
         disp.blit(img, (0, 0))
 
     @staticmethod
-    def if_quit(event, esc):
+    def check_for_quit(event, esc):
         """ Exit game if user inputs a quit command.
 
           - event: input event
