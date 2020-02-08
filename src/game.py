@@ -322,20 +322,8 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    def level_2(self, player):
-        """ Create playable Level 2
-
-         - player: player object
-         - width: screen width
-         - height: screen height
-         - block: block size
-         - gravity: constant for gravity
-         - disp: display screen
-         - clock: game clock
-         - fps: frames per second
-         - end: end text
-         - win: level clear text
-        """
+    def level_2(self, player: Player):
+        """ Create playable Level 2 """
 
         # Delta time
         dt = CLOCK.tick(FPS)
