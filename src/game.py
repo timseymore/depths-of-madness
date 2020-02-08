@@ -72,7 +72,7 @@ class Game:
             player = self.character_selection()
             # TODO: Cycle through levels randomly until reaching end level
             self.level_1(player)
-            self.level_2(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+            self.level_2(player)
             self.level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
         # player presses 'esc' to exit game
         pygame.mixer.quit()
@@ -229,14 +229,14 @@ class Game:
         dt = CLOCK.tick(FPS)
 
         # Create Sprites Lists
-        sprites = pygame.sprite.Group()
-        walls = pygame.sprite.Group()
-        platforms = pygame.sprite.Group()
-        extra_lives = pygame.sprite.Group()
-        coins = pygame.sprite.Group()
-        doors = pygame.sprite.Group()
-        players = pygame.sprite.Group()
-        enemies = pygame.sprite.Group()
+        sprites = SpriteGroup()
+        walls = SpriteGroup()
+        platforms = SpriteGroup()
+        extra_lives = SpriteGroup()
+        coins = SpriteGroup()
+        doors = SpriteGroup()
+        players = SpriteGroup()
+        enemies = SpriteGroup()
 
         # ---BUILD THE MAP--
         self.add_border(WIDTH, HEIGHT, BLOCK, walls, sprites)
@@ -322,7 +322,7 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    def level_2(self, player, width, height, block, gravity, disp, clock, fps, end, win):
+    def level_2(self, player):
         """ Create playable Level 2
 
          - player: player object
@@ -338,51 +338,51 @@ class Game:
         """
 
         # Delta time
-        dt = clock.tick(fps)
+        dt = CLOCK.tick(FPS)
 
         # Create Sprites Lists
-        sprites = pygame.sprite.Group()
-        walls = pygame.sprite.Group()
-        platforms = pygame.sprite.Group()
-        extra_lives = pygame.sprite.Group()
-        coins = pygame.sprite.Group()
-        doors = pygame.sprite.Group()
-        players = pygame.sprite.Group()
-        enemies = pygame.sprite.Group()
+        sprites = SpriteGroup()
+        walls = SpriteGroup()
+        platforms = SpriteGroup()
+        extra_lives = SpriteGroup()
+        coins = SpriteGroup()
+        doors = SpriteGroup()
+        players = SpriteGroup()
+        enemies = SpriteGroup()
 
         # ---BUILD THE MAP---
 
         # Main Border
-        self.add_border(width, height, block, walls, sprites)
+        self.add_border(WIDTH, HEIGHT, BLOCK, walls, sprites)
 
         # Top right side ledge
-        self.add_ledge(690, 790, 80, block, walls, sprites)
+        self.add_ledge(690, 790, 80, BLOCK, walls, sprites)
 
         # Second from top, left side ledge
-        self.add_ledge(block, 200 + block, 225, block, walls, sprites)
+        self.add_ledge(BLOCK, 200 + BLOCK, 225, BLOCK, walls, sprites)
 
         # Second from top, right side ledge
-        self.add_ledge(600 + block, width - block, 300, block, walls, sprites)
+        self.add_ledge(600 + BLOCK, WIDTH - BLOCK, 300, BLOCK, walls, sprites)
 
         # Stationary platform, right side
-        self.add_ledge(495 - block, 690, 225, block, walls, sprites)
+        self.add_ledge(495 - BLOCK, 690, 225, BLOCK, walls, sprites)
 
         # Top left side ledge
-        self.add_ledge(block, 210 + block, 200, block, walls, sprites)
+        self.add_ledge(BLOCK, 210 + BLOCK, 200, BLOCK, walls, sprites)
 
         # Floor
         for i in range(5):
-            self.add_ledge(block, 470, height - ((i + 1) * block), block, walls, sprites)
+            self.add_ledge(BLOCK, 470, HEIGHT - ((i + 1) * BLOCK), BLOCK, walls, sprites)
 
         # Column to platform, right side
-        self.add_column(600 + block, 225, 300, block, walls, sprites)
+        self.add_column(600 + BLOCK, 225, 300, BLOCK, walls, sprites)
 
         # Column on floor left
-        self.add_column(470, height - 180, height, block, walls, sprites)
+        self.add_column(470, HEIGHT - 180, HEIGHT, BLOCK, walls, sprites)
 
         # Create the platform objects
         platform = self.add_platform(300, 80, 0, 3, platforms, walls, sprites,)
-        platform.change_bounds(block, width - block, block, height - (block * 10))
+        platform.change_bounds(BLOCK, WIDTH - BLOCK, BLOCK, HEIGHT - (BLOCK * 10))
 
         # ---ADD OBJECTS---
 
@@ -393,22 +393,22 @@ class Game:
         self.add_power_up(Coin, 660, 265, coins, sprites)
 
         # Add the door
-        self.add_door(width - (block + 5), height - (block + 75), block, doors, sprites, random.randint(0, 2))
+        self.add_door(WIDTH - (BLOCK + 5), HEIGHT - (BLOCK + 75), BLOCK, doors, sprites, random.randint(0, 2))
 
         # Add player
         player.add_player_next(players, sprites)
 
         # Create the enemy objects.
         # noinspection PyTypeChecker
-        zombie = self.add_enemy(Zombie, 60, (height - 5*block) - 37, 1, walls, players, enemies, sprites)
+        zombie = self.add_enemy(Zombie, 60, (HEIGHT - 5 * BLOCK) - 37, 1, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        demon = self.add_enemy(Demon, 150, (height - 5*block) - 46, -2, walls, players, enemies, sprites)
+        demon = self.add_enemy(Demon, 150, (HEIGHT - 5 * BLOCK) - 46, -2, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike = self.add_enemy(Spike, width - 255, height - 50, 0, walls, players, enemies, sprites)
+        spike = self.add_enemy(Spike, WIDTH - 255, HEIGHT - 50, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_1 = self.add_enemy(Spike, width - 280, height - 50, 0, walls, players, enemies, sprites)
+        spike_1 = self.add_enemy(Spike, WIDTH - 280, HEIGHT - 50, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_2 = self.add_enemy(Spike, width - 305, height - 50, 0, walls, players, enemies, sprites)
+        spike_2 = self.add_enemy(Spike, WIDTH - 305, HEIGHT - 50, 0, walls, players, enemies, sprites)
 
         # Update player lists
         player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
@@ -420,7 +420,7 @@ class Game:
 
         # ---MAIN LOOP---
         while not player.dead and not player.clear:
-            clock.tick(fps)
+            CLOCK.tick(FPS)
 
             # ---Event Processing
 
@@ -431,28 +431,29 @@ class Game:
             self.stone_background()
 
             # Sprites
-            sprites.update(round(dt / 1000, 2), gravity)
-            disp.blit(spike.image, (spike.rect.x, spike.rect.y))
-            disp.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
-            disp.blit(spike_2.image, (spike_2.rect.x, spike_2.rect.y))
-            disp.blit(zombie.image, (zombie.rect.x, zombie.rect.y))
-            disp.blit(demon.image, (demon.rect.x, demon.rect.y))
-            disp.blit(player.image, (player.rect.x, player.rect.y))
-            sprites.draw(disp)
+            sprites.update(round(dt / 1000, 2), GRAVITY)
+            SCREEN.blit(spike.image, (spike.rect.x, spike.rect.y))
+
+            SCREEN.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
+            SCREEN.blit(spike_2.image, (spike_2.rect.x, spike_2.rect.y))
+            SCREEN.blit(zombie.image, (zombie.rect.x, zombie.rect.y))
+            SCREEN.blit(demon.image, (demon.rect.x, demon.rect.y))
+            SCREEN.blit(player.image, (player.rect.x, player.rect.y))
+            sprites.draw(SCREEN)
 
             # HUD
-            player.show_hud(disp)
+            player.show_hud(SCREEN)
 
             # Mouse Pointer
             pointer = MousePointer()
-            disp.blit(pointer.image, pointer.get_pos())
+            SCREEN.blit(pointer.image, pointer.get_pos())
 
             # --Flip Display--
             pygame.display.flip()
 
         pygame.mixer.music.stop()
-        player.if_clear(win, disp, clock, fps)
-        player.if_dead(end, disp, clock, fps)
+        player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
+        player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     def level_3(self, player, width, height, block, gravity, disp, clock, fps, end, win):
         """ Create playable Level 3
