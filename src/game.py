@@ -54,6 +54,155 @@ WIN_SCREEN = WinGame(200, 100)
 # ======================
 # ------ Classes -------
 
+class Level:
+    def __int__(self, player: Player):
+        self.player = player
+        # Delta time
+        self.dt = CLOCK.tick(FPS)
+        # Create Sprites Lists
+        self.sprites = SpriteGroup()
+        self.walls = SpriteGroup()
+        self.platforms = SpriteGroup()
+        self.extra_lives = SpriteGroup()
+        self.coins = SpriteGroup()
+        self.doors = SpriteGroup()
+        self.players = SpriteGroup()
+        self.enemies = SpriteGroup()
+        self.add_border()
+
+    @staticmethod
+    def fill_background():
+        """ Fill background with stone blocks; high CPU usage."""
+
+        for x in range(0, WIDTH, BLOCK):
+            for y in range(0, HEIGHT, BLOCK):
+                img = pygame.image.load(r'src/graphics/stone.png')
+                SCREEN.blit(img, (x, y))
+
+    def add_border(self):
+        """ Draws main border around screen """
+
+        # Floor
+        for x in range(0, WIDTH, BLOCK):
+            wall = Block(x, HEIGHT - BLOCK, BLOCK, BLOCK)
+            self.walls.add(wall)
+            self.sprites.add(wall)
+
+        # Right side wall
+        for y in range(0 - (10 * BLOCK), HEIGHT, BLOCK):
+            wall = Block(WIDTH - BLOCK, y, BLOCK, BLOCK)
+            self.walls.add(wall)
+            self.sprites.add(wall)
+
+        # Left side wall
+        for y in range(0 - (10 * BLOCK), HEIGHT + (BLOCK // 2), BLOCK):
+            wall = Block(0, y, BLOCK, BLOCK)
+            self.walls.add(wall)
+            self.sprites.add(wall)
+
+        # Top left side ledge entrance
+        self.add_ledge(BLOCK, 100 + BLOCK, 80)
+
+    def add_ledge(self, start_x, end_x, y):
+        """ Draw a horizontal ledge
+
+         - start_x: starting position x
+         - end_x: ending position x
+         - y: y position
+        """
+
+        for x in range(start_x, end_x, BLOCK):
+            wall = Block(x, y, BLOCK, BLOCK)
+            self.walls.add(wall)
+            self.sprites.add(wall)
+
+    def add_column(self, x, start_y, end_y):
+        """ Draw a vertical column
+
+         - x: x position
+         - start_y: top position y
+         - end_y: bottom position y
+        """
+
+        for y in range(start_y, end_y, BLOCK):
+            wall = Block(x, y, BLOCK, BLOCK)
+            self.walls.add(wall)
+            self.sprites.add(wall)
+
+    def add_platform(self, x, y, x_speed, y_speed) -> Platform:
+        """ Draw a movable horizontal platform and add to all lists
+
+         - x: x position
+         - y: y position
+         - x_speed: speed in x direction
+         - y_speed: speed in y direction
+         Returns: New platform instance
+        """
+
+        platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
+        self.platforms.add(platform)
+        platform.walls = self.walls
+        self.sprites.add(platform)
+        return platform
+
+    def add_door(self, x, y, exit_level, left=False):
+        """ Draw the door object on right side of screen by default, left by input
+
+         - x: x position
+         - y: y position
+         - exit_level: level that door will lead to
+         - left: Default False, enter True to place on left side
+        """
+
+        if left:
+            door = DoorLeft(x, y, BLOCK, BLOCK + 50, exit_level)
+            self.doors.add(door)
+            self.sprites.add(door)
+        else:
+            door = Door(x, y, BLOCK, BLOCK + 50, exit_level)
+            self.doors.add(door)
+            self.sprites.add(door)
+
+    def add_enemy(self, obj: Enemy, x: int, y: int, speed: int) -> Enemy:
+        """ Adds a specific enemy type to the level
+
+         - obj: Enemy class
+         - x: start x
+         - y: start y
+         - speed: change x speed
+        Returns: Enemy instance
+        """
+
+        # noinspection PyCallingNonCallable
+        enemy = obj(x, y)
+        enemy.change_x = speed
+        enemy.walls = self.walls
+        enemy.player = self.players
+        self.enemies.add(enemy)
+        self.sprites.add(enemy)
+        return enemy
+
+    def add_power_up(self, obj: PowerUp, x: int, y: int, power_list: SpriteGroup):
+        """ Adds a power up object to the sprites list
+
+         - obj: power up object to add
+         - x: x position
+         - y: y position
+         - power_list: SpriteGroup to add power up to
+        """
+
+        # noinspection PyCallingNonCallable
+        power = obj(x, y)
+        power_list.add(power)
+        self.sprites.add(power)
+
+    @staticmethod
+    def stone_background():
+        """ Display dark stone background image"""
+
+        img = pygame.image.load(r'src/graphics/stone_background.png')
+        SCREEN.blit(img, (0, 0))
+
 
 class Game:
     """ Main game object
@@ -74,6 +223,7 @@ class Game:
             self.level_1(player)
             self.level_2(player)
             self.level_3(player)
+            # self.level_4(player)
         # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
@@ -602,6 +752,58 @@ class Game:
             pygame.display.flip()
 
         pygame.mixer.music.stop()
+        player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
+        player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
+
+    @staticmethod
+    def level_4(player: Player):
+        dt = CLOCK.tick(FPS)
+        level = Level()
+        level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
+        # ---Player---
+        player.add_player_start(level.players, level.sprites)
+        # Update player lists
+        player.update_lists(level.walls,
+                            level.enemies,
+                            level.extra_lives,
+                            level.coins,
+                            level.doors,
+                            level.platforms)
+        # Set background music
+        background = r'src\sounds\level_background1.wav'
+        pygame.mixer.music.load(background)
+        pygame.mixer.music.play(-1)
+
+        while not player.dead and not player.clear:
+            CLOCK.tick(FPS)
+
+            # ---Event Processing
+
+            # ---Game Logic
+            print(player.get_state())
+
+            # ---Drawing Code
+            level.stone_background()
+
+            # Sprites
+            level.sprites.update(round(dt / 1000, 2), GRAVITY)
+            # SCREEN.blit(spike.image, (spike.rect.x, spike.rect.y))
+            # SCREEN.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
+            # SCREEN.blit(spider.image, (spider.rect.x, spider.rect.y))
+            # SCREEN.blit(bug.image, (bug.rect.x, bug.rect.y))
+            # SCREEN.blit(player.image, (player.rect.x, player.rect.y))
+            level.sprites.draw(SCREEN)
+
+            # HUD
+            player.show_hud(SCREEN)
+
+            # Mouse Pointer
+            pointer = MousePointer()
+            SCREEN.blit(pointer.image, pointer.get_pos())
+
+            pygame.display.flip()
+
+        pygame.mixer.music.stop()
         player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
@@ -707,7 +909,6 @@ class Game:
             walls.add(wall)
             sprites.add(wall)
 
-    # TODO
     @staticmethod
     def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
         """ Draw a movable horizontal platform and add to all lists
