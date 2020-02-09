@@ -220,9 +220,9 @@ class Game:
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
             player = self.character_selection()
-            self.level_1(player)
-            self.level_2(player)
-            self.level_3(player)
+            # self.level_1(player)
+            # self.level_2(player)
+            # self.level_3(player)
             self.level_4(player)
         # player presses 'esc' to exit game
         pygame.mixer.quit()
@@ -756,46 +756,65 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    # TODO 1: Implement level 4
-    def level_4(self, player: Player):
-        """ Creates playable level 4 """
+    # TODO 1: Create level 4
 
+    @staticmethod
+    def level_4(player: Player):
+        """ Creates playable empty level
+
+         Use to create new levels
+         """
+
+        # Set up level
         dt = CLOCK.tick(FPS)
         level = EmptyLevel(player)
 
+        # ---BUILD THE MAP---
+        # --Main Border--
         level.add_border()
+
+        # add door
         level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
+
+        # ---ADD OBJECTS---
+
+        # Add the Power Up objects
+
+        # add player
         player.add_player_start(level.players, level.sprites)
-        # Update player lists
+
+        # add the enemy objects
+
+        # update player lists
         player.update_lists(level.walls,
                             level.enemies,
                             level.extra_lives,
                             level.coins,
                             level.doors,
                             level.platforms)
-        # Set background music
+
+        # Set and begin playing background music
         background = r'src\sounds\level_background1.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
 
+        # Main loop
         while not player.dead and not player.clear:
             CLOCK.tick(FPS)
 
-            # ---Event Processing
+            # ---Event Processing---
 
-            # ---Game Logic
+            # ---Game Logic---
             print(player.get_state())
 
-            # ---Drawing Code
+            # ---Drawing Code---
             level.stone_background()
 
             # Sprites
             level.sprites.update(round(dt / 1000, 2), GRAVITY)
-            # SCREEN.blit(spike.image, (spike.rect.x, spike.rect.y))
-            # SCREEN.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
-            # SCREEN.blit(spider.image, (spider.rect.x, spider.rect.y))
-            # SCREEN.blit(bug.image, (bug.rect.x, bug.rect.y))
-            # SCREEN.blit(player.image, (player.rect.x, player.rect.y))
+
+            # draw sprites: SCREEN.blit(obj.image, (obj.rect.x, obj.rect.y))
+
             level.sprites.draw(SCREEN)
 
             # HUD
@@ -807,6 +826,81 @@ class Game:
 
             pygame.display.flip()
 
+        # ---End Main Loop---
+        pygame.mixer.music.stop()
+        player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
+        player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
+
+    @staticmethod
+    def level_template(player: Player):
+        """ Creates playable empty level
+
+         Use to create new levels
+         """
+
+        # Set up level
+        dt = CLOCK.tick(FPS)
+        level = EmptyLevel(player)
+
+        # ---BUILD THE MAP---
+        # --Main Border--
+        level.add_border()
+
+        # add door
+        level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
+
+        # ---ADD OBJECTS---
+
+        # Add the Power Up objects
+
+        # add player
+        player.add_player_start(level.players, level.sprites)
+
+        # add the enemy objects
+
+        # update player lists
+        player.update_lists(level.walls,
+                            level.enemies,
+                            level.extra_lives,
+                            level.coins,
+                            level.doors,
+                            level.platforms)
+
+        # Set and begin playing background music
+        background = r'src\sounds\level_background1.wav'
+        pygame.mixer.music.load(background)
+        pygame.mixer.music.play(-1)
+
+        # Main loop
+        while not player.dead and not player.clear:
+
+            CLOCK.tick(FPS)
+
+            # ---Event Processing---
+
+            # ---Game Logic---
+            print(player.get_state())
+
+            # ---Drawing Code---
+            level.stone_background()
+
+            # Sprites
+            level.sprites.update(round(dt / 1000, 2), GRAVITY)
+
+            # draw sprites: SCREEN.blit(obj.image, (obj.rect.x, obj.rect.y))
+
+            level.sprites.draw(SCREEN)
+
+            # HUD
+            player.show_hud(SCREEN)
+
+            # Mouse Pointer
+            pointer = MousePointer()
+            SCREEN.blit(pointer.image, pointer.get_pos())
+
+            pygame.display.flip()
+
+        # ---End Main Loop---
         pygame.mixer.music.stop()
         player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
