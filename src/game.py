@@ -73,7 +73,7 @@ class Game:
             # TODO: Cycle through levels randomly until reaching end level
             self.level_1(player)
             self.level_2(player)
-            self.level_3(player, WIDTH, HEIGHT, BLOCK, GRAVITY, SCREEN, CLOCK, FPS, END_SCREEN, WIN_SCREEN)
+            self.level_3(player)
         # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
@@ -122,15 +122,7 @@ class Game:
             pygame.display.flip()
 
     def controls_menu(self):
-        """ Runs the menu showing controls for the game.
-
-         - disp: display screen
-         - time: game clock
-         - fps: frames per second
-         - width: screen width
-         - height: screen height
-         - block: block size
-        """
+        """ Runs the menu showing controls for the game """
 
         # set up menu gui
         menu_border = pygame.Surface([700, 500])
@@ -177,13 +169,6 @@ class Game:
 
     def character_selection(self) -> Player:
         """ Runs the character selection screen.
-
-         - disp: display screen
-         - time: game clock
-         - fps: frames per second
-         - width: screen width
-         - height: screen height
-         - block: block size
 
         returns: Player instance
         """
@@ -443,50 +428,38 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    def level_3(self, player, width, height, block, gravity, disp, clock, fps, end, win):
-        """ Create playable Level 3
-
-         - player: player object
-         - width: screen width
-         - height: screen height
-         - block: block size
-         - gravity: constant for gravity
-         - disp: display screen
-         - clock: game clock
-         - fps: frames per second
-         - end: end text
-         - win: level clear text
-        """
+    def level_3(self, player: Player):
+        """ Create playable Level 3 """
 
         # Delta time
-        dt = clock.tick(fps)
+        dt = CLOCK.tick(FPS)
 
         # Create Sprites Lists
-        sprites = pygame.sprite.Group()
-        walls = pygame.sprite.Group()
-        platforms = pygame.sprite.Group()
-        extra_lives = pygame.sprite.Group()
-        coins = pygame.sprite.Group()
-        doors = pygame.sprite.Group()
-        players = pygame.sprite.Group()
-        enemies = pygame.sprite.Group()
+        sprites = SpriteGroup()
+        walls = SpriteGroup()
+        platforms = SpriteGroup()
+        extra_lives = SpriteGroup()
+        coins = SpriteGroup()
+        doors = SpriteGroup()
+        players = SpriteGroup()
+        enemies = SpriteGroup()
 
         # ---BUILD THE MAP---
         # --Main Border--
-        self.add_border(width, height, block, walls, sprites)
+        self.add_border(WIDTH, HEIGHT, BLOCK, walls, sprites)
 
         # Mid level floor
-        self.add_ledge(block, 300, 300, block, walls, sprites)
-        self.add_ledge(400, width - block, 300, block, walls, sprites)
+        self.add_ledge(BLOCK, 300, 300, BLOCK, walls, sprites)
+        self.add_ledge(400, WIDTH - BLOCK, 300, BLOCK, walls, sprites)
 
         # Add the door
-        self.add_door(5, height - (block + 75), block, doors, sprites, random.randint(0, 3), True)
+        self.add_door(5, HEIGHT - (BLOCK + 75), BLOCK, doors, sprites, random.randint(0, 3), True)
 
         # ---ADD OBJECTS---
 
         # Add the Power Up objects
         # noinspection PyTypeChecker
-        self.add_power_up(Coin, 725, height - 60, coins, sprites)
+        self.add_power_up(Coin, 725, HEIGHT - 60, coins, sprites)
         # noinspection PyTypeChecker
         self.add_power_up(ExtraLife, 325, 200, extra_lives, sprites)
 
@@ -495,75 +468,76 @@ class Game:
 
         # Create the enemy objects.
         # noinspection PyTypeChecker
-        zombie = self.add_enemy(Zombie, 60, (height - block) - 37, 1, walls, players, enemies, sprites)
+        zombie = self.add_enemy(Zombie, 60, (HEIGHT - BLOCK) - 37, 1, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        demon = self.add_enemy(Demon, 150, (height - block) - 46, -2, walls, players, enemies, sprites)
+        demon = self.add_enemy(Demon, 150, (HEIGHT - BLOCK) - 46, -2, walls, players, enemies, sprites)
 
         # Add spikes to mid level
         # noinspection PyTypeChecker
-        spike = self.add_enemy(Spike, 25, 300 - block, 0, walls, players, enemies, sprites)
+        spike = self.add_enemy(Spike, 25, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_1 = self.add_enemy(Spike, 50, 300 - block, 0, walls, players, enemies, sprites)
+        spike_1 = self.add_enemy(Spike, 50, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_2 = self.add_enemy(Spike, 75, 300 - block, 0, walls, players, enemies, sprites)
+        spike_2 = self.add_enemy(Spike, 75, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_3 = self.add_enemy(Spike, 100, 300 - block, 0, walls, players, enemies, sprites)
+        spike_3 = self.add_enemy(Spike, 100, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_4 = self.add_enemy(Spike, 125, 300 - block, 0, walls, players, enemies, sprites)
+        spike_4 = self.add_enemy(Spike, 125, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_5 = self.add_enemy(Spike, 150, 300 - block, 0, walls, players, enemies, sprites)
+        spike_5 = self.add_enemy(Spike, 150, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_6 = self.add_enemy(Spike, 175, 300 - block, 0, walls, players, enemies, sprites)
+        spike_6 = self.add_enemy(Spike, 175, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_7 = self.add_enemy(Spike, 200, 300 - block, 0, walls, players, enemies, sprites)
+        spike_7 = self.add_enemy(Spike, 200, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_8 = self.add_enemy(Spike, 225, 300 - block, 0, walls, players, enemies, sprites)
+        spike_8 = self.add_enemy(Spike, 225, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_9 = self.add_enemy(Spike, 250, 300 - block, 0, walls, players, enemies, sprites)
+        spike_9 = self.add_enemy(Spike, 250, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_10 = self.add_enemy(Spike, 275, 300 - block, 0, walls, players, enemies, sprites)
+        spike_10 = self.add_enemy(Spike, 275, 300 - BLOCK, 0, walls, players, enemies, sprites)
 
         # TODO Add mario style tunnel leading to lower level
         # Tunnel to lower level
 
         # Continue mid level spikes
         # noinspection PyTypeChecker
-        spike_12 = self.add_enemy(Spike, 400, 300 - block, 0, walls, players, enemies, sprites)
+        spike_12 = self.add_enemy(Spike, 400, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_13 = self.add_enemy(Spike, 425, 300 - block, 0, walls, players, enemies, sprites)
+        spike_13 = self.add_enemy(Spike, 425, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_14 = self.add_enemy(Spike, 450, 300 - block, 0, walls, players, enemies, sprites)
+        spike_14 = self.add_enemy(Spike, 450, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_15 = self.add_enemy(Spike, 475, 300 - block, 0, walls, players, enemies, sprites)
+        spike_15 = self.add_enemy(Spike, 475, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_16 = self.add_enemy(Spike, 500, 300 - block, 0, walls, players, enemies, sprites)
+        spike_16 = self.add_enemy(Spike, 500, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_17 = self.add_enemy(Spike, 525, 300 - block, 0, walls, players, enemies, sprites)
+        spike_17 = self.add_enemy(Spike, 525, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_18 = self.add_enemy(Spike, 550, 300 - block, 0, walls, players, enemies, sprites)
+        spike_18 = self.add_enemy(Spike, 550, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_19 = self.add_enemy(Spike, 525, 300 - block, 0, walls, players, enemies, sprites)
+        spike_19 = self.add_enemy(Spike, 525, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_20 = self.add_enemy(Spike, 550, 300 - block, 0, walls, players, enemies, sprites)
+        spike_20 = self.add_enemy(Spike, 550, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_21 = self.add_enemy(Spike, 575, 300 - block, 0, walls, players, enemies, sprites)
+        spike_21 = self.add_enemy(Spike, 575, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_22 = self.add_enemy(Spike, 600, 300 - block, 0, walls, players, enemies, sprites)
+        spike_22 = self.add_enemy(Spike, 600, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_23 = self.add_enemy(Spike, 625, 300 - block, 0, walls, players, enemies, sprites)
+        spike_23 = self.add_enemy(Spike, 625, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_24 = self.add_enemy(Spike, 650, 300 - block, 0, walls, players, enemies, sprites)
+        spike_24 = self.add_enemy(Spike, 650, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_25 = self.add_enemy(Spike, 675, 300 - block, 0, walls, players, enemies, sprites)
+        spike_25 = self.add_enemy(Spike, 675, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_26 = self.add_enemy(Spike, 700, 300 - block, 0, walls, players, enemies, sprites)
+        spike_26 = self.add_enemy(Spike, 700, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_27 = self.add_enemy(Spike, 725, 300 - block, 0, walls, players, enemies, sprites)
+        spike_27 = self.add_enemy(Spike, 725, 300 - BLOCK, 0, walls, players, enemies, sprites)
         # noinspection PyTypeChecker
-        spike_28 = self.add_enemy(Spike, 750, 300 - block, 0, walls, players, enemies, sprites)
+        spike_28 = self.add_enemy(Spike, 750, 300 - BLOCK, 0, walls, players, enemies, sprites)
 
         # Update player lists
         player.update_lists(walls, enemies, extra_lives, coins, doors, platforms)
+
         # Music
         background = r'src\sounds\level_background3.wav'
         pygame.mixer.music.load(background)
@@ -571,7 +545,7 @@ class Game:
 
         # ---MAIN LOOP---
         while not player.dead and not player.clear:
-            clock.tick(fps)
+            CLOCK.tick(FPS)
             # ---Game Logic
 
             # ---Drawing Code---
@@ -579,57 +553,57 @@ class Game:
             self.stone_background()
 
             # Objects
-            sprites.update(round(dt / 1000, 2), gravity)
+            sprites.update(round(dt / 1000, 2), GRAVITY)
 
             # Display spikes
-            disp.blit(spike.image, (spike.rect.x, spike.rect.y))
-            disp.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
-            disp.blit(spike_2.image, (spike_2.rect.x, spike_2.rect.y))
-            disp.blit(spike_3.image, (spike_3.rect.x, spike_3.rect.y))
-            disp.blit(spike_4.image, (spike_4.rect.x, spike_4.rect.y))
-            disp.blit(spike_5.image, (spike_5.rect.x, spike_5.rect.y))
-            disp.blit(spike_6.image, (spike_6.rect.x, spike_6.rect.y))
-            disp.blit(spike_7.image, (spike_7.rect.x, spike_7.rect.y))
-            disp.blit(spike_8.image, (spike_8.rect.x, spike_8.rect.y))
-            disp.blit(spike_9.image, (spike_9.rect.x, spike_9.rect.y))
-            disp.blit(spike_10.image, (spike_10.rect.x, spike_10.rect.y))
+            SCREEN.blit(spike.image, (spike.rect.x, spike.rect.y))
+            SCREEN.blit(spike_1.image, (spike_1.rect.x, spike_1.rect.y))
+            SCREEN.blit(spike_2.image, (spike_2.rect.x, spike_2.rect.y))
+            SCREEN.blit(spike_3.image, (spike_3.rect.x, spike_3.rect.y))
+            SCREEN.blit(spike_4.image, (spike_4.rect.x, spike_4.rect.y))
+            SCREEN.blit(spike_5.image, (spike_5.rect.x, spike_5.rect.y))
+            SCREEN.blit(spike_6.image, (spike_6.rect.x, spike_6.rect.y))
+            SCREEN.blit(spike_7.image, (spike_7.rect.x, spike_7.rect.y))
+            SCREEN.blit(spike_8.image, (spike_8.rect.x, spike_8.rect.y))
+            SCREEN.blit(spike_9.image, (spike_9.rect.x, spike_9.rect.y))
+            SCREEN.blit(spike_10.image, (spike_10.rect.x, spike_10.rect.y))
             # TODO Display Tunnel
-            disp.blit(spike_12.image, (spike_12.rect.x, spike_12.rect.y))
-            disp.blit(spike_13.image, (spike_13.rect.x, spike_13.rect.y))
-            disp.blit(spike_14.image, (spike_14.rect.x, spike_14.rect.y))
-            disp.blit(spike_15.image, (spike_15.rect.x, spike_15.rect.y))
-            disp.blit(spike_16.image, (spike_16.rect.x, spike_16.rect.y))
-            disp.blit(spike_17.image, (spike_17.rect.x, spike_17.rect.y))
-            disp.blit(spike_18.image, (spike_18.rect.x, spike_18.rect.y))
-            disp.blit(spike_19.image, (spike_19.rect.x, spike_19.rect.y))
-            disp.blit(spike_20.image, (spike_20.rect.x, spike_20.rect.y))
-            disp.blit(spike_21.image, (spike_21.rect.x, spike_21.rect.y))
-            disp.blit(spike_22.image, (spike_22.rect.x, spike_22.rect.y))
-            disp.blit(spike_23.image, (spike_23.rect.x, spike_23.rect.y))
-            disp.blit(spike_24.image, (spike_24.rect.x, spike_24.rect.y))
-            disp.blit(spike_25.image, (spike_25.rect.x, spike_25.rect.y))
-            disp.blit(spike_26.image, (spike_26.rect.x, spike_26.rect.y))
-            disp.blit(spike_27.image, (spike_27.rect.x, spike_27.rect.y))
-            disp.blit(spike_28.image, (spike_28.rect.x, spike_28.rect.y))
+            SCREEN.blit(spike_12.image, (spike_12.rect.x, spike_12.rect.y))
+            SCREEN.blit(spike_13.image, (spike_13.rect.x, spike_13.rect.y))
+            SCREEN.blit(spike_14.image, (spike_14.rect.x, spike_14.rect.y))
+            SCREEN.blit(spike_15.image, (spike_15.rect.x, spike_15.rect.y))
+            SCREEN.blit(spike_16.image, (spike_16.rect.x, spike_16.rect.y))
+            SCREEN.blit(spike_17.image, (spike_17.rect.x, spike_17.rect.y))
+            SCREEN.blit(spike_18.image, (spike_18.rect.x, spike_18.rect.y))
+            SCREEN.blit(spike_19.image, (spike_19.rect.x, spike_19.rect.y))
+            SCREEN.blit(spike_20.image, (spike_20.rect.x, spike_20.rect.y))
+            SCREEN.blit(spike_21.image, (spike_21.rect.x, spike_21.rect.y))
+            SCREEN.blit(spike_22.image, (spike_22.rect.x, spike_22.rect.y))
+            SCREEN.blit(spike_23.image, (spike_23.rect.x, spike_23.rect.y))
+            SCREEN.blit(spike_24.image, (spike_24.rect.x, spike_24.rect.y))
+            SCREEN.blit(spike_25.image, (spike_25.rect.x, spike_25.rect.y))
+            SCREEN.blit(spike_26.image, (spike_26.rect.x, spike_26.rect.y))
+            SCREEN.blit(spike_27.image, (spike_27.rect.x, spike_27.rect.y))
+            SCREEN.blit(spike_28.image, (spike_28.rect.x, spike_28.rect.y))
 
-            disp.blit(zombie.image, (zombie.rect.x, zombie.rect.y))
-            disp.blit(demon.image, (demon.rect.x, demon.rect.y))
-            disp.blit(player.image, (player.rect.x, player.rect.y))
-            sprites.draw(disp)
+            SCREEN.blit(zombie.image, (zombie.rect.x, zombie.rect.y))
+            SCREEN.blit(demon.image, (demon.rect.x, demon.rect.y))
+            SCREEN.blit(player.image, (player.rect.x, player.rect.y))
+            sprites.draw(SCREEN)
 
             # HUD
-            player.show_hud(disp)
+            player.show_hud(SCREEN)
 
             # Mouse Pointer
             pointer = MousePointer()
-            disp.blit(pointer.image, pointer.get_pos())
+            SCREEN.blit(pointer.image, pointer.get_pos())
 
             # --Flip Display--
             pygame.display.flip()
 
         pygame.mixer.music.stop()
-        player.if_win(win, disp, clock, fps)
-        player.if_dead(end, disp, clock, fps)
+        player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
+        player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     @staticmethod
     def fill_background():
