@@ -54,12 +54,14 @@ WIN_SCREEN = WinGame(200, 100)
 # ======================
 # ------ Classes -------
 
-class Level:
-    def __int__(self, player: Player):
+class EmptyLevel(object):
+    """ A playable level in the game """
+
+    def __init__(self, player: Player):
+        """ Constructor """
+
         self.player = player
-        # Delta time
         self.dt = CLOCK.tick(FPS)
-        # Create Sprites Lists
         self.sprites = SpriteGroup()
         self.walls = SpriteGroup()
         self.platforms = SpriteGroup()
@@ -68,7 +70,6 @@ class Level:
         self.doors = SpriteGroup()
         self.players = SpriteGroup()
         self.enemies = SpriteGroup()
-        self.add_border()
 
     @staticmethod
     def fill_background():
@@ -219,11 +220,10 @@ class Game:
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
             player = self.character_selection()
-            # TODO: Cycle through levels randomly until reaching end level
             self.level_1(player)
             self.level_2(player)
             self.level_3(player)
-            # self.level_4(player)
+            self.level_4(player)
         # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
@@ -357,6 +357,7 @@ class Game:
             SCREEN.blit(text_surface_2, (290, 255))
             pygame.display.flip()
 
+    # TODO 2: Refactor first 3 levels using EmptyLevel class
     def level_1(self, player: Player):
         """ Create playable Level 1 """
 
@@ -646,7 +647,7 @@ class Game:
         # noinspection PyTypeChecker
         spike_10 = self.add_enemy(Spike, 275, 300 - BLOCK, 0, walls, players, enemies, sprites)
 
-        # TODO Add mario style tunnel leading to lower level
+        # TODO 3: Add Mario style tunnel leading to lower level
         # Tunnel to lower level
 
         # Continue mid level spikes
@@ -717,7 +718,7 @@ class Game:
             SCREEN.blit(spike_8.image, (spike_8.rect.x, spike_8.rect.y))
             SCREEN.blit(spike_9.image, (spike_9.rect.x, spike_9.rect.y))
             SCREEN.blit(spike_10.image, (spike_10.rect.x, spike_10.rect.y))
-            # TODO Display Tunnel
+            # TODO 3: Display Mario style tunnel here
             SCREEN.blit(spike_12.image, (spike_12.rect.x, spike_12.rect.y))
             SCREEN.blit(spike_13.image, (spike_13.rect.x, spike_13.rect.y))
             SCREEN.blit(spike_14.image, (spike_14.rect.x, spike_14.rect.y))
@@ -755,12 +756,15 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    @staticmethod
-    def level_4(player: Player):
+    # TODO 1: Implement level 4
+    def level_4(self, player: Player):
+        """ Creates playable level 4 """
+
         dt = CLOCK.tick(FPS)
-        level = Level()
+        level = EmptyLevel(player)
+
+        level.add_border()
         level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
-        # ---Player---
         player.add_player_start(level.players, level.sprites)
         # Update player lists
         player.update_lists(level.walls,
