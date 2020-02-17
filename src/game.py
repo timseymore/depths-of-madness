@@ -54,7 +54,7 @@ WIN_SCREEN = WinGame(200, 100)
 # ======================
 # ------ Classes -------
 
-class EmptyLevel(object):
+class Level(object):
     """ A playable level in the game """
 
     def __init__(self, player: Player):
@@ -174,7 +174,6 @@ class EmptyLevel(object):
         Returns: Enemy instance
         """
 
-        # noinspection PyCallingNonCallable
         enemy = obj(x, y)
         enemy.change_x = speed
         enemy.walls = self.walls
@@ -767,7 +766,7 @@ class Game:
 
         # Set up level
         dt = CLOCK.tick(FPS)
-        level = EmptyLevel(player)
+        level = Level(player)
 
         # ---BUILD THE MAP---
         # --Main Border--
@@ -840,7 +839,7 @@ class Game:
 
         # Set up level
         dt = CLOCK.tick(FPS)
-        level = EmptyLevel(player)
+        level = Level(player)
 
         # ---BUILD THE MAP---
         # --Main Border--
