@@ -317,10 +317,10 @@ class Game:
             SCREEN.blit(text_surface_7, (100, 450))
             pygame.display.flip()
 
-    def character_selection(self) -> Player:
+    def character_selection(self):
         """ Runs the character selection screen.
 
-        returns: Player instance
+        returns: Player : Player instance
         """
 
         img_1 = pygame.image.load(r"src/graphics/male_right.png")
@@ -358,8 +358,11 @@ class Game:
             pygame.display.flip()
 
     # TODO 2: Refactor first 3 levels using EmptyLevel class
-    def level_1(self, player: Player):
-        """ Create playable Level 1 """
+    def level_1(self, player):
+        """ Create playable Level 1
+
+        - player: Player : player to play trough level
+        """
 
         # Delta time
         dt = CLOCK.tick(FPS)
@@ -458,8 +461,11 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    def level_2(self, player: Player):
-        """ Create playable Level 2 """
+    def level_2(self, player):
+        """ Create playable Level 2
+
+        - player: Player : player to play trough level
+        """
 
         # Delta time
         dt = CLOCK.tick(FPS)
@@ -579,8 +585,11 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    def level_3(self, player: Player):
-        """ Create playable Level 3 """
+    def level_3(self, player):
+        """ Create playable Level 3
+
+        - player: Player : player to play trough level
+        """
 
         # Delta time
         dt = CLOCK.tick(FPS)
@@ -757,10 +766,12 @@ class Game:
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     # TODO 1: Finish implementing level 4
-
     @staticmethod
-    def level_4(player: Player):
-        """ Creates playable level 4 """
+    def level_4(player):
+        """ Creates playable level 4
+
+        - player: Player : player to play trough level
+        """
 
         # Set up level
         dt = CLOCK.tick(FPS)
@@ -872,11 +883,13 @@ class Game:
     # TODO: Add level 5 (Boss level)
 
     @staticmethod
-    def level_template(player: Player):
+    def level_template(player):
         """ Creates playable empty level
 
-         Use to create new levels
-         """
+        Use this template to create new levels
+
+        - player: Player : player to play trough level
+        """
 
         # Set up level
         dt = CLOCK.tick(FPS)
@@ -965,8 +978,8 @@ class Game:
     def check_for_quit(event, esc):
         """ Exit game if user inputs a quit command.
 
-          - event: input event
-          - esc: Boolean Value:  True if 'esc'  will exit
+          - event: pygame.event : input event
+          - esc: bool : True if 'esc'  will exit
         """
 
         if event.type == pygame.QUIT:
@@ -979,11 +992,11 @@ class Game:
     def add_border(self, width, height, block, walls, sprites):
         """ Draws main border around screen
 
-         - width: screen width
-         - height: screen height
-         - block: block size
-         - walls: wall list
-         - sprites: sprites list
+         - width: int : screen width
+         - height: int : screen height
+         - block: int : block size
+         - walls: SpriteGroup : wall list
+         - sprites: SpriteGroup : sprites list
         """
 
         # Floor
@@ -1017,12 +1030,12 @@ class Game:
     def add_ledge(start_x, end_x, y, block, walls, sprites):
         """ Draw a horizontal ledge
 
-         - start_x: starting position x
-         - end_x: ending position x
-         - y: y position
-         - block: block size
-         - walls: wall list
-         - sprites: sprites list
+         - start_x: int : starting position x
+         - end_x: int : ending position x
+         - y: int : y position
+         - block: int : block size
+         - walls: int : wall list
+         - sprites: SpriteGroup : sprites list
         """
 
         for x in range(start_x, end_x, block):
@@ -1034,12 +1047,12 @@ class Game:
     def add_column(x, start_y, end_y, block, walls, sprites):
         """ Draw a vertical column
 
-         - x: x position
-         - start_y: top position y
-         - end_y: bottom position y
-         - block: block size
-         - walls: wall list
-         - sprites: sprites list
+         - x: int : x position
+         - start_y: int : top position y
+         - end_y: int : bottom position y
+         - block: int : block size
+         - walls: SpriteGroup : wall list
+         - sprites: SpriteGroup : sprites list
         """
 
         for y in range(start_y, end_y, block):
@@ -1052,14 +1065,14 @@ class Game:
         """ Draw a movable horizontal platform and add to all lists
 
 
-         - x: x position
-         - y: y position
-         - x_speed: speed in x direction
-         - y_speed: speed in y direction
-         - platforms: platform list
-         - walls: wall list
-         - sprites: sprites list
-         Returns: New platform instance
+         - x: int : x position
+         - y: int : y position
+         - x_speed: int : speed in x direction
+         - y_speed: int : speed in y direction
+         - platforms: SpriteGroup : platform list
+         - walls: SpriteGroup : wall list
+         - sprites: SpriteGroup : sprites list
+         Returns: Platform : New platform instance with given parameters
         """
 
         platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
@@ -1072,12 +1085,12 @@ class Game:
     def add_door(x, y, block, doors, sprites, exit_level, left=False):
         """ Draw the door object on right side of screen by default, left by input
 
-         - x: x position
-         - y: y position
-         - block: block size
-         - doors: door list
-         - sprites: sprites list
-         - left: Default False, enter True to place on left side
+         - x: int : x position
+         - y: int : y position
+         - block: int : block size
+         - doors: SpriteGroup : door list
+         - sprites: SpriteGroup : sprites list
+         - left: bool : Default False, enter True to place on left side
         """
 
         if left:
@@ -1090,23 +1103,20 @@ class Game:
             sprites.add(door)
 
     @staticmethod
-    def add_enemy(obj: Enemy, x: int, y: int, speed: int, walls: SpriteGroup,
-                  players: SpriteGroup, enemies: SpriteGroup, sprites: SpriteGroup) -> Enemy:
+    def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
         """ Adds a specific enemy type to the level
 
-         - obj: Enemy class
-         - x: start x
-         - y: start y
-         - speed: change x speed
-         - walls: wall list
-         - players: player list
-         - enemies: enemy list
-         - sprites: all sprite list
-
-        returns: Enemy instance
+         - obj: Enemy : Enemy class name
+         - x: int : start x
+         - y: int : start y
+         - speed: int : change x speed
+         - walls: SpriteGroup : wall list
+         - players: SpriteGroup : player list
+         - enemies: SpriteGroup : enemy list
+         - sprites: SpriteGroup : all sprite list
+        Returns: Enemy : new Enemy instance with given parameters
         """
 
-        # noinspection PyCallingNonCallable
         enemy = obj(x, y)
         enemy.change_x = speed
         enemy.walls = walls
@@ -1116,17 +1126,16 @@ class Game:
         return enemy
 
     @staticmethod
-    def add_power_up(obj: PowerUp, x: int, y: int, power_list: SpriteGroup, sprites: SpriteGroup):
+    def add_power_up(obj, x, y, power_list, sprites):
         """ Adds a power up object to the sprites list
 
-         - obj: power up object to add
-         - x: x position
-         - y: y position
-         - power_list: power up list
-         - sprites: sprites list
+         - obj: PowerUp : power up object to add
+         - x: int : x position
+         - y: int : y position
+         - power_list: SpriteGroup : power up list
+         - sprites: SpriteGroup : sprites list
         """
 
-        # noinspection PyCallingNonCallable
         power = obj(x, y)
         power_list.add(power)
         sprites.add(power)
