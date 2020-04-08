@@ -759,10 +759,7 @@ class Game:
 
     @staticmethod
     def level_4(player: Player):
-        """ Creates playable empty level
-
-         Use to create new levels
-         """
+        """ Creates playable level 4 """
 
         # Set up level
         dt = CLOCK.tick(FPS)
@@ -773,7 +770,16 @@ class Game:
         level.add_border()
 
         # add door
-        level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
+        level.add_door(WIDTH - (BLOCK * 2), (HEIGHT - (BLOCK + 75)) / 2, BLOCK, random.randint(0, 1))
+
+        # ledge under door
+        level.add_ledge(WIDTH - (BLOCK * 6), WIDTH - BLOCK, (HEIGHT / 2) + BLOCK)
+
+        # middle floating platform
+        level.add_platform(WIDTH / 2, (HEIGHT / 2) + (BLOCK * 2), 0, 0)
+
+        # left floating platform
+        level.add_platform(BLOCK * 8, HEIGHT - (BLOCK * 5),  1, 0)
 
         # ---ADD OBJECTS---
 
@@ -783,6 +789,38 @@ class Game:
         player.add_player_start(level.players, level.sprites)
 
         # add the enemy objects
+
+        # floor spikes
+        level.add_enemy(Spike, BLOCK, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 2, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 3, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 4, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 5, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 6, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 7, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 8, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 9, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 10, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 11, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 12, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 13, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 14, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 15, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 16, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 17, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 18, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 19, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 20, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 21, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 22, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 23, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 24, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 25, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 26, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 27, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 28, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 29, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 30, HEIGHT - (BLOCK * 2), 0)
 
         # update player lists
         player.update_lists(level.walls,
