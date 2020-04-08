@@ -54,7 +54,7 @@ WIN_SCREEN = WinGame(200, 100)
 # ======================
 # ------ Classes -------
 
-class EmptyLevel(object):
+class Level(object):
     """ A playable level in the game """
 
     def __init__(self, player: Player):
@@ -174,7 +174,6 @@ class EmptyLevel(object):
         Returns: Enemy instance
         """
 
-        # noinspection PyCallingNonCallable
         enemy = obj(x, y)
         enemy.change_x = speed
         enemy.walls = self.walls
@@ -220,10 +219,11 @@ class Game:
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
             player = self.character_selection()
-            # self.level_1(player)
-            # self.level_2(player)
-            # self.level_3(player)
-            self.level_4(player)
+            self.level_1(player)
+            self.level_2(player)
+            self.level_3(player)
+            # self.level_4(player)
+
         # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
@@ -756,25 +756,31 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    # TODO 1: Create level 4
+    # TODO 1: Finish implementing level 4
 
     @staticmethod
     def level_4(player: Player):
-        """ Creates playable empty level
-
-         Use to create new levels
-         """
+        """ Creates playable level 4 """
 
         # Set up level
         dt = CLOCK.tick(FPS)
-        level = EmptyLevel(player)
+        level = Level(player)
 
         # ---BUILD THE MAP---
         # --Main Border--
         level.add_border()
 
         # add door
-        level.add_door(WIDTH - (BLOCK * 2), HEIGHT - (BLOCK + 75), BLOCK, random.randint(0, 1))
+        level.add_door(WIDTH - (BLOCK * 2), (HEIGHT - (BLOCK + 75)) / 2, BLOCK, random.randint(0, 1))
+
+        # ledge under door
+        level.add_ledge(WIDTH - (BLOCK * 6), WIDTH - BLOCK, (HEIGHT / 2) + BLOCK)
+
+        # middle floating platform
+        level.add_platform(WIDTH / 2, (HEIGHT / 2) + (BLOCK * 2), 0, 0)
+
+        # left floating platform
+        level.add_platform(BLOCK * 8, HEIGHT - (BLOCK * 5),  1, 0)
 
         # ---ADD OBJECTS---
 
@@ -784,6 +790,38 @@ class Game:
         player.add_player_start(level.players, level.sprites)
 
         # add the enemy objects
+
+        # floor spikes
+        level.add_enemy(Spike, BLOCK, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 2, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 3, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 4, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 5, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 6, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 7, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 8, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 9, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 10, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 11, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 12, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 13, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 14, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 15, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 16, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 17, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 18, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 19, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 20, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 21, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 22, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 23, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 24, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 25, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 26, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 27, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 28, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 29, HEIGHT - (BLOCK * 2), 0)
+        level.add_enemy(Spike, BLOCK * 30, HEIGHT - (BLOCK * 2), 0)
 
         # update player lists
         player.update_lists(level.walls,
@@ -831,6 +869,8 @@ class Game:
         player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
+    # TODO: Add level 5 (Boss level)
+
     @staticmethod
     def level_template(player: Player):
         """ Creates playable empty level
@@ -840,7 +880,7 @@ class Game:
 
         # Set up level
         dt = CLOCK.tick(FPS)
-        level = EmptyLevel(player)
+        level = Level(player)
 
         # ---BUILD THE MAP---
         # --Main Border--
