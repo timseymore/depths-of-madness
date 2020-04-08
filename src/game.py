@@ -219,10 +219,11 @@ class Game:
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
             player = self.character_selection()
-            # self.level_1(player)
-            # self.level_2(player)
-            # self.level_3(player)
-            self.level_4(player)
+            self.level_1(player)
+            self.level_2(player)
+            self.level_3(player)
+            # self.level_4(player)
+
         # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
@@ -755,7 +756,7 @@ class Game:
         player.if_clear(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
-    # TODO 1: Create level 4
+    # TODO 1: Finish implementing level 4
 
     @staticmethod
     def level_4(player: Player):
@@ -867,6 +868,8 @@ class Game:
         pygame.mixer.music.stop()
         player.if_win(WIN_SCREEN, SCREEN, CLOCK, FPS)
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
+
+    # TODO: Add level 5 (Boss level)
 
     @staticmethod
     def level_template(player: Player):
