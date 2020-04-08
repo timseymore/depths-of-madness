@@ -107,9 +107,9 @@ class Level(object):
     def add_ledge(self, start_x, end_x, y):
         """ Draw a horizontal ledge
 
-         - start_x: starting position x
-         - end_x: ending position x
-         - y: y position
+         - start_x: int : starting position x
+         - end_x: int : ending position x
+         - y: int : y position
         """
 
         for x in range(start_x, end_x, BLOCK):
@@ -120,9 +120,9 @@ class Level(object):
     def add_column(self, x, start_y, end_y):
         """ Draw a vertical column
 
-         - x: x position
-         - start_y: top position y
-         - end_y: bottom position y
+         - x: int : x position
+         - start_y: int : top position y
+         - end_y: int : bottom position y
         """
 
         for y in range(start_y, end_y, BLOCK):
@@ -130,14 +130,14 @@ class Level(object):
             self.walls.add(wall)
             self.sprites.add(wall)
 
-    def add_platform(self, x, y, x_speed, y_speed) -> Platform:
+    def add_platform(self, x, y, x_speed, y_speed):
         """ Draw a movable horizontal platform and add to all lists
 
-         - x: x position
-         - y: y position
-         - x_speed: speed in x direction
-         - y_speed: speed in y direction
-         Returns: New platform instance
+         - x: int : x position
+         - y: int : y position
+         - x_speed: int : speed in x direction
+         - y_speed: int : speed in y direction
+         Returns: Platform : New platform instance with given parameters
         """
 
         platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
@@ -149,10 +149,10 @@ class Level(object):
     def add_door(self, x, y, exit_level, left=False):
         """ Draw the door object on right side of screen by default, left by input
 
-         - x: x position
-         - y: y position
-         - exit_level: level that door will lead to
-         - left: Default False, enter True to place on left side
+         - x: int : x position
+         - y: int : y position
+         - exit_level: Level: level that door will lead to
+         - left: bool : Default False, enter True to place on left side
         """
 
         if left:
@@ -164,14 +164,14 @@ class Level(object):
             self.doors.add(door)
             self.sprites.add(door)
 
-    def add_enemy(self, obj: Enemy, x: int, y: int, speed: int) -> Enemy:
+    def add_enemy(self, obj, x, y, speed):
         """ Adds a specific enemy type to the level
 
-         - obj: Enemy class
-         - x: start x
-         - y: start y
-         - speed: change x speed
-        Returns: Enemy instance
+         - obj: Enemy : Enemy class name
+         - x: int : start x
+         - y: int : start y
+         - speed: int : change x speed
+        Returns: Enemy : new Enemy instance with given parameters
         """
 
         enemy = obj(x, y)
@@ -182,16 +182,15 @@ class Level(object):
         self.sprites.add(enemy)
         return enemy
 
-    def add_power_up(self, obj: PowerUp, x: int, y: int, power_list: SpriteGroup):
+    def add_power_up(self, obj, x, y, power_list):
         """ Adds a power up object to the sprites list
 
-         - obj: power up object to add
-         - x: x position
-         - y: y position
-         - power_list: SpriteGroup to add power up to
+         - obj: PowerUP : power up object to add
+         - x: int : x position
+         - y: int : y position
+         - power_list: SpriteGroup : SpriteGroup to add power up to
         """
 
-        # noinspection PyCallingNonCallable
         power = obj(x, y)
         power_list.add(power)
         self.sprites.add(power)
