@@ -12,8 +12,6 @@ class Player(pygame.sprite.Sprite):
      interp. a playable character p where:
               - x is the starting x position
               - y is the starting y position
-
-     p = Player(20, 10)  - creates a Player p at x position 20 and y position 10
      """
 
     def __init__(self, x, y):
@@ -336,7 +334,6 @@ class Player(pygame.sprite.Sprite):
             time.tick(fps)
         pygame.mixer.music.stop()
 
-    # TODO: Continue maintenance from this point
     def update_lists(self, walls, enemies, lives, coins, doors, platforms):
         """" Updates lists before entering game loop
 
