@@ -336,7 +336,15 @@ class Player(pygame.sprite.Sprite):
 
     # TODO: Continue maintenance from this point
     def update_lists(self, walls, enemies, lives, coins, doors, platforms):
-        """" Updates lists before entering game loop """
+        """" Updates lists before entering game loop
+
+        - walls: SpriteGroup : wall list
+        - enemies: SpriteGroup : enemy list
+        - lives: SpriteGroup :  extra lives list
+        - coins: SpriteGroup : coin list
+        - doors: SpriteGroup : door list
+        - platforms: SpriteGroup : platform list
+        """
 
         self.enemies = enemies
         self.walls = walls
@@ -347,22 +355,27 @@ class Player(pygame.sprite.Sprite):
         self.win = False
 
     def update(self, dt, gravity):
+        """ Update the player position and state
+
+        - dt: int :  Delta time
+        - gravity: int : Gravity constant
         """
-        Update the player position and state.
-        :param dt: Delta time
-        :param gravity: Gravity constant
-        """
+
         # update player position
         last = self.rect.copy()
-        self.control_player(dt, gravity)
+        self.control(dt, gravity)
         new = self.rect
         self.switch_img(last, new)
         # handle collisions
-        self.map_collisions(last, new)
-        self.object_collisions(last, new)
+        self.check_map(last, new)
 
-    def control_player(self, dt, gravity):
-        """ Player Controls """
+    def control(self, dt, gravity):
+        """ Player Controls
+
+        - dt: int :  Delta time
+        - gravity: int : Gravity constant
+        """
+
         # Check for quick key presses
         for event in pygame.event.get():
             # Quit by closing window or Escape key
@@ -384,34 +397,42 @@ class Player(pygame.sprite.Sprite):
             self.dy = -600
         # Move Left/Right
         if key[pygame.K_LEFT] or key[pygame.K_a]:
-            self.change_speed(-300 * dt, 0)
+            self.move(-300 * dt, 0)
         if key[pygame.K_RIGHT] or key[pygame.K_d]:
-            self.change_speed(300 * dt, 0)
+            self.move(300 * dt, 0)
         # Set y position
         self.dy = min(450, self.dy + gravity)
-        self.change_speed(0, self.dy * dt)
+        self.move(0, self.dy * dt)
 
-    def change_speed(self, x, y):
-        """ Change player speed. """
+    def move(self, x, y):
+        """ Change player position
+
+        - x: int : change in x position
+        - y: int : change in y position
+        """
+
         self.rect.x += x
         self.rect.y += y
 
-    def map_collisions(self, last, new):
+    def check_map(self, last, new):
+        """ Check and handle all map collisions
+
+        - last: (int, int) : Player position before movement
+        - new: (int, int) : Player position after movement
         """
-        Check and handle all map collisions
-        :param last: Player position before movement
-        :param new: Player position after movement
-        """
+
         self.check_walls(last, new)
         self.check_platforms(last, new)
         self.check_doors()
+        self.check_enemies(last, new)
+        self.check_power_ups()
 
     # TODO ===BUG=== climbing and getting stuck on walls while jumping and touching sides
     def check_walls(self, last, new):
-        """
-        Check walls for collisions.
-        :param last: Player position before movement
-        :param new: Player position after movement
+        """ Check walls for collisions
+
+        - last: (int, int) : Player position before movement
+        - new: (int, int) : Player position after movement
         """
         for cell in pygame.sprite.spritecollide(self, self.walls, False):
             # Side to side collision
@@ -434,13 +455,12 @@ class Player(pygame.sprite.Sprite):
 
     # TODO  ==BUG== player not moving along with platform at correct speed
     def check_platforms(self, last, new):
+        """ Checks for player collisions with platforms and handles the collision
+
+        - last: (int, int) : Player position before movement
+        - new: (int, int) : Player position after movement
         """
-        Player Coord Coord -> Player
-        Checks for player collisions with platforms and handles the collision
-         - last: Player position before movement
-         - new: Player position after movement
-         Player.check_platforms(10, 20) >>> Checks for and handles platform collision at coord (20, 30)
-        """
+
         platform_hits = pygame.sprite.spritecollide(self, self.platforms, False)
         for platform in platform_hits:
             # Side to side collision
@@ -455,7 +475,7 @@ class Player(pygame.sprite.Sprite):
 
             if last.bottom >= platform.rect.top < new.bottom:
                 new.bottom = platform.rect.top
-                self.change_speed(platform.x_speed, platform.y_speed)
+                self.move(platform.x_speed, platform.y_speed)
                 self.resting = True
                 self.jumping = False
                 self.falling = False
@@ -467,8 +487,8 @@ class Player(pygame.sprite.Sprite):
                 self.falling = True
 
     def check_doors(self):
-        """ Check if player touches door. """
-        # Check Doors
+        """ Check if player touches door """
+
         door_hits = pygame.sprite.spritecollide(self, self.doors, False)
         for door in door_hits:
             self.clear = True
@@ -476,14 +496,13 @@ class Player(pygame.sprite.Sprite):
             self.score += self.lives * 10
             print(door.get_text())
 
-    # TODO Separate object detection from enemy detection
-    def object_collisions(self, last, new):
+    def check_enemies(self, last, new):
+        """ Checks for enemy collisions
+
+        - last: (int, int) : Player position before movement
+        - new: (int, int) : Player position after movement
         """
-        Checks for object collisions.
-        :param last: Player position before movement
-        :param new: Player position after movement
-        """
-        # Check Enemies
+
         enemy_hits = pygame.sprite.spritecollide(self, self.enemies, False)
         for enemy in enemy_hits:
             enemy = enemy.rect
@@ -495,7 +514,10 @@ class Player(pygame.sprite.Sprite):
                 self.handle_lives()
             else:
                 self.handle_lives()
-        # Check Power Ups
+
+    def check_power_ups(self):
+        """ Checks for power up collisions """
+
         extra_life_list = pygame.sprite.spritecollide(self, self.extra_lives, True)
         for life in extra_life_list:
             self.lives += 1
