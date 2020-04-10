@@ -19,6 +19,5 @@ class Male(Player):
         """
 
         super().__init__(x, y)
-        self.image = pygame.image.load(r'src/graphics/male_right.png')
-        self.rect = pygame.rect.Rect((x, y), self.image.get_size())
+        # self.rect = pygame.rect.Rect((x, y), self.current_image.get_size())
         self.gender = 'male'

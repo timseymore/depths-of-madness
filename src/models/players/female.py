@@ -17,16 +17,18 @@ class Female(Player):
         - x: int :  x location to spawn
         - y: int :  y location to spawn
         """
-        
+
         super().__init__(x, y)
-        self.image = pygame.image.load(r'src/graphics/female_right.png')
+        self.image_right = pygame.image.load(r'src/graphics/female_right.png')
+        self.image_left = pygame.image.load(r'src/graphics/female_left.png')
+        self.image = self.image_right
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.gender = 'female'
 
-    def switch_img(self, last, new):
-        """ Switches img based on direction of movement. """
-
-        if last.right < new.right:
-            self.image = pygame.image.load(r'src/graphics/female_right.png')
-        elif last.left > new.left:
-            self.image = pygame.image.load(r'src/graphics/female_left.png')
+    # def switch_img(self, last, new):
+    #     """ Switches img based on direction of movement. """
+    #
+    #     if last.right < new.right:
+    #         self.image = pygame.image.load(r'src/graphics/female_right.png')
+    #     elif last.left > new.left:
+    #         self.image = pygame.image.load(r'src/graphics/female_left.png')

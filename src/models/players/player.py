@@ -26,6 +26,8 @@ class Player(pygame.sprite.Sprite):
         """
 
         super().__init__()
+        self.image_right = pygame.image.load(r'src/graphics/male_right.png')
+        self.image_left = pygame.image.load(r'src/graphics/male_left.png')
         self.image = pygame.image.load(r'src/graphics/male_right.png')
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.origin_x = x
@@ -186,9 +188,9 @@ class Player(pygame.sprite.Sprite):
         """ Switches player image based on direction of movement """
 
         if last.right < new.right:
-            self.image = pygame.image.load(r'src/graphics/male_right.png')
+            self.image = self.image_right
         elif last.left > new.left:
-            self.image = pygame.image.load(r'src/graphics/male_left.png')
+            self.image = self.image_left
 
     def reset(self):
         """ Reset player to original location in level """
