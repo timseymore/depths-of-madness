@@ -7,28 +7,24 @@ from src.ui.tools.coinicon import CoinIcon
 
 
 class Player(pygame.sprite.Sprite):
-    """
-     Player is  Player(Integer[0, WIDTH], Integer[0, HEIGHT])
+    """ Player is  Player(Integer[0, WIDTH], Integer[0, HEIGHT])
+
      interp. a playable character p where:
               - x is the starting x position
               - y is the starting y position
+
      p = Player(20, 10)  - creates a Player p at x position 20 and y position 10
-
-    Template:
-
-     def fn_for_player(p):
-        ... p.rect.x  # Integer[0, WIDTH]
-        ... p.rect.y  # Integer[0, HEIGHT]
-        ... p.(...)   # PlayerState
      """
+
     def __init__(self, x, y):
-        """
-        Integer[0, WIDTH] Integer[0, HEIGHT] -> Player
+        """ Integer[0, WIDTH] Integer[0, HEIGHT] -> Player
         constructor for Player object
-          - x: x location to spawn
-          - y: y location to spawn
-        p = Player(10, 20)  - create a Player p at x position 10 and y position 20
+
+          - x: int : x location to spawn
+          - y: int : y location to spawn
+          Return: new Player instance
         """
+
         super().__init__()
         self.image = pygame.image.load(r'src/graphics/male_right.png')
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
@@ -55,87 +51,89 @@ class Player(pygame.sprite.Sprite):
         self.extra_lives = []
 
     # Getters
-    def get_gender(self) -> str:
-        """
-        return player gender outside of class definition
-          - Prints error message to console if no gender is defined.
-        Player.get_gender()  - return gender as String
-        """
-        if self.gender == "male" or self.gender == "female":
-            return self.gender
-        else:
-            print("AttributeError: Player gender not defined.")
+    def get_gender(self):
+        """ Getter method
 
-    def get_score(self) -> int:
+        Return: player gender outside of class definition,
+                or error string if no gender is defined.
         """
-         return the Player score outside of class definition
-         Player.get_score()  - returns score as Integer
+
+        if self.gender in ['male', 'female']:
+            return self.gender
+        return 'AttributeError: Player gender not defined'
+
+    def get_score(self):
+        """ Getter method
+
+         Return: the Player score outside of class definition
         """
+
         return self.score
 
-    def get_coins(self) -> int:
+    def get_coins(self):
+        """ Getter method
+
+        Return: number of coins player is holding outside of class definition
         """
-        return number of coins player is holding outside of class definition
-        Player.get_coins()  - returns coins as Integer
-        """
+
         return self.coins
 
-    def get_lives(self) -> int:
+    def get_lives(self):
+        """ Getter method
+
+        Return: number of lives player has left outside of class definition
         """
-        return number of lives player has left outside of class definition
-        Player.get_lives()  - returns lives as Integer
-        """
+
         return self.lives
 
-    def get_state(self) -> str:
-        """
-        return player state outside of class definition
+    def get_state(self):
+        """ Getter method
+
+        Return: player state outside of class definition
           - "resting"
           - "jumping"
           - "falling"
-          - prints error message to console if no state is active.
-        Player.get_state()  - returns state as String
+          - error message if no state is active.
         """
+
         if self.resting:
-            return "resting"
+            return 'resting'
         elif self.jumping:
-            return "jumping"
+            return 'jumping'
         elif self.falling:
-            return "falling"
+            return 'falling'
         else:
-            return "AttributeError: Player state not defined."
+            return 'AttributeError: Player state not defined'
 
     def show_hud(self, ds):
+        """ Display HUD on display screen (score, lives, coins)
+
+          - ds: (int, int) : display screen
         """
-        Player (Integer, Integer) -> Image
-        display HUD on display screen (score, lives, coins)
-          - ds: display screen
-        Player.show_hud(SCREEN)  - displays HUD to game screen
-        """
+
         self.show_score(ds, 650, 10, 20)
         self.show_lives(ds)
         self.show_coins(ds)
 
     def show_score(self, ds, x, y, s):
+        """ Display the player score on screen
+
+           - ds: (int, int) : display screen
+           - x: int : x axis
+           - y: int : y axis
+           - s: int : text size
         """
-        Player (Integer, Integer) Integer[0, WIDTH] Integer[0, HEIGHT] Integer -> Image
-        display the player score on screen
-           - ds: display screen
-           - x: x axis
-           - y: y axis
-           - s: text size
-        Player.show_score(SCREEN, 10, 20, 16)  - displays score at coord (10, 20) font size 16
-        """
-        font = pygame.font.SysFont("Times Roman", s)
-        text = font.render("SCORE {}".format(self.score), False, Color.RedBrown, Color.Black)
+
+        font = pygame.font.SysFont('Times Roman', s)
+        text = font.render('SCORE {}'.format(self.score), False, Color.RedBrown, Color.Black)
         ds.blit(text, (x, y))
 
-    # TODO - Continue maintenance from this point.
     def show_lives(self, disp):
+        """ Displays how many lives the player has left
+
+            - disp: (int, int) : display screen
         """
-        Displays how many lives the player has left
-        :param disp: display screen
-        """
+
         icon_x = 40
         icon_y = 5
         icon = LifeIcon(icon_x, icon_y)
@@ -144,10 +142,11 @@ class Player(pygame.sprite.Sprite):
             icon.x += 20
 
     def show_coins(self, disp):
+        """ Displays how many coins the player is holding
+
+            - disp: (int, int) : display screen
         """
-        Displays how many coins the player is holding
-        :param disp: display screen
-        """
+
         icon_x = 40
         icon_y = 20
         coin = CoinIcon(icon_x, icon_y)
@@ -156,52 +155,60 @@ class Player(pygame.sprite.Sprite):
             coin.x += 20
 
     def add_player_start(self, players, sprites):
-        """
-        Adds a player to level 1;
+        """ Adds a player to level 1
+
+
+        - players: SpriteGroup : player list
+        - sprites: SpriteGroup : all sprite list
+
         To be added before enemy objects.
-        :param players: player list
-        :param sprites: all sprite list
         """
+
         self.add_player_next(players, sprites)
         self.lives = 1
         self.dead = False
         self.win = False
 
     def add_player_next(self, players, sprites):
+        """ Adds a player to a level greater than 1
+
+        - players: SpriteGroup : player list
+        - sprites: SpriteGroup : all sprite list
+
+        To be added before enemy objects
         """
-        Adds a player to a level greater than 1;
-        To be added before enemy objects.
-        :param players: player list
-        :param sprites: all sprite list
-        """
+
         players.add(self)
         sprites.add(self)
         self.reset()
 
     def switch_img(self, last, new):
-        """ Switches player image based on direction of movement. """
+        """ Switches player image based on direction of movement """
+
         if last.right < new.right:
             self.image = pygame.image.load(r'src/graphics/male_right.png')
         elif last.left > new.left:
             self.image = pygame.image.load(r'src/graphics/male_left.png')
 
     def reset(self):
-        """ Reset player to original location in level. """
+        """ Reset player to original location in level """
+
         self.rect.x = self.origin_x
         self.rect.y = self.origin_y
 
     def change_spawn(self, x, y):
-        """ Change spawn point of player. """
+        """ Change spawn point of player """
+
         self.origin_x = x
         self.origin_y = y
 
-    # TODO refactor name to be more representative of what it does
-    def check_lives(self):
+    def handle_lives(self):
+        """  Handle player lives during the game
+
+        Checks number of lives and determines if player is dead
+        Resets player if 1 or more lives are present
         """
-        Checks number of lives and
-        determines if player is dead.
-        Resets player if 1 or more lives are present.
-        """
+
         effect = pygame.mixer.Sound(r'src/sounds/lose_life.wav')
         if self.lives == 0:
             self.dead = True
@@ -211,14 +218,15 @@ class Player(pygame.sprite.Sprite):
             self.reset()
 
     def if_dead(self, img, disp, time, fps):
+        """ Checks for player death and runs Game Over loop if True
+
+        - img: EventBox : event box image
+        - disp: (int, int) :  display screen
+        - time: Clock : game clock
+        - fps: int : frames per second
         """
-        Checks for player death and runs Game Over loop if True.
-        :param img: event box image
-        :param disp: display screen
-        :param time: game clock
-        :param fps: frames per second
-        """
-        font = pygame.font.SysFont("Comic Sans MS", 30)
+
+        font = pygame.font.SysFont('Comic Sans MS', 30)
         text_surface = font.render("Press 'Enter' to continue", False, Color.RedBrown)
         background = r'src/sounds/over_background.wav'
         pygame.mixer.music.load(background)
@@ -248,17 +256,18 @@ class Player(pygame.sprite.Sprite):
             pygame.mixer.music.stop()
 
     def if_clear(self, img, disp, time, fps):
+        """ Checks for level completion and runs level clear loop if True
+
+        - img: EventBox : event box image
+        - disp: (int, int) : display screen
+        - time: Clock : game clock
+        - fps: int : frames per second
         """
-        Checks for level completion and runs level clear loop if True.
-        :param img: event box image
-        :param disp: display screen
-        :param time: game clock
-        :param fps: frames per second
-        """
-        font = pygame.font.SysFont("Comic Sans MS", 30)
-        font1 = pygame.font.SysFont("Times Roman", 50)
+
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        font1 = pygame.font.SysFont('Times Roman', 50)
         text_surface = font.render("Press 'Enter' to play next level.", False, Color.DarkSlateBlue)
-        text_surface1 = font1.render("Level Clear", False, Color.DarkSlateBlue)
+        text_surface1 = font1.render('Level Clear', False, Color.DarkSlateBlue)
         background = r'src/sounds/win_background.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
@@ -285,11 +294,18 @@ class Player(pygame.sprite.Sprite):
         pygame.mixer.music.stop()
 
     def if_win(self, img, disp, time, fps):
-        """ Checks for game win and runs Win Game loop if True """
-        font = pygame.font.SysFont("Comic Sans MS", 30)
-        font1 = pygame.font.SysFont("Times Roman", 45)
+        """ Checks for game win and runs Win Game loop if True
+
+        - img: EventBox : event box image
+        - disp: (int, int) : display screen
+        - time: Clock : game clock
+        - fps: int : frames per second
+        """
+
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        font1 = pygame.font.SysFont('Times Roman', 45)
         text_surface = font.render("Press 'Enter' to continue.", False, Color.DarkSlateBlue)
-        text_surface1 = font1.render("Congratulations You Beat The Game!", False, Color.DarkSlateBlue)
+        text_surface1 = font1.render('Congratulations You Beat The Game!', False, Color.DarkSlateBlue)
         background = r'src/sounds/win_background.wav'
         pygame.mixer.music.load(background)
         pygame.mixer.music.play(-1)
@@ -318,8 +334,10 @@ class Player(pygame.sprite.Sprite):
             time.tick(fps)
         pygame.mixer.music.stop()
 
+    # TODO: Continue maintenance from this point
     def update_lists(self, walls, enemies, lives, coins, doors, platforms):
         """" Updates lists before entering game loop """
+
         self.enemies = enemies
         self.walls = walls
         self.extra_lives = lives
@@ -471,12 +489,12 @@ class Player(pygame.sprite.Sprite):
             enemy = enemy.rect
             if last.right <= enemy.left < new.right:
                 new.right = enemy.left
-                self.check_lives()
+                self.handle_lives()
             elif new.left < enemy.right <= last.left:
                 new.left = enemy.right
-                self.check_lives()
+                self.handle_lives()
             else:
-                self.check_lives()
+                self.handle_lives()
         # Check Power Ups
         extra_life_list = pygame.sprite.spritecollide(self, self.extra_lives, True)
         for life in extra_life_list:
