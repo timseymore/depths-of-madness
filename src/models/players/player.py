@@ -15,8 +15,7 @@ class Player(pygame.sprite.Sprite):
      """
 
     def __init__(self, x, y):
-        """ Integer[0, WIDTH] Integer[0, HEIGHT] -> Player
-        constructor for Player object
+        """ Constructor method
 
           - x: int : x location to spawn
           - y: int : y location to spawn
@@ -172,10 +171,10 @@ class Player(pygame.sprite.Sprite):
     def add_player_next(self, players, sprites):
         """ Adds a player to a level greater than 1
 
+        To be added before enemy objects
+
         - players: SpriteGroup : player list
         - sprites: SpriteGroup : all sprite list
-
-        To be added before enemy objects
         """
 
         players.add(self)
@@ -203,7 +202,7 @@ class Player(pygame.sprite.Sprite):
         self.origin_y = y
 
     def handle_lives(self):
-        """  Handle player lives during the game
+        """ Handle player lives during the game
 
         Checks number of lives and determines if player is dead
         Resets player if 1 or more lives are present

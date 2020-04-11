@@ -24,11 +24,3 @@ class Female(Player):
         self.image = self.image_right
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
         self.gender = 'female'
-
-    # def switch_img(self, last, new):
-    #     """ Switches img based on direction of movement. """
-    #
-    #     if last.right < new.right:
-    #         self.image = pygame.image.load(r'src/graphics/female_right.png')
-    #     elif last.left > new.left:
-    #         self.image = pygame.image.load(r'src/graphics/female_left.png')
