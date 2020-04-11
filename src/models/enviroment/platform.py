@@ -7,14 +7,14 @@ class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, x_speed, y_speed, min_x, max_x, min_y, max_y):
         """ Constructor Method
 
-             - x: x position of platform
-             - y: y position of platform
-             - x_speed: speed at which platform moves left/right
-             - y_speed: speed at which platform moves up/down
-             - min_x: lower x bound
-             - max_x: upper x bound
-             - min_y: lower y bound
-             - max_y: upper y bound
+        - x: int : x position of platform
+        - y: int : y position of platform
+        - x_speed: int : speed at which platform moves left/right
+        - y_speed: int : speed at which platform moves up/down
+        - min_x: int : lower x bound
+        - max_x: int : upper x bound
+        - min_y: int : lower y bound
+        - max_y: int : upper y bound
         """
 
         super().__init__()
@@ -31,10 +31,10 @@ class Platform(pygame.sprite.Sprite):
     def change_bounds(self, min_x, max_x, min_y, max_y):
         """ Change the upper and lower bounds on x and y
 
-             - min_x: new limit for left directional movement
-             - max_x: new limit for right directional movement
-             - min_y: new limit for upward directional movement
-             - max_y: new limit for downward directional movement
+        - min_x: int : new limit for left directional movement
+        - max_x: int : new limit for right directional movement
+        - min_y: int : new limit for upward directional movement
+        - max_y: int : new limit for downward directional movement
         """
 
         self.min_x = min_x
@@ -45,27 +45,37 @@ class Platform(pygame.sprite.Sprite):
     def change_speed(self, x, y):
         """ Change the speed of the platform.
 
-             - x: new left/right speed
-             - y: new up/down speed
+        - x: int : new left/right speed
+        - y: int : new up/down speed
         """
 
         self.x_speed = x
         self.y_speed = y
 
     def update(self, dt, gravity):
-        """ Update the platform position. """
+        """ Update the platform position.
+
+        - dt: int : delta time
+        - gravity: int : gravity constant
+        """
 
         self.handle_left_right()
         self.handle_up_down()
 
     def handle_left_right(self):
+        """ Handle left and right movement and collisions """
+
         self.move_left_right()
         self.check_left_right()
 
     def move_left_right(self):
+        """ Move platform left and right """
+
         self.rect.x = self.move(self.min_x, self.max_x, self.rect.x, self.x_speed)
 
     def check_left_right(self):
+        """ Check for left and right collisions """
+
         # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
@@ -103,14 +113,14 @@ class Platform(pygame.sprite.Sprite):
         # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
-            print("platform collision")
+            print('platform collision')
             # If we are moving down, set our bottom side to the top side of block
             if self.y_speed < 0:
-                print("moving down")
+                print('moving down')
                 self.rect.bottom = block.rect.top
                 self.y_speed *= -1
             else:
-                print("moving up")
+                print('moving up')
                 # Otherwise if we are moving up, do the opposite.
                 self.rect.top = block.rect.bottom
                 self.y_speed *= -1
@@ -119,12 +129,12 @@ class Platform(pygame.sprite.Sprite):
     def move(lower_bound, upper_bound, pos, velocity, vertical=False):
         """ move platform within given bounds
 
-         - lower_bound: lower limit of movement
-         - upper_bound: upper limit of movement
-         - pos: current position
-         - velocity: rate of change in position
-         - vertical: True if moving vertically, False by default
-        returns: new position
+         - lower_bound: int : lower limit of movement
+         - upper_bound: int : upper limit of movement
+         - pos: (int, int) : current position
+         - velocity: int : rate of change in position
+         - vertical: bool : True if moving vertically, False by default
+        Return: new position (int, int)
         """
         
         if lower_bound <= pos <= upper_bound:

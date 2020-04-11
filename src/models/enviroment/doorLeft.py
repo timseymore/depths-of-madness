@@ -8,7 +8,14 @@ class DoorLeft(Door):
     """ A door that appears on the left side of screen. """
 
     def __init__(self, x, y, width, height, exit_level):
-        """ Constructor Method """
+        """ Constructor Method
+
+        - x: int : x position
+        - y: int : y position
+        - width: int : width of door
+        - height: int : height of door
+        - exit_level: Level : level door will exit to
+        """
 
         super().__init__(x, y, width, height, exit_level)
         self.image = pygame.Surface([width, height])
