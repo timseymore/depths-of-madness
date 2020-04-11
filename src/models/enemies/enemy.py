@@ -2,7 +2,7 @@ import pygame
 
 
 class Enemy(pygame.sprite.Sprite):
-    """ enemy that the player battles """
+    """ Enemy that the player battles """
 
     def __init__(self, x, y):
         """ Constructor method
@@ -19,16 +19,19 @@ class Enemy(pygame.sprite.Sprite):
         self.walls = None
         self.platforms = None
         self.player = None
-        self.image = pygame.image.load(r'src/graphics/demon_right.png')
+        # TODO: should be a method to set up image for each sub class
+        self.image_right = pygame.image.load(r'src/graphics/demon_right.png')
+        self.image_left = pygame.image.load(r'src/graphics/demon_left.png')
+        self.image = self.image_right
         self.rect = pygame.rect.Rect((x, y), self.image.get_size())
 
     def switch_img(self):
         """ Switches img based on direction of movement """
 
         if self.change_x < 0:
-            self.image = pygame.image.load(r'src/graphics/demon_left.png')
+            self.image = self.image_left
         elif self.change_x > 0:
-            self.image = pygame.image.load(r'src/graphics/demon_right.png')
+            self.image = self.image_right
 
     def update(self, dt, gravity):
         """ Update the enemy position.
