@@ -4,8 +4,12 @@ import pygame
 class LifeIcon(object):
     """ An icon representing the 'player life' object """
 
-    def __init__(self, x: int, y: int):
-        """ Constructor """
+    def __init__(self, x, y):
+        """ Constructor Method
+
+        - x: int : x position
+        - y: int : y position
+        """
         
         self.x = x
         self.y = y
