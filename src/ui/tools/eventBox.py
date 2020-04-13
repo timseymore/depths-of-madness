@@ -1,4 +1,3 @@
-
 class EventBox(object):
     """ A pop up box with text describing events. """
 

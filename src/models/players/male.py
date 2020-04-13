@@ -1,5 +1,3 @@
-import pygame
-
 from src.models.players.player import Player
 
 
