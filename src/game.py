@@ -57,8 +57,11 @@ WIN_SCREEN = WinGame(200, 100)
 class Level(object):
     """ A playable level in the game """
 
-    def __init__(self, player: Player):
-        """ Constructor """
+    def __init__(self, player):
+        """ Constructor
+
+        - player: Player : player to play through level
+        """
 
         self.player = player
         self.dt = CLOCK.tick(FPS)
@@ -73,7 +76,7 @@ class Level(object):
 
     @staticmethod
     def fill_background():
-        """ Fill background with stone blocks; high CPU usage."""
+        """ Fill background with stone blocks; high CPU usage """
 
         for x in range(0, WIDTH, BLOCK):
             for y in range(0, HEIGHT, BLOCK):
@@ -197,7 +200,7 @@ class Level(object):
 
     @staticmethod
     def stone_background():
-        """ Display dark stone background image"""
+        """ Display dark stone background image """
 
         img = pygame.image.load(r'src/graphics/stone_background.png')
         SCREEN.blit(img, (0, 0))
@@ -317,9 +320,9 @@ class Game:
             pygame.display.flip()
 
     def character_selection(self):
-        """ Runs the character selection screen.
+        """ Runs the character selection screen
 
-        returns: Player : Player instance
+        Returns: Player : Player instance
         """
 
         img_1 = pygame.image.load(r"src/graphics/male_right.png")
@@ -959,7 +962,7 @@ class Game:
 
     @staticmethod
     def fill_background():
-        """ Fill background with stone blocks; high CPU usage."""
+        """ Fill background with stone blocks; high CPU usage """
 
         for x in range(0, WIDTH, BLOCK):
             for y in range(0, HEIGHT, BLOCK):
@@ -968,14 +971,14 @@ class Game:
 
     @staticmethod
     def stone_background():
-        """ Display dark stone background image"""
+        """ Display dark stone background image """
 
         img = pygame.image.load(r'src/graphics/stone_background.png')
         SCREEN.blit(img, (0, 0))
 
     @staticmethod
     def check_for_quit(event, esc):
-        """ Exit game if user inputs a quit command.
+        """ Exit game if user inputs a quit command
 
           - event: pygame.event : input event
           - esc: bool : True if 'esc'  will exit

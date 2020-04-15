@@ -10,6 +10,7 @@ class CoinIcon(object):
         - x: int : x position
         - y: int : y position
         """
+
         self.x = x
         self.y = y
         self.image = pygame.image.load(r'src/graphics/coin_icon.png')

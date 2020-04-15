@@ -17,8 +17,8 @@ class MousePointer(object):
 
     @staticmethod
     def get_pressed():
-        """
-        Returns the state of the mouse buttons
+        """ Returns: the state of the mouse buttons
+
         (button1, button2, button3) Boolean values
         """
 
@@ -26,6 +26,6 @@ class MousePointer(object):
 
     @staticmethod
     def get_focused():
-        """ Returns Boolean; True if mouse is active """
+        """ Returns: True if mouse is active, false otherwise """
 
         return pygame.mouse.get_focused()
