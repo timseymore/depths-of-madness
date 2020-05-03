@@ -1019,12 +1019,6 @@ class Game:
             walls.add(wall)
             sprites.add(wall)
 
-        # Column on floor left wall
-        # add_column(0, height - 80, height, block, walls, sprites)
-
-        # Column on floor right wall
-        # add_column(width - block, height - 80, height, block, walls, sprites)
-
         # Top left side ledge entrance
         self.add_ledge(block, 100 + block, 80, block, walls, sprites)
 
@@ -1056,7 +1050,7 @@ class Game:
          - walls: SpriteGroup : wall list
          - sprites: SpriteGroup : sprites list
         """
-
+        
         for y in range(start_y, end_y, block):
             wall = Block(x, y, block, block)
             walls.add(wall)
@@ -1065,7 +1059,6 @@ class Game:
     @staticmethod
     def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
         """ Draw a movable horizontal platform and add to all lists
-
 
          - x: int : x position
          - y: int : y position
