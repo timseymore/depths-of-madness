@@ -1050,7 +1050,7 @@ class Game:
          - walls: SpriteGroup : wall list
          - sprites: SpriteGroup : sprites list
         """
-        
+
         for y in range(start_y, end_y, block):
             wall = Block(x, y, block, block)
             walls.add(wall)

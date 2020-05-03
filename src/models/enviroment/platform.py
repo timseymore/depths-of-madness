@@ -113,14 +113,11 @@ class Platform(pygame.sprite.Sprite):
         # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
         for block in block_hit_list:
-            print('platform collision')
             # If we are moving down, set our bottom side to the top side of block
             if self.y_speed < 0:
-                print('moving down')
                 self.rect.bottom = block.rect.top
                 self.y_speed *= -1
             else:
-                print('moving up')
                 # Otherwise if we are moving up, do the opposite.
                 self.rect.top = block.rect.bottom
                 self.y_speed *= -1
