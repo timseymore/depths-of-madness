@@ -4,15 +4,15 @@
 
  A 2-D platform game using pygame
 
- - Tim Seymore  2018
+ - Tim Seymore  2018 - 2021
 """
 
 
-import sys
 import random
+import sys
+
 import pygame
 
-from src.models.enemies.enemy import Enemy
 from src.models.enemies.demon import Demon
 from src.models.enemies.insect import Insect
 from src.models.enemies.spike import Spike
@@ -21,22 +21,17 @@ from src.models.enviroment.block import Block
 from src.models.enviroment.door import Door
 from src.models.enviroment.doorLeft import DoorLeft
 from src.models.enviroment.platform import Platform
-from src.models.players.player import Player
+from src.models.groups.spritegroup import SpriteGroup
 from src.models.players.female import Female
 from src.models.players.male import Male
-from src.models.powerUps.powerUp import PowerUp
 from src.models.powerUps.coin import Coin
 from src.models.powerUps.extraLife import ExtraLife
-from src.models.groups.spritegroup import SpriteGroup
 from src.ui.tools.colors import Color
 from src.ui.tools.gameOver import GameOver
 from src.ui.tools.mousePointer import MousePointer
 from src.ui.tools.titleScreen import TitleScreen
 from src.ui.tools.winGame import WinGame
 
-
-# =================
-# --- CONSTANTS ---
 
 VERSION = "ver. 1.00.0"
 WIDTH = 800
@@ -51,18 +46,9 @@ END_SCREEN = GameOver(200, 100)
 WIN_SCREEN = WinGame(200, 100)
 
 
-# ======================
-# ------ Classes -------
-
-class Level(object):
-    """ A playable level in the game """
+class Level:
 
     def __init__(self, player):
-        """ Constructor
-
-        - player: Player : player to play through level
-        """
-
         self.player = player
         self.dt = CLOCK.tick(FPS)
         self.sprites = SpriteGroup()
@@ -76,16 +62,12 @@ class Level(object):
 
     @staticmethod
     def fill_background():
-        """ Fill background with stone blocks; high CPU usage """
-
         for x in range(0, WIDTH, BLOCK):
             for y in range(0, HEIGHT, BLOCK):
                 img = pygame.image.load(r'src/graphics/stone.png')
                 SCREEN.blit(img, (x, y))
 
     def add_border(self):
-        """ Draws main border around screen """
-
         # Floor
         for x in range(0, WIDTH, BLOCK):
             wall = Block(x, HEIGHT - BLOCK, BLOCK, BLOCK)
@@ -108,41 +90,18 @@ class Level(object):
         self.add_ledge(BLOCK, 100 + BLOCK, 80)
 
     def add_ledge(self, start_x, end_x, y):
-        """ Draw a horizontal ledge
-
-         - start_x: int : starting position x
-         - end_x: int : ending position x
-         - y: int : y position
-        """
-
         for x in range(start_x, end_x, BLOCK):
             wall = Block(x, y, BLOCK, BLOCK)
             self.walls.add(wall)
             self.sprites.add(wall)
 
     def add_column(self, x, start_y, end_y):
-        """ Draw a vertical column
-
-         - x: int : x position
-         - start_y: int : top position y
-         - end_y: int : bottom position y
-        """
-
         for y in range(start_y, end_y, BLOCK):
             wall = Block(x, y, BLOCK, BLOCK)
             self.walls.add(wall)
             self.sprites.add(wall)
 
     def add_platform(self, x, y, x_speed, y_speed):
-        """ Draw a movable horizontal platform and add to all lists
-
-         - x: int : x position
-         - y: int : y position
-         - x_speed: int : speed in x direction
-         - y_speed: int : speed in y direction
-         Returns: Platform : New platform instance with given parameters
-        """
-
         platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
         self.platforms.add(platform)
         platform.walls = self.walls
@@ -150,14 +109,6 @@ class Level(object):
         return platform
 
     def add_door(self, x, y, exit_level, left=False):
-        """ Draw the door object on right side of screen by default, left by input
-
-         - x: int : x position
-         - y: int : y position
-         - exit_level: Level: level that door will lead to
-         - left: bool : Default False, enter True to place on left side
-        """
-
         if left:
             door = DoorLeft(x, y, BLOCK, BLOCK + 50, exit_level)
             self.doors.add(door)
@@ -168,15 +119,6 @@ class Level(object):
             self.sprites.add(door)
 
     def add_enemy(self, obj, x, y, speed):
-        """ Adds a specific enemy type to the level
-
-         - obj: Enemy : Enemy class name
-         - x: int : start x
-         - y: int : start y
-         - speed: int : change x speed
-        Returns: Enemy : new Enemy instance with given parameters
-        """
-
         enemy = obj(x, y)
         enemy.change_x = speed
         enemy.walls = self.walls
@@ -186,53 +128,32 @@ class Level(object):
         return enemy
 
     def add_power_up(self, obj, x, y, power_list):
-        """ Adds a power up object to the sprites list
-
-         - obj: PowerUP : power up object to add
-         - x: int : x position
-         - y: int : y position
-         - power_list: SpriteGroup : SpriteGroup to add power up to
-        """
-
         power = obj(x, y)
         power_list.add(power)
         self.sprites.add(power)
 
     @staticmethod
     def stone_background():
-        """ Display dark stone background image """
-
         img = pygame.image.load(r'src/graphics/stone_background.png')
         SCREEN.blit(img, (0, 0))
 
 
 class Game:
-    """ Main game object
-
-    Start game with Game().main()
-    """
 
     def main(self):
-        """ Main run function """
-
         running = True
         while running:
-            # Show menu -> player selection -> start game
             # NOTE: game clock ticks inside each inner function
             self.main_menu()
             player = self.character_selection()
             self.level_1(player)
             self.level_2(player)
             self.level_3(player)
-            # self.level_4(player)
 
-        # player presses 'esc' to exit game
         pygame.mixer.quit()
         pygame.quit()
 
     def main_menu(self):
-        """ Title screen for the game with main menu options """
-
         # set up menu screen gui
         menu_border = pygame.Surface([400, 150])
         menu_border.fill(Color.Eigengrau)
@@ -274,8 +195,6 @@ class Game:
             pygame.display.flip()
 
     def controls_menu(self):
-        """ Runs the menu showing controls for the game """
-
         # set up menu gui
         menu_border = pygame.Surface([700, 500])
         menu_border.fill(Color.Eigengrau)
@@ -320,11 +239,6 @@ class Game:
             pygame.display.flip()
 
     def character_selection(self):
-        """ Runs the character selection screen
-
-        Returns: Player : Player instance
-        """
-
         img_1 = pygame.image.load(r"src/graphics/male_right.png")
         img_2 = pygame.image.load(r"src/graphics/female_left.png")
         menu_border = pygame.Surface([600, 400])
@@ -361,11 +275,6 @@ class Game:
 
     # TODO 2: Refactor first 3 levels using EmptyLevel class
     def level_1(self, player):
-        """ Create playable Level 1
-
-        - player: Player : player to play trough level
-        """
-
         # Delta time
         dt = CLOCK.tick(FPS)
 
@@ -464,11 +373,6 @@ class Game:
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     def level_2(self, player):
-        """ Create playable Level 2
-
-        - player: Player : player to play trough level
-        """
-
         # Delta time
         dt = CLOCK.tick(FPS)
 
@@ -588,11 +492,6 @@ class Game:
         player.if_dead(END_SCREEN, SCREEN, CLOCK, FPS)
 
     def level_3(self, player):
-        """ Create playable Level 3
-
-        - player: Player : player to play trough level
-        """
-
         # Delta time
         dt = CLOCK.tick(FPS)
 
@@ -770,11 +669,6 @@ class Game:
     # TODO 1: Finish implementing level 4
     @staticmethod
     def level_4(player):
-        """ Creates playable level 4
-
-        - player: Player : player to play trough level
-        """
-
         # Set up level
         dt = CLOCK.tick(FPS)
         level = Level(player)
@@ -886,13 +780,6 @@ class Game:
 
     @staticmethod
     def level_template(player):
-        """ Creates playable empty level
-
-        Use this template to create new levels
-
-        - player: Player : player to play trough level
-        """
-
         # Set up level
         dt = CLOCK.tick(FPS)
         level = Level(player)
@@ -962,8 +849,6 @@ class Game:
 
     @staticmethod
     def fill_background():
-        """ Fill background with stone blocks; high CPU usage """
-
         for x in range(0, WIDTH, BLOCK):
             for y in range(0, HEIGHT, BLOCK):
                 img = pygame.image.load(r'src/graphics/stone.png')
@@ -971,19 +856,11 @@ class Game:
 
     @staticmethod
     def stone_background():
-        """ Display dark stone background image """
-
         img = pygame.image.load(r'src/graphics/stone_background.png')
         SCREEN.blit(img, (0, 0))
 
     @staticmethod
     def check_for_quit(event, esc):
-        """ Exit game if user inputs a quit command
-
-          - event: pygame.event : input event
-          - esc: bool : True if 'esc'  will exit
-        """
-
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
@@ -992,15 +869,6 @@ class Game:
             sys.exit()
 
     def add_border(self, width, height, block, walls, sprites):
-        """ Draws main border around screen
-
-         - width: int : screen width
-         - height: int : screen height
-         - block: int : block size
-         - walls: SpriteGroup : wall list
-         - sprites: SpriteGroup : sprites list
-        """
-
         # Floor
         for x in range(0, width, block):
             wall = Block(x, height - block, block, block)
@@ -1024,16 +892,6 @@ class Game:
 
     @staticmethod
     def add_ledge(start_x, end_x, y, block, walls, sprites):
-        """ Draw a horizontal ledge
-
-         - start_x: int : starting position x
-         - end_x: int : ending position x
-         - y: int : y position
-         - block: int : block size
-         - walls: int : wall list
-         - sprites: SpriteGroup : sprites list
-        """
-
         for x in range(start_x, end_x, block):
             wall = Block(x, y, block, block)
             walls.add(wall)
@@ -1041,16 +899,6 @@ class Game:
 
     @staticmethod
     def add_column(x, start_y, end_y, block, walls, sprites):
-        """ Draw a vertical column
-
-         - x: int : x position
-         - start_y: int : top position y
-         - end_y: int : bottom position y
-         - block: int : block size
-         - walls: SpriteGroup : wall list
-         - sprites: SpriteGroup : sprites list
-        """
-
         for y in range(start_y, end_y, block):
             wall = Block(x, y, block, block)
             walls.add(wall)
@@ -1058,18 +906,6 @@ class Game:
 
     @staticmethod
     def add_platform(x, y, x_speed, y_speed, platforms, walls, sprites):
-        """ Draw a movable horizontal platform and add to all lists
-
-         - x: int : x position
-         - y: int : y position
-         - x_speed: int : speed in x direction
-         - y_speed: int : speed in y direction
-         - platforms: SpriteGroup : platform list
-         - walls: SpriteGroup : wall list
-         - sprites: SpriteGroup : sprites list
-         Returns: Platform : New platform instance with given parameters
-        """
-
         platform = Platform(x, y, x_speed, y_speed, BLOCK, WIDTH - BLOCK, 0, HEIGHT - BLOCK)
         platforms.add(platform)
         platform.walls = walls
@@ -1078,16 +914,6 @@ class Game:
 
     @staticmethod
     def add_door(x, y, block, doors, sprites, exit_level, left=False):
-        """ Draw the door object on right side of screen by default, left by input
-
-         - x: int : x position
-         - y: int : y position
-         - block: int : block size
-         - doors: SpriteGroup : door list
-         - sprites: SpriteGroup : sprites list
-         - left: bool : Default False, enter True to place on left side
-        """
-
         if left:
             door = DoorLeft(x, y, block, block + 50, exit_level)
             doors.add(door)
@@ -1099,19 +925,6 @@ class Game:
 
     @staticmethod
     def add_enemy(obj, x, y, speed, walls, players, enemies, sprites):
-        """ Adds a specific enemy type to the level
-
-         - obj: Enemy : Enemy class name
-         - x: int : start x
-         - y: int : start y
-         - speed: int : change x speed
-         - walls: SpriteGroup : wall list
-         - players: SpriteGroup : player list
-         - enemies: SpriteGroup : enemy list
-         - sprites: SpriteGroup : all sprite list
-        Returns: Enemy : new Enemy instance with given parameters
-        """
-
         enemy = obj(x, y)
         enemy.change_x = speed
         enemy.walls = walls
@@ -1122,22 +935,10 @@ class Game:
 
     @staticmethod
     def add_power_up(obj, x, y, power_list, sprites):
-        """ Adds a power up object to the sprites list
-
-         - obj: PowerUp : power up object to add
-         - x: int : x position
-         - y: int : y position
-         - power_list: SpriteGroup : power up list
-         - sprites: SpriteGroup : sprites list
-        """
-
         power = obj(x, y)
         power_list.add(power)
         sprites.add(power)
 
-
-# ========================
-# ------- Run game -------
 
 if __name__ == "__main__":
     pygame.init()
